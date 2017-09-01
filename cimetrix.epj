@@ -1,0 +1,2515 @@
+[CONFIG]
+version=4
+datesaved=20020122173423
+#logging settings: 0=off, 00010000=Errors, 00020000=Messages, 00040000=Protocol, 00080000=Callbacks, 00000100=Other logs
+logging=0
+#same as in CIMConnect - File Logging Config window
+loggingpath=C:\
+loggingdefaultfilename=logfile
+loggingmaxfiles=4
+loggingmaxfilesize=32767
+loggingtimeperiod=0
+#SECS-II Message output limits (see ICxValue::CopyToNString for more info)
+loggingmsglimit=-1
+loggingmsgelemlimit=-1
+#enable logging to file: 0=off 1=on
+filelogging=0
+
+
+[CONNECTION1]
+name=GEM Host 5000
+encoder=SECSIICodec.CxSECSIIEncoder
+decoder=SECSIICodec.CxSECSIIDecoder
+commif=CxSMS.CxSMSObject
+#If useregforcommifcfg is NOT zero then the commifcfg string will be read from the registry and not the epj file.
+useregforcommifcfg=0
+#If forceupdatereg is NOT zero then the registry entry for this connection is updated with the commifcfg string.
+forceupdatereg=0
+commifcfg=0,HSMS,127.0.0.1,5000,PASSIVE,45000,5000,5000,10000,5000,EQUIPMENT,60000,AUTOS9F1,AUTOS9F9
+taskdll=cxemtask.dll
+
+[CONNECTION2]
+name=GEM Host 5001
+encoder=SECSIICodec.CxSECSIIEncoder
+decoder=SECSIICodec.CxSECSIIDecoder
+commif=CxSMS.CxSMSObject
+#If useregforcommifcfg is NOT zero then the commifcfg string will be read from the registry and not the epj file.
+useregforcommifcfg=0
+#If forceupdatereg is NOT zero then the registry entry for this connection is updated with the commifcfg string.
+forceupdatereg=0
+commifcfg=32767,HSMS,127.0.0.1,5001,PASSIVE,45000,5000,5000,10000,5000,EQUIPMENT,60000,AUTOS9F1,AUTOS9F9
+taskdll=cxemtask.dll
+
+[CONNECTION3]
+name=GEM Host 5002
+encoder=SECSIICodec.CxSECSIIEncoder
+decoder=SECSIICodec.CxSECSIIDecoder
+commif=CxSMS.CxSMSObject
+#If useregforcommifcfg is NOT zero then the commifcfg string will be read from the registry and not the epj file.
+useregforcommifcfg=0
+#If forceupdatereg is NOT zero then the registry entry for this connection is updated with the commifcfg string.
+forceupdatereg=0
+commifcfg=32767,HSMS,127.0.0.1,5002,PASSIVE,45000,5000,5000,10000,5000,EQUIPMENT,60000,AUTOS9F1,AUTOS9F9
+taskdll=cxemtask.dll
+
+#note that all fields must be filled except wellknownname
+#empty fields (i.e. ,,) are allowed in some places
+
+[COMMON EVENTS]
+#id=name, description, wellknownname
+3=MaterialReceived,Material arrived from a port on the equipment.,MaterialReceived
+4=MaterialRemoved,Material was sent from a port on the equipment.,MaterialRemoved
+6=OperatorCommandIssued,Machine operator issued a control command.,OperatorCommandIssued
+7=PPChange,A process program (recipe) has been created changed or deleted.,PPChange
+8=PPSelected,A new process program (recipe) has been accepted. Either the host or machine operator has selected the recipe.,PPSelected
+9=ProcessingCompleted,Normal exit of EXECUTING state as part of the Processing State Machine.,ProcessingCompleted
+10=ProcessingStarted,Normal exit of EXECUTING state as part of the Processing State Machine.,ProcessingStarted
+11=ProcessingStateChange,The state of the Processing State Machine has changed.,ProcessingStateChange
+12=ProcessingStopped,A previously requested STOP command has been performed.,ProcessingStopped
+16=ECChange,An equipment constant value was changed locally by the operator.,ECChange
+18=HostCommandAccepted,A host remote command was accepted.,HostCommandAccepted
+19=HostECChange,A host changed an equipment constant(EC) value.,HostECChange
+20=HostPPChange,A host changed a Process Program.,HostPPChange
+21=PPVerificationFailed,Recipe Verification Failed,PPVerificationFailed
+#Add your equipment definitions here
+
+[CONNECTION1 EVENTS]
+#id=name, description, wellknownname
+0=ControlStateLocal,Control State Machine switched to local (operator) control.,ControlStateLocal
+1=ControlStateRemote,Control State Machine switched to remote (host) control.,ControlStateRemote
+2=EquipmentOffline,Control State Machine switched to the offline state by the machine operator.,EquipmentOffline
+5=MessageRecognition,Machine operator recognized the terminal service message from the host.,MessageRecognition
+13=SpoolTransmitFailure,Spool Transmit failure has occurred.,SpoolTransmitFailure
+14=SpoolingActivated,Spooling State Machine has entered the ACTIVE state.,SpoolingActivated
+15=SpoolingDeactivated,Spooling State Machine has entered the DE-ACTIVE state.,SpoolingDeactivated
+#Do not add definitions here without reading the documentation
+
+[CONNECTION2 EVENTS]
+#id=name, description, wellknownname
+0=ControlStateLocal,Control State Machine switched to local (operator) control.,ControlStateLocal
+1=ControlStateRemote,Control State Machine switched to remote (host) control.,ControlStateRemote
+2=EquipmentOffline,Control State Machine switched to the offline state by the machine operator.,EquipmentOffline
+5=MessageRecognition,Machine operator recognized the terminal service message from the host.,MessageRecognition
+13=SpoolTransmitFailure,Spool Transmit failure has occurred.,SpoolTransmitFailure
+14=SpoolingActivated,Spooling State Machine has entered the ACTIVE state.,SpoolingActivated
+15=SpoolingDeactivated,Spooling State Machine has entered the DE-ACTIVE state.,SpoolingDeactivated
+#Do not add definitions here without reading the documentation
+
+[CONNECTION3 EVENTS]
+#id=name, description, wellknownname
+0=ControlStateLocal,Control State Machine switched to local (operator) control.,ControlStateLocal
+1=ControlStateRemote,Control State Machine switched to remote (host) control.,ControlStateRemote
+2=EquipmentOffline,Control State Machine switched to the offline state by the machine operator.,EquipmentOffline
+5=MessageRecognition,Machine operator recognized the terminal service message from the host.,MessageRecognition
+13=SpoolTransmitFailure,Spool Transmit failure has occurred.,SpoolTransmitFailure
+14=SpoolingActivated,Spooling State Machine has entered the ACTIVE state.,SpoolingActivated
+15=SpoolingDeactivated,Spooling State Machine has entered the DE-ACTIVE state.,SpoolingDeactivated
+#Do not add definitions here without reading the documentation
+
+[ALARMS]
+#id=name, description, text, setEventID, clearEventID, alarm code (ALCD), wellknownname
+#Add your equipment definitions here
+
+#varTypes DV,SV,EC
+#valTypes I1, I2, I4, I8, U1, U2, U4, U8, F4, F8, A, Bo, Bi, L, J, W
+
+[COMMON VARIABLES]
+#id=name, description, units, varType, valType, eventID, private, persistant, min, max, default, wellknownname
+0=AlarmID,ALID of the most recent alarm to change state. This may be linked to any alarm's SET of CLEAR collection event.,,DV,U4,,0,0,U4 0,U4 4294967295,U4,AlarmID
+3=PPChangeName,Name of the process program (recipe) changed by the machine operator. This may be linked to collection event PPChange. See also DV PPChangeStatus.,,DV,A,,0,0,A,A,A,PPChangeName
+4=PPChangeStatus,Type of change made to a process program (recipe) by the machine operator. Possible values include 1 (created) 2 (edited) and 3 (deleted). This may be linked to collection event PPChange. See also DV PPChangeName.,,DV,U1,,0,0,U1 0,U1 255,U1,PPChangeStatus
+6=OperatorCommand,Command issued by the machine operator.,,DV,A,,0,0,,,A,OperatorCommand
+7=ECID,ECID changed by the machine operator.,,DV,U4,,0,0,U4 0,U4 4294967295,U4 0,ECID
+2008=MDLN,Machine hardware ID up to 6 characters. The value is constant.,,SV,A,,0,0,A,A,A MODEL,MDLN
+2009=PPExecName,Currently selected process program (recipe) file. This process program can not be deleted or overwritten by the host since it is considered to be in use.,,SV,A,,0,0,A,A,A,PPExecName
+2010=PPError,A test data value with information about verification errors of a process program that failed verification.,,DV,U1,,0,0,U1 0,U1 255,U1,PPError
+2015=SOFTREV,Machine software ID up to 6 characters. The value is constant.,,SV,A,,0,0,A,A,A 00.01,SOFTREV
+2027=ALARMSSET,List of all SET ALID.,,SV,L,,0,0,L,L,L,AlarmsSet
+2030=PREVIOUSPROCESSSTATE,Previous state of the Processing State Machine.,,SV,U1,,0,0,U1 0,U1 255,U1,PreviousProcessState
+2031=PROCESSSTATE,State of the Processing State Machine.,,SV,U1,,0,0,U1 0,U1 255,U1,ProcessState
+2032=ProcessState,State of the Processing State Machine.,,SV,A,,0,0,A,A,A,ProcessStateString
+2039=NVSPath,Non-volatile storage directory.,,SV,A,,0,0,A,A,A C:\CIMConnectProjects\Equipment1\Nvs,NVSPath
+2040=RecipeHandling,Recipe handling type,,SV,U4,,0,0,U4 0,U4 4294967295,U4 1,RecipeHandling
+2041=RecipeType,Recipe file type,,SV,U4,,0,0,U4 0,U4 4294967295,U4 1,RecipeType
+2042=RecipePath,Recipe storage directory,,SV,A,,0,0,A,A,A d:\nsx\wafer,RecipePath
+2048=RecipeExtension,Recipe file extension,,SV,A,,0,0,A,A,A npp,RecipeExtension
+2050=ASer,The alarm change count,,SV,U4,,,,,,U4 0,ASer
+2051=Time,Computer date and time YYYYMMDDhhmmsscc,,SV,A,,,,,,,Time
+2052=ECChangeName,The EC that changed,,DV,A,,,,,,,ECChangeName
+2053=ECChangeValue,The value of EC that changed,,DV,,,,,,,,ECChangeValue
+2054=AlarmState,The last changed alarm's state,,SV,U1,,,,,,,AlarmState
+2055=CEDescription, description of the last collection event triggered,,DV,A,,,,,,,CEDescription
+#Add your equipment definitions here
+
+[CONNECTION1 VARIABLES]
+#id=name, description, units, varType, valType, eventID, private, persistant, min, max, default, wellknownname
+1=EventLimit,Limit ID of limit that has been exceeded. This may be linked to any variable's Limit Monitoring collection event.,,DV,L,,0,0,L,L,L,EventLimit
+2=LimitVariable,VID of variable associated with the last limit. This may be linked to any variable's Limit Monitoring collection event.,,DV,U4,,0,0,U4 0,U4 4294967295,U4 0,LimitVariable
+5=TransitionType,Direction of a Limit Monitoring zone transition. This may be linked to any variable's Limit Monitoring collection event. Possible values include 1 (lower to upper) and 0 (upper to lower zone).,,DV,Bi,,0,0,Bi 0,Bi 255,Bi 0,TransitionType
+8=HostECHostID,ID of the host that changed the EC value. This may be linked to CE HostECChange. See also DV HostECID.,,DV,U4,,0,0,U4 0,U4 4294967295,U4,HostECHostID
+9=HostECID,ECID changed by another host. This may be linked to CE HostECChange. See also DV HostECHostID.,,DV,U4,,0,0,U4 0,U4 4294967295,U4,HostECID
+10=HostCmdName,Name of the remote command sent by another host.,,DV,A,,0,0,A,A,A,HostCmdID
+11=HostCmdHostID,ID of the host that sent a remote command.,,DV,U4,,0,0,U4 0,U4 4294967295,U4,HostCmdHostID
+12=HostPPChangeName,Name of the process program (recipe) changed by another host. This may be linked to collection event HostPPChange. See also DV HostPPChangeStatus and HostPPChangeHostID.,,DV,A,,0,0,A,A,A,HostPPChangeName
+13=HostPPChangeStatus,Type of change made to a process program (recipe) by another host. Possible values include 1 (created) 2 (edited) and 3 (deleted). This may be linked to collection event HostPPChange. See also DV HostPPChangeName and HostPPChangeHostID.,,DV,U1,,0,0,U1 0,U1 255,U1 0,HostPPChangeStatus
+14=HostPPChangeHostID,ID of the host that changed a process program (recipe).,,DV,U4,,0,0,U4 0,U4 4294967295,U4,HostPPChangeHostID
+15=LastPPRequested,Name of the process program (recipe) requested by the equipment,,DV,A,,0,0,A,A,A,LastPPRequested
+2004=Clock,Machine's internal clock in the format YYYYMMDDhhmmsscc where Y = year M = month D = day h = hour m = minute s = second c = centisecond.,,SV,A,,0,0,,,,Clock
+2016=SpoolCountActual,Number of messages actually stored in the spool area. Multi-block inquire/grant messages are not included in this count.,,SV,U4,,0,1,U4 0,U4 4294967295,U4 0,SpoolCountActual
+2017=SpoolCountTotal,Total number of messages put into spool area from the time spooling was activated. Multi-block inquire/grant messages are not included in this count.,,SV,U4,,0,1,U4 0,U4 4294967295,U4 0,SpoolCountTotal
+2018=SpoolFullTime,Time when the spool area becomes full in the format YYYYMMDDhhmmsscc where Y = year M = month D = day h = hour m = minute s = second c = centisecond.,,SV,A,,0,1,A,A,A,SpoolFullTime
+2019=SpoolStartTime,Time when spool was last activated in the format YYYYMMDDhhmmsscc where Y = year M = month D = day h = hour m = minute s = second c = centisecond.,,SV,A,,0,1,A,A,A,SpoolStartTime
+2026=ALARMSENABLED,List of all enabled ALID.,,SV,L,,0,1,L,L,L,AlarmsEnabled
+2028=CONTROLSTATE,State of the Control State Machine.  Possible values include 1=EquipOffline 2=AttemptOnline 3=HostOffline 4=OnlineLocal and 5=OnlineRemote.,,SV,U1,,0,0,U1 0,U1 5,U1 4,ControlState
+2029=EVENTSENABLED,List of all enabled CEID.,,SV,L,,0,1,L,L,L,EventsEnabled
+2033=ControlStateSwitch,The GEM local/remote control switch where 0 = local and 1 = remote,,SV,U4,,0,0,U4 0,U4 4294967295,U4 0,CtrlRemoteSwitch
+2034=CtrlOnlineSwitch,The GEM online/offline control switch where 0 = offline and 1= online,,SV,U4,,0,0,U4 0,U4 4294967295,U4 1,CtrlOnlineSwitch
+2035=CommEnableSwitch,The GEM communications enable/disable operator switch where 0 = disabled and 256 = enabled,,SV,U4,,0,0,U4 0,U4 4294967295,U4 256,CommEnableSwitch
+2036=CommState,The current state of the GEM communications state machine where 0 = disabled 260 = communicating 273 = WaitCRA | WaitCRFromHost and 274 = WaitDelay | WaitCRFromHost,,SV,U4,,0,0,U4 0,U4 4294967295,U4 260,CommState
+2037=SpoolState,The current state of the GEM spooling state machine where 0 = inactive 273 = NoSpoolOutput | SpoolNotFull 274 = TransmitSpool | SpoolNotFull 276 = PurgeSpool | SpoolNotFull 289 = NoSpoolOutput | SpoolFull 290 = TransmitSpool | SpoolFull 292 = PurgeSpool | SpoolFull,,SV,U4,,0,1,U4 0,U4 4294967295,U4 0,SpoolState
+2043=GEMEnable,Enable GEM features,,SV,Bo,,0,0,Bo 0,Bo 1,Bo 1,GEMEnable
+2044=RemoteCmdEnable,enable remote command handling,,SV,Bo,,0,0,Bo 0,Bo 1,Bo 1,RemoteCmdEnable
+2045=HostPPEnable,enable process program manipulation,,SV,Bo,,0,0,Bo 0,Bo 1,Bo 1,HostPPEnable
+2046=ECSetEnable,enable EC setting,,SV,Bo,,0,0,Bo 0,Bo 1,Bo 1,ECSetEnable
+2047=HostTermMsgEnable,enable terminal services setting,,SV,Bo,,0,0,Bo 0,Bo 1,Bo 1,HostTermMsgEnable
+4000=EstablishCommunicationsTimeout,Communication attempt timeout. When the Communication State Machine is enabled but not communicating the machine will attempt to establish communication with a host every timeout period.,,EC,U2,,0,1,U2 0,U2 65535,U2 10,EstablishCommunicationsTimeout
+4004=MaxSpoolMessages,Maximum number of messages that can be put into the spool area until it is considered full as part of the Spooling State Machine. Multi-block inquire/grant messages are not include in this count.,,EC,U4,,0,1,U4 0,U4 4294967295,U4 100,MaxSpoolMessages
+4005=MaxSpoolTransmit,Maximum number of messages that the machine will transmit from the spool area in response to an S6F23 (transmit spooled messages) request as part of the Spooling State Machine. If 0 there is no limit. Multi-block inquire/grant messages are not include in this count.,,EC,U4,,0,1,U4 0,U4 4294967295,U4 10,MaxSpoolTransmit
+4009=OverwriteSpool,Determine whether to overwrite data in the spool area or to discard further messages when the spool area is full as part of the Spooling State Machine. Possible values include 1 (overwrite) and 0 (discard).,,EC,Bo,,0,1,Bo 0,Bo 1,Bo 0,OverwriteSpool
+4010=SpoolEnabled,Enable or disable the Spooling State Machine. Possible values include 1 (enabled) and 0 (disabled).,,EC,Bo,,0,1,Bo 0,Bo 1,Bo 0,SpoolEnable
+4011=WBitS10,Request host reply for stream 10 messages (Terminal Services). Possible values include 1 (reply) 0 (no reply).,,EC,Bo,,0,1,Bo 0,Bo 1,Bo 1,S10ReplyExpected
+4012=WBitS5,Request host reply for stream 5 messages (Alarms). Possible values include 1 (reply) 0 (no reply).,,EC,Bo,,0,1,Bo 0,Bo 1,Bo 1,S5ReplyExpected
+4013=WBitS6,Request host reply for stream 6 messages (Events). If the machine is producing frequent collection events it may be a good idea to disable request reply. Possible values include 1 (reply) 0 (no reply).,,EC,Bo,,0,1,Bo 0,Bo 1,Bo 1,S6ReplyExpected
+4020=TimeFormat,Y2K time format selection. Possible values include 1 (compliant 16 byte) and 0 (not compliant 12 byte).,,EC,U4,,0,1,U4 0,U4 4294967295,U4 1,TimeFormat
+4021=DefCtrlOfflineState,State of the Control State Machine when going offline. Possible values include 1 = Equipment Offline 3 = Host Offline,,EC,U1,,0,1,U1 0,U1 5,U1 3,DefCtrlOfflineState
+4022=EventReportMsg,Message sent on event trigger,,EC,U4,,0,1,U4 0,U4 4294967295,U4 67083,EventReportMsg
+4023=DefaultCommState,The default state of the GEM communications state machine where 0 = disabled and 256 = enabled.,,EC,U4,,0,1,U4 0,U4 4294967295,U4 256,DefaultCommState
+4024=DefaultCtrlState,The default state of the GEM control state machine 1=EquipOffline 2=AttemptOnline 3=HostOffline 4=OnlineLocal and 5=OnlineRemote,,EC,U1,,0,1,U1 0,U1 5,U1 5,DefaultCtrlState
+4025=HeartBeat,Message level circuit assurance (0 turns it off),secs,EC,U2,,0,1,,,U2 0,HeartBeat
+4026=ClockOffset,Time offset between host's and local time,sec,SV,I4,,,,,,I4 0,ClockOffset
+4027=LastCEID,The last triggered CE,,DV,U4,,,,,,,LastCEID
+4028=LimitFreq,The frequency at which limits with GetValue callbacks are polled (0 turns it off),secs,EC,U2,,0,1,,,U2 0,LimitFreq
+4029=DataID,E5 DATAID,,DV,U4,,,,,,U4 0,DataID
+4030=PreviousControlState, the prior control state,,SV,U1,,,,,,,PreviousControlState
+4031=S6MultiBlockInquire, 1=send MBI 0=don't send MBI,,EC,Bo,,0,1,,,Bo 0,S6MultiBlockInquire
+#   data item format specifiers for SECS-II messages. These are private variables
+#   uncomment these only if you need something other than U4 format.  Format conversion degrades performance.
+#4040=ALIDFormat,the data type for alarm ids in messages,,SV,U4,,1,0,U4 1,U4 11,U4 7,ALIDFormat
+#4041=CEIDFormat,the data type for CE ids in messages,,SV,U4,,1,0,U4 1,U4 11,U4 7,CEIDFormat
+#4042=DATAIDFormat,the data type for DATAID in messages,,SV,U4,,1,0,U4 1,U4 11,U4 7,DATAIDFormat
+#4043=RPTIDFormat,the data type for report ids in messages,,SV,U4,,1,0,U4 1,U4 11,U4 7,RPTIDFormat
+#4044=TRIDFormat,the data type for trace ids in messages,,SV,U4,,1,0,U4 1,U4 11,U4 7,TRIDFormat
+#4045=VIDFormat,the data type for variable (EC SV DV) ids in messages,,SV,U4,,1,0,U4 1,U4 11,U4 7,VIDFormat
+#Do not add definitions here without reading the documentation
+
+[CONNECTION2 VARIABLES]
+#id=name, description, units, varType, valType, eventID, private, persistant, min, max, default, wellknownname
+1=EventLimit,Limit ID of limit that has been exceeded. This may be linked to any variable's Limit Monitoring collection event.,,DV,L,,0,0,L,L,L,EventLimit
+2=LimitVariable,VID of variable associated with the last limit. This may be linked to any variable's Limit Monitoring collection event.,,DV,U4,,0,0,U4 0,U4 4294967295,U4 0,LimitVariable
+5=TransitionType,Direction of a Limit Monitoring zone transition. This may be linked to any variable's Limit Monitoring collection event. Possible values include 1 (lower to upper) and 0 (upper to lower zone).,,DV,Bi,,0,0,Bi 0,Bi 255,Bi 0,TransitionType
+8=HostECHostID,ID of the host that changed the EC value. This may be linked to CE HostECChange. See also DV HostECID.,,DV,U4,,0,0,U4 0,U4 4294967295,U4,HostECHostID
+9=HostECID,ECID changed by another host. This may be linked to CE HostECChange. See also DV HostECHostID.,,DV,U4,,0,0,U4 0,U4 4294967295,U4,HostECID
+10=HostCmdName,Name of the remote command sent by another host.,,DV,A,,0,0,A,A,A,HostCmdID
+11=HostCmdHostID,ID of the host that sent a remote command.,,DV,U4,,0,0,U4 0,U4 4294967295,U4,HostCmdHostID
+12=HostPPChangeName,Name of the process program (recipe) changed by another host. This may be linked to collection event HostPPChange. See also DV HostPPChangeStatus and HostPPChangeHostID.,,DV,A,,0,0,A,A,A,HostPPChangeName
+13=HostPPChangeStatus,Type of change made to a process program (recipe) by another host. Possible values include 1 (created) 2 (edited) and 3 (deleted). This may be linked to collection event HostPPChange. See also DV HostPPChangeName and HostPPChangeHostID.,,DV,U1,,0,0,U1 0,U1 255,U1 0,HostPPChangeStatus
+14=HostPPChangeHostID,ID of the host that changed a process program (recipe).,,DV,U4,,0,0,U4 0,U4 4294967295,U4,HostPPChangeHostID
+15=LastPPRequested,Name of the process program (recipe) requested by the equipment,,DV,A,,0,0,A,A,A,LastPPRequested
+2004=Clock,Machine's internal clock in the format YYYYMMDDhhmmsscc where Y = year M = month D = day h = hour m = minute s = second c = centisecond.,,SV,A,,0,0,,,,Clock
+2016=SpoolCountActual,Number of messages actually stored in the spool area. Multi-block inquire/grant messages are not included in this count.,,SV,U4,,0,1,U4 0,U4 4294967295,U4 0,SpoolCountActual
+2017=SpoolCountTotal,Total number of messages put into spool area from the time spooling was activated. Multi-block inquire/grant messages are not included in this count.,,SV,U4,,0,1,U4 0,U4 4294967295,U4 0,SpoolCountTotal
+2018=SpoolFullTime,Time when the spool area becomes full in the format YYYYMMDDhhmmsscc where Y = year M = month D = day h = hour m = minute s = second c = centisecond.,,SV,A,,0,1,A,A,A,SpoolFullTime
+2019=SpoolStartTime,Time when spool was last activated in the format YYYYMMDDhhmmsscc where Y = year M = month D = day h = hour m = minute s = second c = centisecond.,,SV,A,,0,1,A,A,A,SpoolStartTime
+2026=ALARMSENABLED,List of all enabled ALID.,,SV,L,,0,1,L,L,L,AlarmsEnabled
+2028=CONTROLSTATE,State of the Control State Machine.  Possible values include 1=EquipOffline 2=AttemptOnline 3=HostOffline 4=OnlineLocal and 5=OnlineRemote.,,SV,U1,,0,0,U1 0,U1 5,U1 4,ControlState
+2029=EVENTSENABLED,List of all enabled CEID.,,SV,L,,0,1,L,L,L,EventsEnabled
+2033=ControlStateSwitch,The GEM local/remote control switch where 0 = local and 1 = remote,,SV,U4,,0,0,U4 0,U4 4294967295,U4 0,CtrlRemoteSwitch
+2034=CtrlOnlineSwitch,The GEM online/offline control switch where 0 = offline and 1= online,,SV,U4,,0,0,U4 0,U4 4294967295,U4 1,CtrlOnlineSwitch
+2035=CommEnableSwitch,The GEM communications enable/disable operator switch where 0 = disabled and 256 = enabled,,SV,U4,,0,0,U4 0,U4 4294967295,U4 256,CommEnableSwitch
+2036=CommState,The current state of the GEM communications state machine where 0 = disabled 260 = communicating 273 = WaitCRA | WaitCRFromHost and 273 = WaitDelay | WaitCRFromHost,,SV,U4,,0,0,U4 0,U4 4294967295,U4 260,CommState
+2037=SpoolState,The current state of the GEM spooling state machine where 0 = inactive 273 = NoSpoolOutput | SpoolNotFull 274 = TransmitSpool | SpoolNotFull 276 = PurgeSpool | SpoolNotFull 289 = NoSpoolOutput | SpoolFull 290 = TransmitSpool | SpoolFull 292 = PurgeSpool | SpoolFull,,SV,U4,,0,1,U4 0,U4 4294967295,U4 0,SpoolState
+2043=GEMEnable,Enable GEM features,,SV,Bo,,0,0,Bo 0,Bo 1,Bo 1,GEMEnable
+2044=RemoteCmdEnable,enable remote command handling,,SV,Bo,,0,0,Bo 0,Bo 1,Bo 1,RemoteCmdEnable
+2045=HostPPEnable,enable process program manipulation,,SV,Bo,,0,0,Bo 0,Bo 1,Bo 1,HostPPEnable
+2046=ECSetEnable,enable EC setting,,SV,Bo,,0,0,Bo 0,Bo 1,Bo 1,ECSetEnable
+2047=HostTermMsgEnable,enable terminal services setting,,SV,Bo,,0,0,Bo 0,Bo 1,Bo 1,HostTermMsgEnable
+4000=EstablishCommunicationsTimeout,Communication attempt timeout. When the Communication State Machine is enabled but not communicating the machine will attempt to establish communication with a host every timeout period.,,EC,U2,,0,1,U2 0,U2 65535,U2 10,EstablishCommunicationsTimeout
+4004=MaxSpoolMessages,Maximum number of messages that can be put into the spool area until it is considered full as part of the Spooling State Machine. Multi-block inquire/grant messages are not include in this count.,,EC,U4,,0,1,U4 0,U4 4294967295,U4 100,MaxSpoolMessages
+4005=MaxSpoolTransmit,Maximum number of messages that the machine will transmit from the spool area in response to an S6F23 (transmit spooled messages) request as part of the Spooling State Machine. If 0 there is no limit. Multi-block inquire/grant messages are not include in this count.,,EC,U4,,0,1,U4 0,U4 4294967295,U4 10,MaxSpoolTransmit
+4009=OverwriteSpool,Determine whether to overwrite data in the spool area or to discard further messages when the spool area is full as part of the Spooling State Machine. Possible values include 1 (overwrite) and 0 (discard).,,EC,Bo,,0,1,Bo 0,Bo 1,Bo 0,OverwriteSpool
+4010=SpoolEnabled,Enable or disable the Spooling State Machine. Possible values include 1 (enabled) and 0 (disabled).,,EC,Bo,,0,1,Bo 0,Bo 1,Bo 0,SpoolEnable
+4011=WBitS10,Request host reply for stream 10 messages (Terminal Services). Possible values include 1 (reply) 0 (no reply).,,EC,Bo,,0,1,Bo 0,Bo 1,Bo 1,S10ReplyExpected
+4012=WBitS5,Request host reply for stream 5 messages (Alarms). Possible values include 1 (reply) 0 (no reply).,,EC,Bo,,0,1,Bo 0,Bo 1,Bo 1,S5ReplyExpected
+4013=WBitS6,Request host reply for stream 6 messages (Events). If the machine is producing frequent collection events it may be a good idea to disable request reply. Possible values include 1 (reply) 0 (no reply).,,EC,Bo,,0,1,Bo 0,Bo 1,Bo 1,S6ReplyExpected
+4020=TimeFormat,Y2K time format selection. Possible values include 1 (compliant 16 byte) and 0 (not compliant 12 byte).,,EC,U4,,0,1,U4 0,U4 4294967295,U4 1,TimeFormat
+4021=DefCtrlOfflineState,State of the Control State Machine when going offline. Possible values include 1 = Equipment Offline 3 = Host Offline,,EC,U1,,0,1,U1 0,U1 5,U1 3,DefCtrlOfflineState
+4022=EventReportMsg,Message sent on event trigger,,EC,U4,,0,1,U4 0,U4 4294967295,U4 67083,EventReportMsg
+4023=DefaultCommState,The default state of the GEM communications state machine where 0 = disabled and 256 = enabled.,,EC,U4,,0,1,U4 0,U4 4294967295,U4 256,DefaultCommState
+4024=DefaultCtrlState,The default state of the GEM control state machine 1=EquipOffline 2=AttemptOnline 3=HostOffline 4=OnlineLocal and 5=OnlineRemote,,EC,U1,,0,1,U1 0,U1 5,U1 5,DefaultCtrlState
+4025=HeartBeat,Message level circuit assurance (0 turns it off),secs,EC,U2,,0,1,,,U2 0,HeartBeat
+4026=ClockOffset,Time offset between host's and local time,sec,SV,I4,,,,,,I4 0,ClockOffset
+4027=LastCEID,The last triggered CE,,DV,U4,,,,,,,LastCEID
+4028=LimitFreq,The frequency at which limits with GetValue callbacks are polled (0 turns it off),secs,EC,U2,,0,1,,,U2 0,LimitFreq
+4029=DataID,E5 DATAID,,DV,U4,,,,,,U4 0,DataID
+4030=PreviousControlState, the prior control state,,SV,U1,,,,,,,PreviousControlState
+4031=S6MultiBlockInquire, 1=send MBI 0=don't send MBI,,EC,Bo,,0,1,,,Bo 0,S6MultiBlockInquire
+#   data item format specifiers for SECS-II messages. These are private variables
+#   uncomment these only if you need something other than U4 format.  Format conversion degrades performance.
+#4040=ALIDFormat,the data type for alarm ids in messages,,SV,U4,,1,0,U4 1,U4 11,U4 7,ALIDFormat
+#4041=CEIDFormat,the data type for CE ids in messages,,SV,U4,,1,0,U4 1,U4 11,U4 7,CEIDFormat
+#4042=DATAIDFormat,the data type for DATAID in messages,,SV,U4,,1,0,U4 1,U4 11,U4 7,DATAIDFormat
+#4043=RPTIDFormat,the data type for report ids in messages,,SV,U4,,1,0,U4 1,U4 11,U4 7,RPTIDFormat
+#4044=TRIDFormat,the data type for trace ids in messages,,SV,U4,,1,0,U4 1,U4 11,U4 7,TRIDFormat
+#4045=VIDFormat,the data type for variable (EC SV DV) ids in messages,,SV,U4,,1,0,U4 1,U4 11,U4 7,VIDFormat
+#Do not add definitions here without reading the documentation
+
+[CONNECTION3 VARIABLES]
+#id=name, description, units, varType, valType, eventID, private, persistant, min, max, default, wellknownname
+1=EventLimit,Limit ID of limit that has been exceeded. This may be linked to any variable's Limit Monitoring collection event.,,DV,L,,0,0,L,L,L,EventLimit
+2=LimitVariable,VID of variable associated with the last limit. This may be linked to any variable's Limit Monitoring collection event.,,DV,U4,,0,0,U4 0,U4 4294967295,U4 0,LimitVariable
+5=TransitionType,Direction of a Limit Monitoring zone transition. This may be linked to any variable's Limit Monitoring collection event. Possible values include 1 (lower to upper) and 0 (upper to lower zone).,,DV,Bi,,0,0,Bi 0,Bi 255,Bi 0,TransitionType
+8=HostECHostID,ID of the host that changed the EC value. This may be linked to CE HostECChange. See also DV HostECID.,,DV,U4,,0,0,U4 0,U4 4294967295,U4,HostECHostID
+9=HostECID,ECID changed by another host. This may be linked to CE HostECChange. See also DV HostECHostID.,,DV,U4,,0,0,U4 0,U4 4294967295,U4,HostECID
+10=HostCmdName,Name of the remote command sent by another host.,,DV,A,,0,0,A,A,A,HostCmdID
+11=HostCmdHostID,ID of the host that sent a remote command.,,DV,U4,,0,0,U4 0,U4 4294967295,U4,HostCmdHostID
+12=HostPPChangeName,Name of the process program (recipe) changed by another host. This may be linked to collection event HostPPChange. See also DV HostPPChangeStatus and HostPPChangeHostID.,,DV,A,,0,0,A,A,A,HostPPChangeName
+13=HostPPChangeStatus,Type of change made to a process program (recipe) by another host. Possible values include 1 (created) 2 (edited) and 3 (deleted). This may be linked to collection event HostPPChange. See also DV HostPPChangeName and HostPPChangeHostID.,,DV,U1,,0,0,U1 0,U1 255,U1 0,HostPPChangeStatus
+14=HostPPChangeHostID,ID of the host that changed a process program (recipe).,,DV,U4,,0,0,U4 0,U4 4294967295,U4,HostPPChangeHostID
+15=LastPPRequested,Name of the process program (recipe) requested by the equipment,,DV,A,,0,0,A,A,A,LastPPRequested
+2004=Clock,Machine's internal clock in the format YYYYMMDDhhmmsscc where Y = year M = month D = day h = hour m = minute s = second c = centisecond.,,SV,A,,0,0,,,,Clock
+2016=SpoolCountActual,Number of messages actually stored in the spool area. Multi-block inquire/grant messages are not included in this count.,,SV,U4,,0,1,U4 0,U4 4294967295,U4 0,SpoolCountActual
+2017=SpoolCountTotal,Total number of messages put into spool area from the time spooling was activated. Multi-block inquire/grant messages are not included in this count.,,SV,U4,,0,1,U4 0,U4 4294967295,U4 0,SpoolCountTotal
+2018=SpoolFullTime,Time when the spool area becomes full in the format YYYYMMDDhhmmsscc where Y = year M = month D = day h = hour m = minute s = second c = centisecond.,,SV,A,,0,1,A,A,A,SpoolFullTime
+2019=SpoolStartTime,Time when spool was last activated in the format YYYYMMDDhhmmsscc where Y = year M = month D = day h = hour m = minute s = second c = centisecond.,,SV,A,,0,1,A,A,A,SpoolStartTime
+2026=ALARMSENABLED,List of all enabled ALID.,,SV,L,,0,1,L,L,L,AlarmsEnabled
+2028=CONTROLSTATE,State of the Control State Machine.  Possible values include 1=EquipOffline 2=AttemptOnline 3=HostOffline 4=OnlineLocal and 5=OnlineRemote.,,SV,U1,,0,0,U1 0,U1 5,U1 4,ControlState
+2029=EVENTSENABLED,List of all enabled CEID.,,SV,L,,0,1,L,L,L,EventsEnabled
+2033=ControlStateSwitch,The GEM local/remote control switch where 0 = local and 1 = remote,,SV,U4,,0,0,U4 0,U4 4294967295,U4 0,CtrlRemoteSwitch
+2034=CtrlOnlineSwitch,The GEM online/offline control switch where 0 = offline and 1= online,,SV,U4,,0,0,U4 0,U4 4294967295,U4 1,CtrlOnlineSwitch
+2035=CommEnableSwitch,The GEM communications enable/disable operator switch where 0 = disabled and 256 = enabled,,SV,U4,,0,0,U4 0,U4 4294967295,U4 256,CommEnableSwitch
+2036=CommState,The current state of the GEM communications state machine where 0 = disabled 260 = communicating 273 = WaitCRA | WaitCRFromHost and 273 = WaitDelay | WaitCRFromHost,,SV,U4,,0,0,U4 0,U4 4294967295,U4 260,CommState
+2037=SpoolState,The current state of the GEM spooling state machine where 0 = inactive 273 = NoSpoolOutput | SpoolNotFull 274 = TransmitSpool | SpoolNotFull 276 = PurgeSpool | SpoolNotFull 289 = NoSpoolOutput | SpoolFull 290 = TransmitSpool | SpoolFull 292 = PurgeSpool | SpoolFull,,SV,U4,,0,1,U4 0,U4 4294967295,U4 0,SpoolState
+2043=GEMEnable,Enable GEM features,,SV,Bo,,0,0,Bo 0,Bo 1,Bo 1,GEMEnable
+2044=RemoteCmdEnable,enable remote command handling,,SV,Bo,,0,0,Bo 0,Bo 1,Bo 1,RemoteCmdEnable
+2045=HostPPEnable,enable process program manipulation,,SV,Bo,,0,0,Bo 0,Bo 1,Bo 1,HostPPEnable
+2046=ECSetEnable,enable EC setting,,SV,Bo,,0,0,Bo 0,Bo 1,Bo 1,ECSetEnable
+2047=HostTermMsgEnable,enable terminal services setting,,SV,Bo,,0,0,Bo 0,Bo 1,Bo 1,HostTermMsgEnable
+4000=EstablishCommunicationsTimeout,Communication attempt timeout. When the Communication State Machine is enabled but not communicating the machine will attempt to establish communication with a host every timeout period.,,EC,U2,,0,1,U2 0,U2 65535,U2 10,EstablishCommunicationsTimeout
+4004=MaxSpoolMessages,Maximum number of messages that can be put into the spool area until it is considered full as part of the Spooling State Machine. Multi-block inquire/grant messages are not include in this count.,,EC,U4,,0,1,U4 0,U4 4294967295,U4 100,MaxSpoolMessages
+4005=MaxSpoolTransmit,Maximum number of messages that the machine will transmit from the spool area in response to an S6F23 (transmit spooled messages) request as part of the Spooling State Machine. If 0 there is no limit. Multi-block inquire/grant messages are not include in this count.,,EC,U4,,0,1,U4 0,U4 4294967295,U4 10,MaxSpoolTransmit
+4009=OverwriteSpool,Determine whether to overwrite data in the spool area or to discard further messages when the spool area is full as part of the Spooling State Machine. Possible values include 1 (overwrite) and 0 (discard).,,EC,Bo,,0,1,Bo 0,Bo 1,Bo 0,OverwriteSpool
+4010=SpoolEnabled,Enable or disable the Spooling State Machine. Possible values include 1 (enabled) and 0 (disabled).,,EC,Bo,,0,1,Bo 0,Bo 1,Bo 0,SpoolEnable
+4011=WBitS10,Request host reply for stream 10 messages (Terminal Services). Possible values include 1 (reply) 0 (no reply).,,EC,Bo,,0,1,Bo 0,Bo 1,Bo 1,S10ReplyExpected
+4012=WBitS5,Request host reply for stream 5 messages (Alarms). Possible values include 1 (reply) 0 (no reply).,,EC,Bo,,0,1,Bo 0,Bo 1,Bo 1,S5ReplyExpected
+4013=WBitS6,Request host reply for stream 6 messages (Events). If the machine is producing frequent collection events it may be a good idea to disable request reply. Possible values include 1 (reply) 0 (no reply).,,EC,Bo,,0,1,Bo 0,Bo 1,Bo 1,S6ReplyExpected
+4020=TimeFormat,Y2K time format selection. Possible values include 1 (compliant 16 byte) and 0 (not compliant 12 byte).,,EC,U4,,0,1,U4 0,U4 4294967295,U4 1,TimeFormat
+4021=DefCtrlOfflineState,State of the Control State Machine when going offline. Possible values include 1 = Equipment Offline 3 = Host Offline,,EC,U1,,0,1,U1 0,U1 5,U1 3,DefCtrlOfflineState
+4022=EventReportMsg,Message sent on event trigger,,EC,U4,,0,1,U4 0,U4 4294967295,U4 67083,EventReportMsg
+4023=DefaultCommState,The default state of the GEM communications state machine where 0 = disabled and 256 = enabled.,,EC,U4,,0,1,U4 0,U4 4294967295,U4 256,DefaultCommState
+4024=DefaultCtrlState,The default state of the GEM control state machine 1=EquipOffline 2=AttemptOnline 3=HostOffline 4=OnlineLocal and 5=OnlineRemote,,EC,U1,,0,1,U1 0,U1 5,U1 5,DefaultCtrlState
+4025=HeartBeat,Message level circuit assurance (0 turns it off),secs,EC,U2,,0,1,,,U2 0,HeartBeat
+4026=ClockOffset,Time offset between host's and local time,sec,SV,I4,,,,,,I4 0,ClockOffset
+4027=LastCEID,The last triggered CE,,DV,U4,,,,,,,LastCEID
+4028=LimitFreq,The frequency at which limits with GetValue callbacks are polled (0 turns it off),secs,EC,U2,,0,1,,,U2 0,LimitFreq
+4029=DataID,E5 DATAID,,DV,U4,,,,,,U4 0,DataID
+4030=PreviousControlState, the prior control state,,SV,U1,,,,,,,PreviousControlState
+4031=S6MultiBlockInquire, 1=send MBI 0=don't send MBI,,EC,Bo,,0,1,,,Bo 0,S6MultiBlockInquire
+#    data item format specifiers for SECS-II messages. These are private variables
+#    uncomment these only if you need something other than U4 format.  Format conversion degrades performance.
+#4040=ALIDFormat,the data type for alarm ids in messages,,SV,U4,,1,0,U4 1,U4 11,U4 7,ALIDFormat
+#4041=CEIDFormat,the data type for CE ids in messages,,SV,U4,,1,0,U4 1,U4 11,U4 7,CEIDFormat
+#4042=DATAIDFormat,the data type for DATAID in messages,,SV,U4,,1,0,U4 1,U4 11,U4 7,DATAIDFormat
+#4043=RPTIDFormat,the data type for report ids in messages,,SV,U4,,1,0,U4 1,U4 11,U4 7,RPTIDFormat
+#4044=TRIDFormat,the data type for trace ids in messages,,SV,U4,,1,0,U4 1,U4 11,U4 7,TRIDFormat
+#4045=VIDFormat,the data type for variable (EC SV DV) ids in messages,,SV,U4,,1,0,U4 1,U4 11,U4 7,VIDFormat
+#Do not add definitions here without reading the documentation
+
+#############################################
+# START: E40 Cimetrix Definitions
+#############################################
+#project file: E40PJM.epj
+
+#note that all fields must be filled except wellknownname
+#empty fields (i.e. ,,) are allowed in some places
+
+[COMMON EVENTS]
+#id=name, description, wellknownname
+#following events will be used if PRJobEventStyle EC is set to true(1) - Cimetrix style - event for each state
+8950=PJQueued,Process Job transitioned to QUEUED state,
+8951=PJSetup,Process Job transitioned to SETTING UP state.,
+8952=PJWaitingForStart,Process Job transitioned to WAITINGFORSTART state.,
+8953=PJProcessing,Process Job transitioned to PROCESSING state.,
+8954=PJProcessingComplete,Process Job processing completed.,
+8955=PJProcessJobComplete,Process Job completed.,
+8956=PJPausing,Process Job transitioned to PAUSING state.,
+8957=PJPaused,Process Job transitioned to PAUSED state.,
+8958=PJStopping,Process Job transitioned to STOPPING state.,
+8959=PJAborting,Process Job transitioned to ABORTING state.,
+
+#following events will be used if PRJobEventStyle EC is set to false(0) - CCS style - event for each transaction in PJM state model
+8970=PJ_tsm1,Process Job No State to QUEUED/POOLED state.,
+8971=PJ_tsm2,Process Job QUEUED/POOLED state to SETTING UP state.,
+8972=PJ_tsm3,Process Job SETTING UP state to WAITING FOR START state.,
+8973=PJ_tsm4,Process Job SETTING UP state to PROCESSING state.,
+8974=PJ_tsm5,Process Job WAITING FOR START state to PROCESSING state.,
+8975=PJ_tsm6,Process Job PROCESSING state to PROCESS COMPLETE state.,
+8976=PJ_tsm7,Process Job PROCESS COMPLETE state to No State.,
+8977=PJ_tsm8,Process Job EXECUTING state to PAUSING state.,
+8978=PJ_tsm9,Process Job PAUSING state to PAUSED state.,
+8979=PJ_tsm10,Process Job PAUSE state to EXECUTING state.,
+8980=PJ_tsm11,Process Job EXECUTING state to STOPPING state.,
+8981=PJ_tsm12,Process Job PAUSE state to STOPPING state.,
+8982=PJ_tsm13,Process Job EXECUTING state to ABORTING state.,
+8983=PJ_tsm14,Process Job STOPPING state to ABORTING state.,
+8984=PJ_tsm15,Process Job PAUSE state to ABORTING state.,
+8985=PJ_tsm16,Process Job ABORTING state to No State.,
+8986=PJ_tsm17,Process Job STOPPING state to No State.,
+8987=PJ_tsm18,Process Job QUEUED/POOLED state to No State.,
+
+#varTypes DV,SV,EC
+#valTypes I1, I2, I4, I8, U1, U2, U4, U8, F4, F8, A, Bo, Bi, L, J, W
+
+[COMMON VARIABLES]
+#id=name, description, units, varType, valType, eventID, private, persistant, min, max, default, wellknownname
+8900=PRJobID,Process Job ID,,DV,A,,,,,,A,
+8901=PRMtrlOrder,PRMtrlOrder attribute of Process Job object,,SV,U1,,,1,,,U1 1,
+8902=PRJobStateAscii,Text representation of Process Job's state,,DV,A,,,,,,A,
+8903=PRJobState,Enumerated representation of Process Job's state,,DV,U1,,,,,,U1 0,
+8904=PRJobPrevStateAscii,Process Job's previous state (text),,DV,A,,,,,,A,
+8905=PRJobPrevState,Process Job's previous state (enumerated),,DV,U1,,,,,,U1 0,
+8906=PRJobRecID,Process Job's RecID attribute,,DV,A,,,,,,A,
+8907=PRJobPauseEvent,Process Job's PauseEvent attribute,,DV,L,,,,,,,
+8908=PRJobPRMtlNameList,Process Job's PRMtlNameList attribute,,DV,L,,,,,,,
+8909=PRJobPRMtlType,Process Job's PRMtlType attribute,,DV,Bi,,,,,,Bi 0,
+8910=PRJobPRProcessStart,Process Job's PRProcessStart attribute,,DV,Bo,,,,,,Bo 0,
+8911=PRJobPRRecipeMethod,Process Job's PRRecipeMethod attribute,,DV,U1,,,,,,U1 0,
+8912=PRJobRecVariableList,Process Job's RecVariableList attribute,,DV,L,,,,,,,
+8913=PRJobEventStyle,0 = 18 events(new style) 1 = 10 events(old style) 2 = both styles(default),,EC,U1,,,1,U1 0,U1 2,U1 2,
+8914=PRJobWaitForAllMaterial,1=PJ will wait for all material to arrive; 0=for any material,,EC,Bo,,,1,,,Bo 1,
+8915=PRJobCheckSlotMapStatusMaterial,1=PJ will wait for Slot Map Status of Carrier(s) to be verified; 0=will not check,,EC,Bo,,,1,,,Bo 1,
+8916=SuppressPRJobAlert,1=No PRJobAlert messages; 0=PRJobAlert messages will be sent,,EC,Bo,,,1,,,Bo 0,
+8917=PRJobObjType,E39 process job object OBJTYPE attribute value,,EC,A,,,1,,,A PROCESSJOB,
+8918=ExtendRecipeTuningStates,Allow Recipe Tuning in additional states 0 = reject request 1 = call callback - new style (default) ,,EC,U1,,0,0,,,U1 1,
+#############################################
+# END: E40 Cimetrix Definitions
+#############################################
+
+#############################################
+# START: E87 Cimetrix Definitions
+#################################
+#project file: E87.epj
+
+
+#note that all fields must be filled except wellknownname
+#empty fields (i.e. ,,) are allowed in some places
+
+
+[COMMON EVENTS]
+#id=name, description, wellknownname
+9000=E87NoState2OutOfService,LPTSTM transition 1,
+9001=E87NoState2InService,LPTSTM transition 1,
+9002=E87OutOfService2InService,LPTSTM transition 2,
+9003=E87InService2OutOfService,LPTSTM transition 3,
+9004=E87InService2TransferReady,LPTSTM transition 4,
+9005=E87InService2TransferBlocked,LPTSTM transition 4,
+9006=E87TransferReady2ReadyToLoad,LPTSTM transition 5,
+9007=E87TransferReady2ReadyToUnload,LPTSTM transition 5,
+9008=E87ReadyToLoad2TransferBlocked,LPTSTM transition 6,
+9009=E87ReadyToUnload2TransferBlocked,LPTSTM transition 7,
+9010=E87TransferBlocked2ReadytoLoad,LPTSTM transition 8,
+9011=E87TransferBlocked2ReadytoUnload,LPTSTM transition 9,
+9012=E87TransferBlocked2TransferReady,LPTSTM transition 10,
+
+9013=E87NoState2Carrier,Carrier State Model trasition 1,
+9014=E87NoState2IdNotRead,Carrier State Model trasition 2,
+9015=E87NoState2WaitingForHost,Carrier State Model trasition 3,
+9016=E87NoState2IdVerficationOk,Carrier State Model trasition 4,
+9017=E87NoState2IdVerificationFail,Carrier State Model trasition 5,
+
+9018=E87IdNotRead2IdVerificationOk,Carrier State Model trasition 6,
+9019=E87IdNotRead2WaitingForHost,Carrier State Model trasition 7,
+
+9020=E87WaitingforHost2IdVerificationOk,Carrier State Model trasition 8,
+9021=E87WaitingforHost2IdVerificationFail,Carrier State Model trasition 9,
+
+9022=E87IdNotRead2BypassWaitingForHost,Carrier State Model trasition 10,
+9023=E87IdNotRead2BypassIdVerificationOk,Carrier State Model trasition 11,
+
+9025=E87SlotMapNotRead2SlotMapVerificationOk,Carrier State Model trasition 13,
+9026=E87SlotMapNotRead2WaitingForHost,Carrier State Model trasition 14,
+
+9027=E87WaitingForHost2SlotMapVerificationOk,Carrier State Model trasition 15,
+9028=E87WaitingForHost2SlotMapVerificationFail,Carrier State Model trasition 16,
+
+9029=E87NoState2NotAccessed,Carrier State Model trasition 17,
+9030=E87NotAccess2InAccess,Carrier State Model trasition 18,
+9031=E87InAccess2CarrierComplete,Carrier State Model trasition 19,
+9032=E87InAccess2CarrierStopped,Carrier State Model trasition 20,
+9033=E87Carrier2NoState,Carrier State Model trasition 21,
+
+9034=E87NoState2Manual,Access Mode State Model transition 1,
+9035=E87NoState2Auto,Access Mode State Model transition 1,
+9036=E87Manual2Auto,Access Mode State Model transition 2,
+9037=E87Auto2Manual,Access Mode State Model transition 3,
+
+9039=E87NotReserved2Reserved,LP Reservation State Model transition 2,
+9040=E87Reserved2NotReserved,LP Reservation State Model transition 3,
+
+9041=E87NoState2NotAssociated,LPCASM transition 1,
+9042=E87NotAssociated2Associated,LPCASM transition 2,
+9043=E87Associated2NotAssociated,LPCASM transition 3,
+9044=E87Associated2Associated,LPCASM transition 4,
+
+9045=CarrierClosed,Carrier door has been closed,
+9046=CarrierOpened,Carrier door has been opened,
+9047=BufferCapacityChanged,,
+9048=CarrierProcessingStatusChanged,,
+9049=CarrierApproachingComplete,,
+
+
+
+#Alarms' set and clear events
+9050=AccessModeViolationSet,,
+9051=AccessModeViolationClear,,
+9052=CarrierVerificationFailureSet,,
+9053=CarrierVerificationFailureClear,,
+9054=SlotMapReadFailedSet,,
+9055=SlotMapReadFailedClear,,
+9056=SlotMapVerificationFailedSet,,
+9057=SlotMapVerificationFailedClear,,
+9058=AttemptToUseOutOfServiceLPSet,,
+9059=AttemptToUseOutOfServiceLPClear,,
+9060=CarrierPresenceErrorSet,,
+9061=CarrierPresenceErrorClear,,
+9062=CarrierPlacementErrorSet,,
+9063=CarrierPlacementErrorClear,,
+9064=CarrierDockFailureSet,,
+9065=CarrierDockFailureClear,,
+9066=CarrierOpenFailureSet,,
+9067=CarrierOpenFailureClear,,
+9068=DuplicateCarrierIDSet,,
+9069=DuplicateCarrierIDClear,,
+9070=CarrierRemovalErrorSet,,
+9071=CarrierRemovalErrorClear,,
+9072=IBCarrierMoveFailureSet,,
+9073=IBCarrierMoveFailureClear,,
+9074=PIOFailureSet,,
+9075=PIOFailureClear,,
+
+9076=CarrierIDReadFail,,
+9077=CarrierLocationChanged,,
+9078=CarrierClamped,,
+9079=CarrierUnclamped,,
+9080=DuplicateCarrierIDInProcess,a carrier has been received with the same id as a carrier being processed,
+9081=IDReaderUnavailable,,
+9082=IDReaderAvailable,,
+
+9083=UnknownCarrierID,a carrier arrives at a not associated loadport and the carrierID reader is not available,
+
+[ALARMS]
+#id=name, description, text, setEventID, clearEventID, wellknownname
+
+#epj version 3 alarms without alarm codes.  Use this section if your epj file version is 3
+#9200=AccessModeViolation,E87 alarm, Access Mode Violation, 9050, 9051,
+#9201=CarrierVerificationFailure,E87 alarm, Carrier Verification Failure, 9052, 9053,
+#9202=SlotMapReadFailed,E87 alarm, Slot Map Read Failed, 9054, 9055,
+#9203=SlotMapVerificationFailed,E87 alarm, Slot Map Verification Failed, 9056, 9057,
+#9204=AttemptToUseOutOfServiceLP,E87 alarm, Attempt To Use Out Of Service Load Port, 9058, 9059,
+#9205=CarrierPresenceError,E87 alarm, Carrier Presence Error, 9060, 9061,
+#9206=CarrierPlacementError,E87 alarm, Carrier Placement Error, 9062, 9063,
+#9207=CarrierDockFailure,E87 alarm, Carrier Dock/UnDock Failure, 9064, 9065,
+#9208=CarrierOpenFailure,E87 alarm, Carrier Open/Close Failure, 9066, 9067,
+#9209=DuplicateCarrierID,E87 alarm, Duplicate CarrierID, 9068, 9069,
+#9210=CarrierRemovalError,E87 alarm, Carrier Removal Error, 9070, 9071,
+#9211=PIOFailure,E87 alarm, PIO Failure, 9074, 9075,
+#9212=IBCarrierMoveFailure,E87 alarm, Internal Buffer Carrier Move Failure, 9072, 9073,
+
+#epj version 4 alarms with ALCD entries.  Use this section if your epj file version is 4.  Also change the ALCD values if desired.
+9200=AccessModeViolation,E87 alarm, Access Mode Violation, 9050, 9051, 0,
+9201=CarrierVerificationFailure,E87 alarm, Carrier Verification Failure, 9052, 9053, 0,
+9202=SlotMapReadFailed,E87 alarm, Slot Map Read Failed, 9054, 9055, 0,
+9203=SlotMapVerificationFailed,E87 alarm, Slot Map Verification Failed, 9056, 9057, 0,
+9204=AttemptToUseOutOfServiceLP,E87 alarm, Attempt To Use Out Of Service Load Port, 9058, 9059, 0,
+9205=CarrierPresenceError,E87 alarm, Carrier Presence Error, 9060, 9061, 0,
+9206=CarrierPlacementError,E87 alarm, Carrier Placement Error, 9062, 9063, 0,
+9207=CarrierDockFailure,E87 alarm, Carrier Dock/UnDock Failure, 9064, 9065, 0,
+9208=CarrierOpenFailure,E87 alarm, Carrier Open/Close Failure, 9066, 9067, 0,
+9209=DuplicateCarrierID,E87 alarm, Duplicate CarrierID, 9068, 9069, 0,
+9210=CarrierRemovalError,E87 alarm, Carrier Removal Error, 9070, 9071, 0,
+9211=PIOFailure,E87 alarm, PIO Failure, 9074, 9075, 0,
+9212=IBCarrierMoveFailure,E87 alarm, Internal Buffer Carrier Move Failure, 9072, 9073, 0,
+
+
+#varTypes DV,SV,EC
+#valTypes I1, I2, I4, I8, U1, U2, U4, U8, F4, F8, A, Bo, Bi, L, J, W
+
+[COMMON VARIABLES]
+#id=name, description, units, varType, valType, eventID, private, persistant, min, max, default, wellknownname
+9100=LocationID,Location ID,,DV,A,,,,,,,
+9101=CarrierID,Carrier ID,,DV,A,,,,,,,
+9102=PortID,Port ID,,DV,U1,,,,,,U1 0,
+9104=AvailPartitionCapacity,Available capacity of the Partition,,DV,U1,,,,,,U1 0,
+9105=PartitionCapacity,Capacity of the Partition,,DV,U1,,,,,,,
+9106=PartitionID,Partition ID,,DV,A,,,,,,,
+9107=PartitionType,Partition Type,,DV,A,,,,,,,
+9108=PortAssociationState,Load Port Association State,,DV,U1,,,,,,U1 0,
+9109=PortGroupID,Port Group ID,,DV,A,,,,,,,
+9110=PortTransferState,Load Port transfer State,,DV,U1,,,,,,U1 0,
+9111=BufferPartitionInfo,,,DV,L,,,,,,,
+9112=PortStateInfo,,,DV,L,,,,,,,
+9113=PortGroup,,,DV,L,,,,,,,
+#9114=PortListDV,,,DV,L,,,,,,,
+9120=BufferCapacityList,,,SV,L,,,,,,,
+9121=CarrierLocationMatrix,,,SV,L,,,,,,,
+9122=PortStateInfoList,,,SV,L,,,,,,,
+9123=PortAssociationStateList,,,SV,L,,,,,,,
+#9124=PortGroupList,,,SV,L,,,,,,,
+9125=PortTransferStateList,,,SV,L,,,,,,,
+9126=CarrierID_1,,,SV,A,,,,,,,
+9127=CarrierID_2,,,SV,A,,,,,,,
+9128=CarrierID_3,,,SV,A,,,,,,,
+9129=CarrierID_4,,,SV,A,,,,,,,
+9130=CarrierID_5,,,SV,A,,,,,,,
+9131=CarrierID_6,,,SV,A,,,,,,,
+9132=CarrierID_7,,,SV,A,,,,,,,
+9133=CarrierID_8,,,SV,A,,,,,,,
+9134=CarrierID_9,,,SV,A,,,,,,,
+9135=CarrierID_10,,,SV,A,,,,,,,
+9136=CarrierID_11,,,SV,A,,,,,,,
+9137=CarrierID_12,,,SV,A,,,,,,,
+9138=LocationID_1,,,SV,A,,,,,,,
+9139=LocationID_2,,,SV,A,,,,,,,
+9140=LocationID_3,,,SV,A,,,,,,,
+9141=LocationID_4,,,SV,A,,,,,,,
+9142=LocationID_5,,,SV,A,,,,,,,
+9143=LocationID_6,,,SV,A,,,,,,,
+9144=LocationID_7,,,SV,A,,,,,,,
+9145=LocationID_8,,,SV,A,,,,,,,
+9146=LocationID_9,,,SV,A,,,,,,,
+9147=LocationID_10,,,SV,A,,,,,,,
+9148=LocationID_11,,,SV,A,,,,,,,
+9149=LocationID_12,,,SV,A,,,,,,,
+9150=BufferPartitionInfo_1,,,SV,L,,,,,,,
+9151=PartitionID_1,,,SV,A,,,,,,,
+9152=PartitionType_1,,,SV,A,,,,,,,
+9153=AvailPartitionCapacity_1,,,SV,U1,,,,,,U1 0,
+9154=PartitionCapacity_1,,,SV,U1,,,,,,,
+# Partition*_2, _3, _4 at the end of file
+9155=PortStateInfo_1,,,SV,L,,,,,,,
+9156=PortStateInfo_2,,,SV,L,,,,,,,
+9157=PortStateInfo_3,,,SV,L,,,,,,,
+9158=PortStateInfo_4,,,SV,L,,,,,,,
+9159=PortStateInfo_5,,,SV,L,,,,,,,
+9160=PortStateInfo_6,,,SV,L,,,,,,,
+9161=PortAssociationState_1,,,SV,U1,,,,,,U1 0,
+9162=PortAssociationState_2,,,SV,U1,,,,,,U1 0,
+9163=PortAssociationState_3,,,SV,U1,,,,,,U1 0,
+9164=PortAssociationState_4,,,SV,U1,,,,,,U1 0,
+9165=PortAssociationState_5,,,SV,U1,,,,,,U1 0,
+9166=PortAssociationState_6,,,SV,U1,,,,,,U1 0,
+9167=PortTransferState_1,,,SV,U1,,0,1,,,U1 2,
+9168=PortTransferState_2,,,SV,U1,,0,1,,,U1 2,
+9169=PortTransferState_3,,,SV,U1,,0,1,,,U1 2,
+9170=PortTransferState_4,,,SV,U1,,0,1,,,U1 2,
+9171=PortTransferState_5,,,SV,U1,,0,1,,,U1 2,
+9172=PortTransferState_6,,,SV,U1,,0,1,,,U1 2,
+9173=PortID_1,,,SV,U1,,,,,,U1 0,
+9174=PortID_2,,,SV,U1,,,,,,U1 0,
+9175=PortID_3,,,SV,U1,,,,,,U1 0,
+9176=PortID_4,,,SV,U1,,,,,,U1 0,
+9177=PortID_5,,,SV,U1,,,,,,U1 0,
+9178=PortID_6,,,SV,U1,,,,,,U1 0,
+9179=AccessMode_1,,,SV,U1,,,1,,,U1 1,
+9180=AccessMode_2,,,SV,U1,,,1,,,U1 1,
+9181=AccessMode_3,,,SV,U1,,,1,,,U1 1,
+9182=AccessMode_4,,,SV,U1,,,1,,,U1 1,
+9183=AccessMode_5,,,SV,U1,,,1,,,U1 1,
+9184=AccessMode_6,,,SV,U1,,,1,,,U1 1,
+9224=AccessMode,Access Mode state,,DV,U1,,,,,,U1 0,
+
+9185=BufferPartitionInfo_2,,,SV,L,,,,,,,
+9186=PartitionID_2,,,SV,A,,,,,,,
+9187=PartitionType_2,,,SV,A,,,,,,,
+9188=AvailPartitionCapacity_2,,,SV,U1,,,,,,U1 0,
+9189=PartitionCapacity_2,,,SV,U1,,,,,,,
+
+9190=BufferPartitionInfo_3,,,SV,L,,,,,,,
+9191=PartitionID_3,,,SV,A,,,,,,,
+9192=PartitionType_3,,,SV,A,,,,,,,
+9193=AvailPartitionCapacity_3,,,SV,U1,,,,,,U1 0,
+9194=PartitionCapacity_3,,,SV,U1,,,,,,,
+
+9195=BufferPartitionInfo_4,,,SV,L,,,,,,,
+9196=PartitionID_4,,,SV,A,,,,,,,
+9197=PartitionType_4,,,SV,A,,,,,,,
+9198=AvailPartitionCapacity_4,,,SV,U1,,,,,,U1 0,
+9199=PartitionCapacity_4,,,SV,U1,,,,,,,
+
+9200=Reason,,,SV,U1,,,,,,U1 0,
+9201=UnAllocatedPartitionCapacityDV,,,DV,U1,,,,,,U1 0,
+9203=PortList,,,SV,L,,,,,,,
+
+9204=CapacityDV,the carrier capacity,,DV,U1,,,,,,,
+9205=SubstrateCountDV,the carrier substrate count,,DV,U1,,,,,,,
+9206=CarrierIDStatusDV,the carrier ID verification state,,DV,U1,,,,,,,
+9207=CarrierAccessingStatusDV,the carrier accessing state,,DV,U1,,,,,,,
+9208=SlotMapStatusDV,the carrier slot map verification state,,DV,U1,,,,,,,
+
+9209=ContentMapDV,the carrier content map,,DV,L,,,,,,,
+9210=SlotMapDV,the carrier slot map,,DV,L,,,,,,,
+
+9211=UsageDV,the carrier substrate usage,,DV,A,,,,,,,
+
+9212=LoadPortReservationState, Load port Reservation State,,DV,U1,,,,,,,
+9213=LoadPortReservationStateList, Load port Reservation State,,SV,L,,,,,,,
+9214=LoadPortReservationState_1, Load port Reservation State,,SV,U1,,,,,,,
+9215=LoadPortReservationState_2, Load port Reservation State,,SV,U1,,,,,,,
+9216=LoadPortReservationState_3, Load port Reservation State,,SV,U1,,,,,,,
+9217=LoadPortReservationState_4, Load port Reservation State,,SV,U1,,,,,,,
+9218=LoadPortReservationState_5, Load port Reservation State,,SV,U1,,,,,,,
+9219=LoadPortReservationState_6, Load port Reservation State,,SV,U1,,,,,,,
+
+9220=UnAllocatedPartitionCapacity_1,,,SV,U1,,,,,,U1 0,
+9221=UnAllocatedPartitionCapacity_2,,,SV,U1,,,,,,U1 0,
+9222=UnAllocatedPartitionCapacity_3,,,SV,U1,,,,,,U1 0,
+9223=UnAllocatedPartitionCapacity_4,,,SV,U1,,,,,,U1 0,
+
+#use either the BypassReadID for each loadport, or the single BypassReadID for all ports
+#remove the variables for the style not desired.
+#9315=BypassReadID_1,BypassReadID for loadport 1,,EC,Bo,,0,1,,,Bo 0,
+#9316=BypassReadID_2,BypassReadID for loadport 2,,EC,Bo,,0,1,,,Bo 0,
+#9317=BypassReadID_3,BypassReadID for loadport 3,,EC,Bo,,0,1,,,Bo 0,
+#9318=BypassReadID_4,BypassReadID for loadport 4,,EC,Bo,,0,1,,,Bo 0,
+#9319=BypassReadID_5,BypassReadID for loadport 5,,EC,Bo,,0,1,,,Bo 0,
+#9320=BypassReadID_6,BypassReadID for loadport 6,,EC,Bo,,0,1,,,Bo 0,
+9115=BypassReadID,BypassReadID for all ports,,EC,Bo,,0,1,,,Bo 0,
+
+9330=CarrierHold,0=Host Release 1=Carrier Complete/Stopped,,EC,U1,,0,1,U1 0,U1 1,U1 1,
+9331=CarrierUnclamp,0=Carrier Complete/Stopped 1=AMHS,,EC,U1,,0,1,U1 0,U1 1,U1 0,
+
+9332=SubstrateIDSeparator,Used when generating substrate IDs from a slot map.  Separates carrierID and slot number,,SV,A,,0,0,,,A .,
+9333=CEIDSelectorCSM4,0=CSM transition 4 CE; 1=CSM transition 8 CE (Intel's req.) is triggered when CIDR unavailable,,EC,U1,,0,1,U1 0,U1 1,U1 1,
+9334=CEIDSelectorCSM5,0=CSM transition 5 CE; 1=CSM transition 9 CE (Intel's req.) is triggered when CIDR unavailable,,EC,U1,,0,1,U1 0,U1 1,U1 1,
+9335=SendCIDVerifyAlarm, 0 = do not send on CarrierAtPort 1=send on CarrierAtPort when ID does not match Associated ID,,EC,U1,,0,1,U1 0,U1 1,U1 0,
+9336=UseCarrierPlaced,CarrierLocationChanged will be triggered by 0=CarrierAtPort; 1=CarrierPlaced,,EC,U1,,0,1,U1 0,U1 1,U1 0,
+9337=UseSlotmapOnly,Only use slotmap for creating substrates (ignore contentmap if set to true 1),,EC,Bo,,0,1,,,Bo 0,
+9338=UseSlotmapWithContentMap,Use slotmap when creating substrates from contentmap to check if slot is occupied correctly if set to true 1,,EC,Bo,,0,1,,,Bo 0,
+
+9339=PWCCheckSlotMap,1=Check slot map for cross-slotted or double-slotted wafers and reject service if there is a problem; 0=Don't check slot map.,,EC,Bo,,0,1,,,Bo 0,
+9340=UseSavedTransferState, 0=Use old behavior for determining IN SERVICE sub-state; 1=Use saved load port transfer state when going to IN SERVICE.,,EC,Bo,,0,1,,,Bo 1,
+
+9341=CallCallbackFirst,1=CancelCarrier callback is called BEFORE any state changes are made to the carrier; 0=default behavior,,EC,Bo,,0,1,,,Bo 0,
+
+871010=CarrierRecreateLPSMStyle,1=new style (default); 0=old style,,EC,U1,,,1,,,U1 1,
+875004=E87ErrID_PWC04,Proceed With Carrier - Carrier at port; PWC sends wrong carrier id,,EC,A,,0,0,,,A 3:Unknown object instance - Unknown CarrierID,
+875101=E87ErrID_CCX01,Cancel Carrier - Invalid Carrier ID; CC Sends a wrong/unknown carrier id to the equipment,,EC,A,,0,0,,,A 3:Unknown object instance - Unknown CarrierID,
+878256=TrimCarrierIDs,1=new style; 0=old style (default),,EC,U1,,0,0,,,U1 0,
+###########################################
+#  END : E87
+###########################################
+
+
+
+#############################################
+# START: E90 Cimetrix Definitions
+#############################################
+#project file: E90ST.epj
+
+
+#note that all fields must be filled except wellknownname
+#empty fields (i.e. ,,) are allowed in some places
+
+[COMMON EVENTS]
+#id=name, description, wellknownname
+9550=E90_Subst_NoState2AtSource,The substrate is registered,
+9551=E90_Subst_AtSource2AtWork,The substrate is taken from source substrate location and placed into the equipment,
+9552=E90_Subst_AtWork2AtSource,The substrate has moved to the source substrate location,
+9553=E90_Subst_AtWork2AtWork,The substrate has moved out from current equipment substrate location towards a new one,
+9554=E90_Subst_AtWork2AtDestination,The substrate has moved to the destination substrate location,
+9555=E90_Subst_AtDestination2AtWork,The substrate is taken from destination substrate location and placed into the equipment,
+9556=E90_Subst_AtDestination2Extinction,The substrate is removed from the equipment by a normal transfer sequence,
+9557=E90_Subst_AtDestination2AtSource,User informs or the equipment detects that the substrate is AT SOURCE,
+9558=E90_Subst_AnyState2Extinction,The equipment detects or is informed by the user that a substrate has been removed,
+
+9559=E90_Subst_NoState2NeedsProcessing,The substrate object is created,
+9560=E90_Subst_NeedsProcessing2InProcess,The processing to the substrate starts,
+9561=E90_Subst_InProcess2ProcessingComplete,The processing to the substrate completes,
+9562=E90_Subst_InProcess2NeedsProcessing,The substrate is requested to be processed again,
+9563=E90_Subst_NeedsProcessing2ProcessingComplete,The substrate is lost or skipped,
+
+9564=E90_Loc_Unoccupied2Occupied,Substrate moves onto the substrate location,
+9565=E90_Loc_Occupied2Unoccupied,Substrate moves off the location,
+
+9566=E90_BatchLoc_Unoccupied2Occupied,Substrate batch moves onto the Batch location,
+9567=E90_BatchLoc_Occupied2Unoccupied,Substrate batch moves off the batch location,
+
+9568=NoState2Occupied,Substrate location state model,
+9569=NoState2Unoccupied,Substrate location state model,
+9570=Occupied2NoState,Substrate location state model,
+9571=Unoccupied2NoState,Substrate location state model,
+
+[ALARMS]
+#id=name, description, text, setEventID, clearEventID, wellknownname
+#9200=AccessModeViolation,E87 alarm, Access Mode Violation, 9015, 9016,
+
+
+#varTypes DV,SV,EC
+#valTypes I1, I2, I4, I8, U1, U2, U4, U8, F4, F8, A, Bo, Bi, L, J, W
+
+[COMMON VARIABLES]
+#id=name, description, units, varType, valType, eventID, private, persistant, min, max, default, wellknownname
+9500=LotID,Identifier of the lot associated with the substrate by the user,,DV,A,,,,,,,
+9501=SubstDestination,Identifier of the substrate location on which the substrate shall be finally restored,,DV,A,,,,,,,
+9502=SubstHistory,History of locations visited,,DV,L,,,,,,,
+9503=SubstID,Substrate identifier relevant to the location,,DV,A,,,,,,,
+9504=SubstLocID,Identifier for current equipment substrate location,,DV,A,,,,,,,
+9505=SubstLocState,Substrate Location state,,DV,U1,,,,,,U1 0,
+9506=SubstMtrlStatus,Current status of the substrate that represents criteria of the processing quality,,DV,U1,,,,,,U1 0,
+9507=SubstProcState,Processing state of the substrate,,DV,U1,,,,,,U1 0,
+9508=SubstSource,Identifier of the substrate location on which the substrate has been initially registered,,DV,A,,,,,,,
+9509=SubstType,The type of substrate,,DV,U1,,,,,,U1 0,
+9510=SubstState,Transport state of the substrate,,DV,U1,,,,,,U1 0,
+9511=SubstUsage,How the substrate is used,,DV,U1,,,,,,U1 0,
+
+9512=BatchLocID,Identifier for current batch location,,DV,A,,,,,,,
+9513=SubstPosInBatch, Current substrate position in a batch,,DV,A,,,,,,,
+
+9514=SubstLocState_1,,,SV,U1,,,,,,U1 0,
+9515=SubstLocState_2,,,SV,U1,,,,,,U1 0,
+9516=SubstLocState_3,,,SV,U1,,,,,,U1 0,
+9517=SubstLocState_4,,,SV,U1,,,,,,U1 0,
+9518=SubstLocState_5,,,SV,U1,,,,,,U1 0,
+9519=SubstLocState_6,,,SV,U1,,,,,,U1 0,
+9520=SubstLocState_7,,,SV,U1,,,,,,U1 0,
+9521=SubstLocState_8,,,SV,U1,,,,,,U1 0,
+9522=SubstLocState_9,,,SV,U1,,,,,,U1 0,
+9523=SubstLocState_10,,,SV,U1,,,,,,U1 0,
+9524=SubstLocState_11,,,SV,U1,,,,,,U1 0,
+9525=SubstLocState_12,,,SV,U1,,,,,,U1 0,
+9526=SubstLocState_13,,,SV,U1,,,,,,U1 0,
+9527=SubstLocState_14,,,SV,U1,,,,,,U1 0,
+9528=SubstLocState_15,,,SV,U1,,,,,,U1 0,
+9529=SubstLocState_16,,,SV,U1,,,,,,U1 0,
+9530=SubstLocState_17,,,SV,U1,,,,,,U1 0,
+9531=SubstLocState_18,,,SV,U1,,,,,,U1 0,
+9532=SubstLocState_19,,,SV,U1,,,,,,U1 0,
+9533=SubstLocState_20,,,SV,U1,,,,,,U1 0,
+9534=SubstLocState_21,,,SV,U1,,,,,,U1 0,
+9535=SubstLocState_22,,,SV,U1,,,,,,U1 0,
+9536=SubstLocState_23,,,SV,U1,,,,,,U1 0,
+9537=SubstLocState_24,,,SV,U1,,,,,,U1 0,
+9538=SubstLocState_25,,,SV,U1,,,,,,U1 0,
+9539=SubstLocState_26,,,SV,U1,,,,,,U1 0,
+9540=SubstLocState_27,,,SV,U1,,,,,,U1 0,
+9541=SubstLocState_28,,,SV,U1,,,,,,U1 0,
+9542=SubstLocState_29,,,SV,U1,,,,,,U1 0,
+9543=SubstLocState_30,,,SV,U1,,,,,,U1 0,
+9544=SubstLocState_31,,,SV,U1,,,,,,U1 0,
+9545=SubstLocState_32,,,SV,U1,,,,,,U1 0,
+9546=SubstLocState_33,,,SV,U1,,,,,,U1 0,
+9547=SubstLocState_34,,,SV,U1,,,,,,U1 0,
+9548=SubstLocState_35,,,SV,U1,,,,,,U1 0,
+9549=SubstLocState_36,,,SV,U1,,,,,,U1 0,
+9550=SubstLocState_37,,,SV,U1,,,,,,U1 0,
+9551=SubstLocState_38,,,SV,U1,,,,,,U1 0,
+9552=SubstLocState_39,,,SV,U1,,,,,,U1 0,
+9553=SubstLocState_40,,,SV,U1,,,,,,U1 0,
+9554=SubstLocState_41,,,SV,U1,,,,,,U1 0,
+9555=SubstLocState_42,,,SV,U1,,,,,,U1 0,
+9556=SubstLocState_43,,,SV,U1,,,,,,U1 0,
+9557=SubstLocState_44,,,SV,U1,,,,,,U1 0,
+9558=SubstLocState_45,,,SV,U1,,,,,,U1 0,
+9559=SubstLocState_46,,,SV,U1,,,,,,U1 0,
+9560=SubstLocState_47,,,SV,U1,,,,,,U1 0,
+9561=SubstLocState_48,,,SV,U1,,,,,,U1 0,
+9562=SubstLocState_49,,,SV,U1,,,,,,U1 0,
+9563=SubstLocState_50,,,SV,U1,,,,,,U1 0,
+9564=SubstLocState_51,,,SV,U1,,,,,,U1 0,
+9565=SubstLocState_52,,,SV,U1,,,,,,U1 0,
+9566=SubstLocState_53,,,SV,U1,,,,,,U1 0,
+9567=SubstLocState_54,,,SV,U1,,,,,,U1 0,
+9568=SubstLocState_55,,,SV,U1,,,,,,U1 0,
+9569=SubstLocState_56,,,SV,U1,,,,,,U1 0,
+9570=SubstLocState_57,,,SV,U1,,,,,,U1 0,
+9571=SubstLocState_58,,,SV,U1,,,,,,U1 0,
+9572=SubstLocState_59,,,SV,U1,,,,,,U1 0,
+9573=SubstLocState_60,,,SV,U1,,,,,,U1 0,
+9574=SubstLocState_61,,,SV,U1,,,,,,U1 0,
+9575=SubstLocState_62,,,SV,U1,,,,,,U1 0,
+9576=SubstLocState_63,,,SV,U1,,,,,,U1 0,
+9577=SubstLocState_64,,,SV,U1,,,,,,U1 0,
+9578=SubstLocState_65,,,SV,U1,,,,,,U1 0,
+9579=SubstLocState_66,,,SV,U1,,,,,,U1 0,
+9580=SubstLocState_67,,,SV,U1,,,,,,U1 0,
+9581=SubstLocState_68,,,SV,U1,,,,,,U1 0,
+9582=SubstLocState_69,,,SV,U1,,,,,,U1 0,
+9583=SubstLocState_70,,,SV,U1,,,,,,U1 0,
+9584=SubstLocState_71,,,SV,U1,,,,,,U1 0,
+9585=SubstLocState_72,,,SV,U1,,,,,,U1 0,
+9586=SubstLocState_73,,,SV,U1,,,,,,U1 0,
+9587=SubstLocState_74,,,SV,U1,,,,,,U1 0,
+9588=SubstLocState_75,,,SV,U1,,,,,,U1 0,
+9589=SubstLocState_76,,,SV,U1,,,,,,U1 0,
+9590=SubstLocState_77,,,SV,U1,,,,,,U1 0,
+9591=SubstLocState_78,,,SV,U1,,,,,,U1 0,
+9592=SubstLocState_79,,,SV,U1,,,,,,U1 0,
+9593=SubstLocState_80,,,SV,U1,,,,,,U1 0,
+9594=SubstLocState_81,,,SV,U1,,,,,,U1 0,
+9595=SubstLocState_82,,,SV,U1,,,,,,U1 0,
+9596=SubstLocState_83,,,SV,U1,,,,,,U1 0,
+9597=SubstLocState_84,,,SV,U1,,,,,,U1 0,
+9598=SubstLocState_85,,,SV,U1,,,,,,U1 0,
+9599=SubstLocState_86,,,SV,U1,,,,,,U1 0,
+9600=SubstLocState_87,,,SV,U1,,,,,,U1 0,
+9601=SubstLocState_88,,,SV,U1,,,,,,U1 0,
+9602=SubstLocState_89,,,SV,U1,,,,,,U1 0,
+9603=SubstLocState_90,,,SV,U1,,,,,,U1 0,
+9604=SubstLocState_91,,,SV,U1,,,,,,U1 0,
+9605=SubstLocState_92,,,SV,U1,,,,,,U1 0,
+9606=SubstLocState_93,,,SV,U1,,,,,,U1 0,
+9607=SubstLocState_94,,,SV,U1,,,,,,U1 0,
+9608=SubstLocState_95,,,SV,U1,,,,,,U1 0,
+9609=SubstLocState_96,,,SV,U1,,,,,,U1 0,
+9610=SubstLocState_97,,,SV,U1,,,,,,U1 0,
+9611=SubstLocState_98,,,SV,U1,,,,,,U1 0,
+9612=SubstLocState_99,,,SV,U1,,,,,,U1 0,
+9613=SubstLocState_100,,,SV,U1,,,,,,U1 0,
+9614=SubstLocState_101,,,SV,U1,,,,,,U1 0,
+9615=SubstLocState_102,,,SV,U1,,,,,,U1 0,
+9616=SubstLocState_103,,,SV,U1,,,,,,U1 0,
+9617=SubstLocState_104,,,SV,U1,,,,,,U1 0,
+9618=SubstLocState_105,,,SV,U1,,,,,,U1 0,
+9619=SubstLocState_106,,,SV,U1,,,,,,U1 0,
+9620=SubstLocState_107,,,SV,U1,,,,,,U1 0,
+9621=SubstLocState_108,,,SV,U1,,,,,,U1 0,
+9622=SubstLocState_109,,,SV,U1,,,,,,U1 0,
+9623=SubstLocState_110,,,SV,U1,,,,,,U1 0,
+9624=SubstLocState_111,,,SV,U1,,,,,,U1 0,
+9625=SubstLocState_112,,,SV,U1,,,,,,U1 0,
+9626=SubstLocState_113,,,SV,U1,,,,,,U1 0,
+9627=SubstLocState_114,,,SV,U1,,,,,,U1 0,
+9628=SubstLocState_115,,,SV,U1,,,,,,U1 0,
+9629=SubstLocState_116,,,SV,U1,,,,,,U1 0,
+9630=SubstLocState_117,,,SV,U1,,,,,,U1 0,
+9631=SubstLocState_118,,,SV,U1,,,,,,U1 0,
+9632=SubstLocState_119,,,SV,U1,,,,,,U1 0,
+9633=SubstLocState_120,,,SV,U1,,,,,,U1 0,
+9634=SubstLocState_121,,,SV,U1,,,,,,U1 0,
+9635=SubstLocState_122,,,SV,U1,,,,,,U1 0,
+9636=SubstLocState_123,,,SV,U1,,,,,,U1 0,
+9637=SubstLocState_124,,,SV,U1,,,,,,U1 0,
+9638=SubstLocState_125,,,SV,U1,,,,,,U1 0,
+9639=SubstLocState_126,,,SV,U1,,,,,,U1 0,
+9640=SubstLocState_127,,,SV,U1,,,,,,U1 0,
+9641=SubstLocState_128,,,SV,U1,,,,,,U1 0,
+9642=SubstLocState_129,,,SV,U1,,,,,,U1 0,
+9643=SubstLocState_130,,,SV,U1,,,,,,U1 0,
+9644=SubstLocState_131,,,SV,U1,,,,,,U1 0,
+9645=SubstLocState_132,,,SV,U1,,,,,,U1 0,
+9646=SubstLocState_133,,,SV,U1,,,,,,U1 0,
+9647=SubstLocState_134,,,SV,U1,,,,,,U1 0,
+9648=SubstLocState_135,,,SV,U1,,,,,,U1 0,
+9649=SubstLocState_136,,,SV,U1,,,,,,U1 0,
+9650=SubstLocState_137,,,SV,U1,,,,,,U1 0,
+9651=SubstLocState_138,,,SV,U1,,,,,,U1 0,
+9652=SubstLocState_139,,,SV,U1,,,,,,U1 0,
+9653=SubstLocState_140,,,SV,U1,,,,,,U1 0,
+9654=SubstLocState_141,,,SV,U1,,,,,,U1 0,
+9655=SubstLocState_142,,,SV,U1,,,,,,U1 0,
+9656=SubstLocState_143,,,SV,U1,,,,,,U1 0,
+9657=SubstLocState_144,,,SV,U1,,,,,,U1 0,
+9658=SubstLocState_145,,,SV,U1,,,,,,U1 0,
+9659=SubstLocState_146,,,SV,U1,,,,,,U1 0,
+9660=SubstLocState_147,,,SV,U1,,,,,,U1 0,
+9661=SubstLocState_148,,,SV,U1,,,,,,U1 0,
+9662=SubstLocState_149,,,SV,U1,,,,,,U1 0,
+9663=SubstLocState_150,,,SV,U1,,,,,,U1 0,
+9664=SubstLocState_151,,,SV,U1,,,,,,U1 0,
+9665=SubstLocState_152,,,SV,U1,,,,,,U1 0,
+9666=SubstLocState_153,,,SV,U1,,,,,,U1 0,
+9667=SubstLocState_154,,,SV,U1,,,,,,U1 0,
+9668=SubstLocState_155,,,SV,U1,,,,,,U1 0,
+9669=SubstLocState_156,,,SV,U1,,,,,,U1 0,
+9670=SubstLocState_157,,,SV,U1,,,,,,U1 0,
+9671=SubstLocState_158,,,SV,U1,,,,,,U1 0,
+9672=SubstLocState_159,,,SV,U1,,,,,,U1 0,
+9673=SubstLocState_160,,,SV,U1,,,,,,U1 0,
+9674=SubstLocState_161,,,SV,U1,,,,,,U1 0,
+9675=SubstLocState_162,,,SV,U1,,,,,,U1 0,
+9676=SubstLocState_163,,,SV,U1,,,,,,U1 0,
+9677=SubstLocState_164,,,SV,U1,,,,,,U1 0,
+9678=SubstLocState_165,,,SV,U1,,,,,,U1 0,
+9679=SubstLocState_166,,,SV,U1,,,,,,U1 0,
+9680=SubstLocState_167,,,SV,U1,,,,,,U1 0,
+9681=SubstLocState_168,,,SV,U1,,,,,,U1 0,
+9682=SubstLocState_169,,,SV,U1,,,,,,U1 0,
+9683=SubstLocState_170,,,SV,U1,,,,,,U1 0,
+9684=SubstLocState_171,,,SV,U1,,,,,,U1 0,
+9685=SubstLocState_172,,,SV,U1,,,,,,U1 0,
+9686=SubstLocState_173,,,SV,U1,,,,,,U1 0,
+9687=SubstLocState_174,,,SV,U1,,,,,,U1 0,
+9688=SubstLocState_175,,,SV,U1,,,,,,U1 0,
+9689=SubstLocState_176,,,SV,U1,,,,,,U1 0,
+9690=SubstLocState_177,,,SV,U1,,,,,,U1 0,
+9691=SubstLocState_178,,,SV,U1,,,,,,U1 0,
+9692=SubstLocState_179,,,SV,U1,,,,,,U1 0,
+9693=SubstLocState_180,,,SV,U1,,,,,,U1 0,
+9694=SubstLocState_181,,,SV,U1,,,,,,U1 0,
+9695=SubstLocState_182,,,SV,U1,,,,,,U1 0,
+9696=SubstLocState_183,,,SV,U1,,,,,,U1 0,
+9697=SubstLocState_184,,,SV,U1,,,,,,U1 0,
+9698=SubstLocState_185,,,SV,U1,,,,,,U1 0,
+9699=SubstLocState_186,,,SV,U1,,,,,,U1 0,
+9700=SubstLocState_187,,,SV,U1,,,,,,U1 0,
+9701=SubstLocState_188,,,SV,U1,,,,,,U1 0,
+9702=SubstLocState_189,,,SV,U1,,,,,,U1 0,
+9703=SubstLocState_190,,,SV,U1,,,,,,U1 0,
+9704=SubstLocState_191,,,SV,U1,,,,,,U1 0,
+9705=SubstLocState_192,,,SV,U1,,,,,,U1 0,
+9706=SubstLocState_193,,,SV,U1,,,,,,U1 0,
+9707=SubstLocState_194,,,SV,U1,,,,,,U1 0,
+9708=SubstLocState_195,,,SV,U1,,,,,,U1 0,
+9709=SubstLocState_196,,,SV,U1,,,,,,U1 0,
+9710=SubstLocState_197,,,SV,U1,,,,,,U1 0,
+9711=SubstLocState_198,,,SV,U1,,,,,,U1 0,
+9712=SubstLocState_199,,,SV,U1,,,,,,U1 0,
+9713=SubstLocState_200,,,SV,U1,,,,,,U1 0,
+9714=SubstLocState_201,,,SV,U1,,,,,,U1 0,
+9715=SubstLocState_202,,,SV,U1,,,,,,U1 0,
+9716=SubstLocState_203,,,SV,U1,,,,,,U1 0,
+9717=SubstLocState_204,,,SV,U1,,,,,,U1 0,
+9718=SubstLocState_205,,,SV,U1,,,,,,U1 0,
+9719=SubstLocState_206,,,SV,U1,,,,,,U1 0,
+9720=SubstLocState_207,,,SV,U1,,,,,,U1 0,
+9721=SubstLocState_208,,,SV,U1,,,,,,U1 0,
+9722=SubstLocState_209,,,SV,U1,,,,,,U1 0,
+9723=SubstLocState_210,,,SV,U1,,,,,,U1 0,
+9724=SubstLocState_211,,,SV,U1,,,,,,U1 0,
+9725=SubstLocState_212,,,SV,U1,,,,,,U1 0,
+9726=SubstLocState_213,,,SV,U1,,,,,,U1 0,
+9727=SubstLocState_214,,,SV,U1,,,,,,U1 0,
+9728=SubstLocState_215,,,SV,U1,,,,,,U1 0,
+9729=SubstLocState_216,,,SV,U1,,,,,,U1 0,
+9730=SubstLocState_217,,,SV,U1,,,,,,U1 0,
+9731=SubstLocState_218,,,SV,U1,,,,,,U1 0,
+9732=SubstLocState_219,,,SV,U1,,,,,,U1 0,
+9733=SubstLocState_220,,,SV,U1,,,,,,U1 0,
+9734=SubstLocState_221,,,SV,U1,,,,,,U1 0,
+9735=SubstLocState_222,,,SV,U1,,,,,,U1 0,
+9736=SubstLocState_223,,,SV,U1,,,,,,U1 0,
+9737=SubstLocState_224,,,SV,U1,,,,,,U1 0,
+9738=SubstLocState_225,,,SV,U1,,,,,,U1 0,
+9739=SubstLocState_226,,,SV,U1,,,,,,U1 0,
+9740=SubstLocState_227,,,SV,U1,,,,,,U1 0,
+9741=SubstLocState_228,,,SV,U1,,,,,,U1 0,
+9742=SubstLocState_229,,,SV,U1,,,,,,U1 0,
+9743=SubstLocState_230,,,SV,U1,,,,,,U1 0,
+9744=SubstLocState_231,,,SV,U1,,,,,,U1 0,
+9745=SubstLocState_232,,,SV,U1,,,,,,U1 0,
+9746=SubstLocState_233,,,SV,U1,,,,,,U1 0,
+9747=SubstLocState_234,,,SV,U1,,,,,,U1 0,
+9748=SubstLocState_235,,,SV,U1,,,,,,U1 0,
+9749=SubstLocState_236,,,SV,U1,,,,,,U1 0,
+9750=SubstLocState_237,,,SV,U1,,,,,,U1 0,
+9751=SubstLocState_238,,,SV,U1,,,,,,U1 0,
+9752=SubstLocState_239,,,SV,U1,,,,,,U1 0,
+9753=SubstLocState_240,,,SV,U1,,,,,,U1 0,
+9754=SubstLocState_241,,,SV,U1,,,,,,U1 0,
+9755=SubstLocState_242,,,SV,U1,,,,,,U1 0,
+9756=SubstLocState_243,,,SV,U1,,,,,,U1 0,
+9757=SubstLocState_244,,,SV,U1,,,,,,U1 0,
+9758=SubstLocState_245,,,SV,U1,,,,,,U1 0,
+9759=SubstLocState_246,,,SV,U1,,,,,,U1 0,
+9760=SubstLocState_247,,,SV,U1,,,,,,U1 0,
+9761=SubstLocState_248,,,SV,U1,,,,,,U1 0,
+9762=SubstLocState_249,,,SV,U1,,,,,,U1 0,
+9763=SubstLocState_250,,,SV,U1,,,,,,U1 0,
+9764=SubstLocState_251,,,SV,U1,,,,,,U1 0,
+9765=SubstLocState_252,,,SV,U1,,,,,,U1 0,
+9766=SubstLocState_253,,,SV,U1,,,,,,U1 0,
+9767=SubstLocState_254,,,SV,U1,,,,,,U1 0,
+9768=SubstLocState_255,,,SV,U1,,,,,,U1 0,
+9769=SubstLocState_256,,,SV,U1,,,,,,U1 0,
+9770=SubstrLocSubstrID_1,,,SV,A,,,1,,,,
+9771=SubstrLocSubstrID_2,,,SV,A,,,1,,,,
+9772=SubstrLocSubstrID_3,,,SV,A,,,1,,,,
+9773=SubstrLocSubstrID_4,,,SV,A,,,1,,,,
+9774=SubstrLocSubstrID_5,,,SV,A,,,1,,,,
+9775=SubstrLocSubstrID_6,,,SV,A,,,1,,,,
+9776=SubstrLocSubstrID_7,,,SV,A,,,1,,,,
+9777=SubstrLocSubstrID_8,,,SV,A,,,1,,,,
+9778=SubstrLocSubstrID_9,,,SV,A,,,1,,,,
+9779=SubstrLocSubstrID_10,,,SV,A,,,1,,,,
+9780=SubstrLocSubstrID_11,,,SV,A,,,1,,,,
+9781=SubstrLocSubstrID_12,,,SV,A,,,1,,,,
+9782=SubstrLocSubstrID_13,,,SV,A,,,1,,,,
+9783=SubstrLocSubstrID_14,,,SV,A,,,1,,,,
+9784=SubstrLocSubstrID_15,,,SV,A,,,1,,,,
+9785=SubstrLocSubstrID_16,,,SV,A,,,1,,,,
+9786=SubstrLocSubstrID_17,,,SV,A,,,1,,,,
+9787=SubstrLocSubstrID_18,,,SV,A,,,1,,,,
+9788=SubstrLocSubstrID_19,,,SV,A,,,1,,,,
+9789=SubstrLocSubstrID_20,,,SV,A,,,1,,,,
+9790=SubstrLocSubstrID_21,,,SV,A,,,1,,,,
+9791=SubstrLocSubstrID_22,,,SV,A,,,1,,,,
+9792=SubstrLocSubstrID_23,,,SV,A,,,1,,,,
+9793=SubstrLocSubstrID_24,,,SV,A,,,1,,,,
+9794=SubstrLocSubstrID_25,,,SV,A,,,1,,,,
+9795=SubstrLocSubstrID_26,,,SV,A,,,1,,,,
+9796=SubstrLocSubstrID_27,,,SV,A,,,1,,,,
+9797=SubstrLocSubstrID_28,,,SV,A,,,1,,,,
+9798=SubstrLocSubstrID_29,,,SV,A,,,1,,,,
+9799=SubstrLocSubstrID_30,,,SV,A,,,1,,,,
+9800=SubstrLocSubstrID_31,,,SV,A,,,1,,,,
+9801=SubstrLocSubstrID_32,,,SV,A,,,1,,,,
+9802=SubstrLocSubstrID_33,,,SV,A,,,1,,,,
+9803=SubstrLocSubstrID_34,,,SV,A,,,1,,,,
+9804=SubstrLocSubstrID_35,,,SV,A,,,1,,,,
+9805=SubstrLocSubstrID_36,,,SV,A,,,1,,,,
+9806=SubstrLocSubstrID_37,,,SV,A,,,1,,,,
+9807=SubstrLocSubstrID_38,,,SV,A,,,1,,,,
+9808=SubstrLocSubstrID_39,,,SV,A,,,1,,,,
+9809=SubstrLocSubstrID_40,,,SV,A,,,1,,,,
+9810=SubstrLocSubstrID_41,,,SV,A,,,1,,,,
+9811=SubstrLocSubstrID_42,,,SV,A,,,1,,,,
+9812=SubstrLocSubstrID_43,,,SV,A,,,1,,,,
+9813=SubstrLocSubstrID_44,,,SV,A,,,1,,,,
+9814=SubstrLocSubstrID_45,,,SV,A,,,1,,,,
+9815=SubstrLocSubstrID_46,,,SV,A,,,1,,,,
+9816=SubstrLocSubstrID_47,,,SV,A,,,1,,,,
+9817=SubstrLocSubstrID_48,,,SV,A,,,1,,,,
+9818=SubstrLocSubstrID_49,,,SV,A,,,1,,,,
+9819=SubstrLocSubstrID_50,,,SV,A,,,1,,,,
+9820=SubstrLocSubstrID_51,,,SV,A,,,1,,,,
+9821=SubstrLocSubstrID_52,,,SV,A,,,1,,,,
+9822=SubstrLocSubstrID_53,,,SV,A,,,1,,,,
+9823=SubstrLocSubstrID_54,,,SV,A,,,1,,,,
+9824=SubstrLocSubstrID_55,,,SV,A,,,1,,,,
+9825=SubstrLocSubstrID_56,,,SV,A,,,1,,,,
+9826=SubstrLocSubstrID_57,,,SV,A,,,1,,,,
+9827=SubstrLocSubstrID_58,,,SV,A,,,1,,,,
+9828=SubstrLocSubstrID_59,,,SV,A,,,1,,,,
+9829=SubstrLocSubstrID_60,,,SV,A,,,1,,,,
+9830=SubstrLocSubstrID_61,,,SV,A,,,1,,,,
+9831=SubstrLocSubstrID_62,,,SV,A,,,1,,,,
+9832=SubstrLocSubstrID_63,,,SV,A,,,1,,,,
+9833=SubstrLocSubstrID_64,,,SV,A,,,1,,,,
+9834=SubstrLocSubstrID_65,,,SV,A,,,1,,,,
+9835=SubstrLocSubstrID_66,,,SV,A,,,1,,,,
+9836=SubstrLocSubstrID_67,,,SV,A,,,1,,,,
+9837=SubstrLocSubstrID_68,,,SV,A,,,1,,,,
+9838=SubstrLocSubstrID_69,,,SV,A,,,1,,,,
+9839=SubstrLocSubstrID_70,,,SV,A,,,1,,,,
+9840=SubstrLocSubstrID_71,,,SV,A,,,1,,,,
+9841=SubstrLocSubstrID_72,,,SV,A,,,1,,,,
+9842=SubstrLocSubstrID_73,,,SV,A,,,1,,,,
+9843=SubstrLocSubstrID_74,,,SV,A,,,1,,,,
+9844=SubstrLocSubstrID_75,,,SV,A,,,1,,,,
+9845=SubstrLocSubstrID_76,,,SV,A,,,1,,,,
+9846=SubstrLocSubstrID_77,,,SV,A,,,1,,,,
+9847=SubstrLocSubstrID_78,,,SV,A,,,1,,,,
+9848=SubstrLocSubstrID_79,,,SV,A,,,1,,,,
+9849=SubstrLocSubstrID_80,,,SV,A,,,1,,,,
+9850=SubstrLocSubstrID_81,,,SV,A,,,1,,,,
+9851=SubstrLocSubstrID_82,,,SV,A,,,1,,,,
+9852=SubstrLocSubstrID_83,,,SV,A,,,1,,,,
+9853=SubstrLocSubstrID_84,,,SV,A,,,1,,,,
+9854=SubstrLocSubstrID_85,,,SV,A,,,1,,,,
+9855=SubstrLocSubstrID_86,,,SV,A,,,1,,,,
+9856=SubstrLocSubstrID_87,,,SV,A,,,1,,,,
+9857=SubstrLocSubstrID_88,,,SV,A,,,1,,,,
+9858=SubstrLocSubstrID_89,,,SV,A,,,1,,,,
+9859=SubstrLocSubstrID_90,,,SV,A,,,1,,,,
+9860=SubstrLocSubstrID_91,,,SV,A,,,1,,,,
+9861=SubstrLocSubstrID_92,,,SV,A,,,1,,,,
+9862=SubstrLocSubstrID_93,,,SV,A,,,1,,,,
+9863=SubstrLocSubstrID_94,,,SV,A,,,1,,,,
+9864=SubstrLocSubstrID_95,,,SV,A,,,1,,,,
+9865=SubstrLocSubstrID_96,,,SV,A,,,1,,,,
+9866=SubstrLocSubstrID_97,,,SV,A,,,1,,,,
+9867=SubstrLocSubstrID_98,,,SV,A,,,1,,,,
+9868=SubstrLocSubstrID_99,,,SV,A,,,1,,,,
+9869=SubstrLocSubstrID_100,,,SV,A,,,1,,,,
+9870=SubstrLocSubstrID_101,,,SV,A,,,1,,,,
+9871=SubstrLocSubstrID_102,,,SV,A,,,1,,,,
+9872=SubstrLocSubstrID_103,,,SV,A,,,1,,,,
+9873=SubstrLocSubstrID_104,,,SV,A,,,1,,,,
+9874=SubstrLocSubstrID_105,,,SV,A,,,1,,,,
+9875=SubstrLocSubstrID_106,,,SV,A,,,1,,,,
+9876=SubstrLocSubstrID_107,,,SV,A,,,1,,,,
+9877=SubstrLocSubstrID_108,,,SV,A,,,1,,,,
+9878=SubstrLocSubstrID_109,,,SV,A,,,1,,,,
+9879=SubstrLocSubstrID_110,,,SV,A,,,1,,,,
+9880=SubstrLocSubstrID_111,,,SV,A,,,1,,,,
+9881=SubstrLocSubstrID_112,,,SV,A,,,1,,,,
+9882=SubstrLocSubstrID_113,,,SV,A,,,1,,,,
+9883=SubstrLocSubstrID_114,,,SV,A,,,1,,,,
+9884=SubstrLocSubstrID_115,,,SV,A,,,1,,,,
+9885=SubstrLocSubstrID_116,,,SV,A,,,1,,,,
+9886=SubstrLocSubstrID_117,,,SV,A,,,1,,,,
+9887=SubstrLocSubstrID_118,,,SV,A,,,1,,,,
+9888=SubstrLocSubstrID_119,,,SV,A,,,1,,,,
+9889=SubstrLocSubstrID_120,,,SV,A,,,1,,,,
+9890=SubstrLocSubstrID_121,,,SV,A,,,1,,,,
+9891=SubstrLocSubstrID_122,,,SV,A,,,1,,,,
+9892=SubstrLocSubstrID_123,,,SV,A,,,1,,,,
+9893=SubstrLocSubstrID_124,,,SV,A,,,1,,,,
+9894=SubstrLocSubstrID_125,,,SV,A,,,1,,,,
+9895=SubstrLocSubstrID_126,,,SV,A,,,1,,,,
+9896=SubstrLocSubstrID_127,,,SV,A,,,1,,,,
+9897=SubstrLocSubstrID_128,,,SV,A,,,1,,,,
+9898=SubstrLocSubstrID_129,,,SV,A,,,1,,,,
+9899=SubstrLocSubstrID_130,,,SV,A,,,1,,,,
+9900=SubstrLocSubstrID_131,,,SV,A,,,1,,,,
+9901=SubstrLocSubstrID_132,,,SV,A,,,1,,,,
+9902=SubstrLocSubstrID_133,,,SV,A,,,1,,,,
+9903=SubstrLocSubstrID_134,,,SV,A,,,1,,,,
+9904=SubstrLocSubstrID_135,,,SV,A,,,1,,,,
+9905=SubstrLocSubstrID_136,,,SV,A,,,1,,,,
+9906=SubstrLocSubstrID_137,,,SV,A,,,1,,,,
+9907=SubstrLocSubstrID_138,,,SV,A,,,1,,,,
+9908=SubstrLocSubstrID_139,,,SV,A,,,1,,,,
+9909=SubstrLocSubstrID_140,,,SV,A,,,1,,,,
+9910=SubstrLocSubstrID_141,,,SV,A,,,1,,,,
+9911=SubstrLocSubstrID_142,,,SV,A,,,1,,,,
+9912=SubstrLocSubstrID_143,,,SV,A,,,1,,,,
+9913=SubstrLocSubstrID_144,,,SV,A,,,1,,,,
+9914=SubstrLocSubstrID_145,,,SV,A,,,1,,,,
+9915=SubstrLocSubstrID_146,,,SV,A,,,1,,,,
+9916=SubstrLocSubstrID_147,,,SV,A,,,1,,,,
+9917=SubstrLocSubstrID_148,,,SV,A,,,1,,,,
+9918=SubstrLocSubstrID_149,,,SV,A,,,1,,,,
+9919=SubstrLocSubstrID_150,,,SV,A,,,1,,,,
+9920=SubstrLocSubstrID_151,,,SV,A,,,1,,,,
+9921=SubstrLocSubstrID_152,,,SV,A,,,1,,,,
+9922=SubstrLocSubstrID_153,,,SV,A,,,1,,,,
+9923=SubstrLocSubstrID_154,,,SV,A,,,1,,,,
+9924=SubstrLocSubstrID_155,,,SV,A,,,1,,,,
+9925=SubstrLocSubstrID_156,,,SV,A,,,1,,,,
+9926=SubstrLocSubstrID_157,,,SV,A,,,1,,,,
+9927=SubstrLocSubstrID_158,,,SV,A,,,1,,,,
+9928=SubstrLocSubstrID_159,,,SV,A,,,1,,,,
+9929=SubstrLocSubstrID_160,,,SV,A,,,1,,,,
+9930=SubstrLocSubstrID_161,,,SV,A,,,1,,,,
+9931=SubstrLocSubstrID_162,,,SV,A,,,1,,,,
+9932=SubstrLocSubstrID_163,,,SV,A,,,1,,,,
+9933=SubstrLocSubstrID_164,,,SV,A,,,1,,,,
+9934=SubstrLocSubstrID_165,,,SV,A,,,1,,,,
+9935=SubstrLocSubstrID_166,,,SV,A,,,1,,,,
+9936=SubstrLocSubstrID_167,,,SV,A,,,1,,,,
+9937=SubstrLocSubstrID_168,,,SV,A,,,1,,,,
+9938=SubstrLocSubstrID_169,,,SV,A,,,1,,,,
+9939=SubstrLocSubstrID_170,,,SV,A,,,1,,,,
+9940=SubstrLocSubstrID_171,,,SV,A,,,1,,,,
+9941=SubstrLocSubstrID_172,,,SV,A,,,1,,,,
+9942=SubstrLocSubstrID_173,,,SV,A,,,1,,,,
+9943=SubstrLocSubstrID_174,,,SV,A,,,1,,,,
+9944=SubstrLocSubstrID_175,,,SV,A,,,1,,,,
+9945=SubstrLocSubstrID_176,,,SV,A,,,1,,,,
+9946=SubstrLocSubstrID_177,,,SV,A,,,1,,,,
+9947=SubstrLocSubstrID_178,,,SV,A,,,1,,,,
+9948=SubstrLocSubstrID_179,,,SV,A,,,1,,,,
+9949=SubstrLocSubstrID_180,,,SV,A,,,1,,,,
+9950=SubstrLocSubstrID_181,,,SV,A,,,1,,,,
+9951=SubstrLocSubstrID_182,,,SV,A,,,1,,,,
+9952=SubstrLocSubstrID_183,,,SV,A,,,1,,,,
+9953=SubstrLocSubstrID_184,,,SV,A,,,1,,,,
+9954=SubstrLocSubstrID_185,,,SV,A,,,1,,,,
+9955=SubstrLocSubstrID_186,,,SV,A,,,1,,,,
+9956=SubstrLocSubstrID_187,,,SV,A,,,1,,,,
+9957=SubstrLocSubstrID_188,,,SV,A,,,1,,,,
+9958=SubstrLocSubstrID_189,,,SV,A,,,1,,,,
+9959=SubstrLocSubstrID_190,,,SV,A,,,1,,,,
+9960=SubstrLocSubstrID_191,,,SV,A,,,1,,,,
+9961=SubstrLocSubstrID_192,,,SV,A,,,1,,,,
+9962=SubstrLocSubstrID_193,,,SV,A,,,1,,,,
+9963=SubstrLocSubstrID_194,,,SV,A,,,1,,,,
+9964=SubstrLocSubstrID_195,,,SV,A,,,1,,,,
+9965=SubstrLocSubstrID_196,,,SV,A,,,1,,,,
+9966=SubstrLocSubstrID_197,,,SV,A,,,1,,,,
+9967=SubstrLocSubstrID_198,,,SV,A,,,1,,,,
+9968=SubstrLocSubstrID_199,,,SV,A,,,1,,,,
+9969=SubstrLocSubstrID_200,,,SV,A,,,1,,,,
+9970=SubstrLocSubstrID_201,,,SV,A,,,1,,,,
+9971=SubstrLocSubstrID_202,,,SV,A,,,1,,,,
+9972=SubstrLocSubstrID_203,,,SV,A,,,1,,,,
+9973=SubstrLocSubstrID_204,,,SV,A,,,1,,,,
+9974=SubstrLocSubstrID_205,,,SV,A,,,1,,,,
+9975=SubstrLocSubstrID_206,,,SV,A,,,1,,,,
+9976=SubstrLocSubstrID_207,,,SV,A,,,1,,,,
+9977=SubstrLocSubstrID_208,,,SV,A,,,1,,,,
+9978=SubstrLocSubstrID_209,,,SV,A,,,1,,,,
+9979=SubstrLocSubstrID_210,,,SV,A,,,1,,,,
+9980=SubstrLocSubstrID_211,,,SV,A,,,1,,,,
+9981=SubstrLocSubstrID_212,,,SV,A,,,1,,,,
+9982=SubstrLocSubstrID_213,,,SV,A,,,1,,,,
+9983=SubstrLocSubstrID_214,,,SV,A,,,1,,,,
+9984=SubstrLocSubstrID_215,,,SV,A,,,1,,,,
+9985=SubstrLocSubstrID_216,,,SV,A,,,1,,,,
+9986=SubstrLocSubstrID_217,,,SV,A,,,1,,,,
+9987=SubstrLocSubstrID_218,,,SV,A,,,1,,,,
+9988=SubstrLocSubstrID_219,,,SV,A,,,1,,,,
+9989=SubstrLocSubstrID_220,,,SV,A,,,1,,,,
+9990=SubstrLocSubstrID_221,,,SV,A,,,1,,,,
+9991=SubstrLocSubstrID_222,,,SV,A,,,1,,,,
+9992=SubstrLocSubstrID_223,,,SV,A,,,1,,,,
+9993=SubstrLocSubstrID_224,,,SV,A,,,1,,,,
+9994=SubstrLocSubstrID_225,,,SV,A,,,1,,,,
+9995=SubstrLocSubstrID_226,,,SV,A,,,1,,,,
+9996=SubstrLocSubstrID_227,,,SV,A,,,1,,,,
+9997=SubstrLocSubstrID_228,,,SV,A,,,1,,,,
+9998=SubstrLocSubstrID_229,,,SV,A,,,1,,,,
+9999=SubstrLocSubstrID_230,,,SV,A,,,1,,,,
+10000=SubstrLocSubstrID_231,,,SV,A,,,1,,,,
+10001=SubstrLocSubstrID_232,,,SV,A,,,1,,,,
+10002=SubstrLocSubstrID_233,,,SV,A,,,1,,,,
+10003=SubstrLocSubstrID_234,,,SV,A,,,1,,,,
+10004=SubstrLocSubstrID_235,,,SV,A,,,1,,,,
+10005=SubstrLocSubstrID_236,,,SV,A,,,1,,,,
+10006=SubstrLocSubstrID_237,,,SV,A,,,1,,,,
+10007=SubstrLocSubstrID_238,,,SV,A,,,1,,,,
+10008=SubstrLocSubstrID_239,,,SV,A,,,1,,,,
+10009=SubstrLocSubstrID_240,,,SV,A,,,1,,,,
+10010=SubstrLocSubstrID_241,,,SV,A,,,1,,,,
+10011=SubstrLocSubstrID_242,,,SV,A,,,1,,,,
+10012=SubstrLocSubstrID_243,,,SV,A,,,1,,,,
+10013=SubstrLocSubstrID_244,,,SV,A,,,1,,,,
+10014=SubstrLocSubstrID_245,,,SV,A,,,1,,,,
+10015=SubstrLocSubstrID_246,,,SV,A,,,1,,,,
+10016=SubstrLocSubstrID_247,,,SV,A,,,1,,,,
+10017=SubstrLocSubstrID_248,,,SV,A,,,1,,,,
+10018=SubstrLocSubstrID_249,,,SV,A,,,1,,,,
+10019=SubstrLocSubstrID_250,,,SV,A,,,1,,,,
+10020=SubstrLocSubstrID_251,,,SV,A,,,1,,,,
+10021=SubstrLocSubstrID_252,,,SV,A,,,1,,,,
+10022=SubstrLocSubstrID_253,,,SV,A,,,1,,,,
+10023=SubstrLocSubstrID_254,,,SV,A,,,1,,,,
+10024=SubstrLocSubstrID_255,,,SV,A,,,1,,,,
+10025=SubstrLocSubstrID_256,,,SV,A,,,1,,,,
+
+10026=SubstIDList,Ordered list of SubstID,,DV,L,,,,,,,
+10027=SubstLocIDList,Ordered list of SubstLocID,,DV,L,,,,,,,
+10028=SubstLocStateList,Ordered list of SubstLocState,,DV,L,,,,,,,
+10029=SubstProcStateList,Ordered list of SubstProcState,,DV,L,,,,,,,
+10030=SubstStateList,Ordered list of SubstState,,DV,L,,,,,,,
+
+10031=SubstLocID_1,,,SV,A,,,,,,,
+10032=SubstLocID_2,,,SV,A,,,,,,,
+10033=SubstLocID_3,,,SV,A,,,,,,,
+10034=SubstLocID_4,,,SV,A,,,,,,,
+10035=SubstLocID_5,,,SV,A,,,,,,,
+10036=SubstLocID_6,,,SV,A,,,,,,,
+10037=SubstLocID_7,,,SV,A,,,,,,,
+10038=SubstLocID_8,,,SV,A,,,,,,,
+10039=SubstLocID_9,,,SV,A,,,,,,,
+10040=SubstLocID_10,,,SV,A,,,,,,,
+10041=SubstLocID_11,,,SV,A,,,,,,,
+10042=SubstLocID_12,,,SV,A,,,,,,,
+10043=SubstLocID_13,,,SV,A,,,,,,,
+10044=SubstLocID_14,,,SV,A,,,,,,,
+10045=SubstLocID_15,,,SV,A,,,,,,,
+10046=SubstLocID_16,,,SV,A,,,,,,,
+10047=SubstLocID_17,,,SV,A,,,,,,,
+10048=SubstLocID_18,,,SV,A,,,,,,,
+10049=SubstLocID_19,,,SV,A,,,,,,,
+10050=SubstLocID_20,,,SV,A,,,,,,,
+10051=SubstLocID_21,,,SV,A,,,,,,,
+10052=SubstLocID_22,,,SV,A,,,,,,,
+10053=SubstLocID_23,,,SV,A,,,,,,,
+10054=SubstLocID_24,,,SV,A,,,,,,,
+10055=SubstLocID_25,,,SV,A,,,,,,,
+10056=SubstLocID_26,,,SV,A,,,,,,,
+10057=SubstLocID_27,,,SV,A,,,,,,,
+10058=SubstLocID_28,,,SV,A,,,,,,,
+10059=SubstLocID_29,,,SV,A,,,,,,,
+10060=SubstLocID_30,,,SV,A,,,,,,,
+10061=SubstLocID_31,,,SV,A,,,,,,,
+10062=SubstLocID_32,,,SV,A,,,,,,,
+10063=SubstLocID_33,,,SV,A,,,,,,,
+10064=SubstLocID_34,,,SV,A,,,,,,,
+10065=SubstLocID_35,,,SV,A,,,,,,,
+10066=SubstLocID_36,,,SV,A,,,,,,,
+10067=SubstLocID_37,,,SV,A,,,,,,,
+10068=SubstLocID_38,,,SV,A,,,,,,,
+10069=SubstLocID_39,,,SV,A,,,,,,,
+10070=SubstLocID_40,,,SV,A,,,,,,,
+10071=SubstLocID_41,,,SV,A,,,,,,,
+10072=SubstLocID_42,,,SV,A,,,,,,,
+10073=SubstLocID_43,,,SV,A,,,,,,,
+10074=SubstLocID_44,,,SV,A,,,,,,,
+10075=SubstLocID_45,,,SV,A,,,,,,,
+10076=SubstLocID_46,,,SV,A,,,,,,,
+10077=SubstLocID_47,,,SV,A,,,,,,,
+10078=SubstLocID_48,,,SV,A,,,,,,,
+10079=SubstLocID_49,,,SV,A,,,,,,,
+10080=SubstLocID_50,,,SV,A,,,,,,,
+10081=SubstLocID_51,,,SV,A,,,,,,,
+10082=SubstLocID_52,,,SV,A,,,,,,,
+10083=SubstLocID_53,,,SV,A,,,,,,,
+10084=SubstLocID_54,,,SV,A,,,,,,,
+10085=SubstLocID_55,,,SV,A,,,,,,,
+10086=SubstLocID_56,,,SV,A,,,,,,,
+10087=SubstLocID_57,,,SV,A,,,,,,,
+10088=SubstLocID_58,,,SV,A,,,,,,,
+10089=SubstLocID_59,,,SV,A,,,,,,,
+10090=SubstLocID_60,,,SV,A,,,,,,,
+10091=SubstLocID_61,,,SV,A,,,,,,,
+10092=SubstLocID_62,,,SV,A,,,,,,,
+10093=SubstLocID_63,,,SV,A,,,,,,,
+10094=SubstLocID_64,,,SV,A,,,,,,,
+10095=SubstLocID_65,,,SV,A,,,,,,,
+10096=SubstLocID_66,,,SV,A,,,,,,,
+10097=SubstLocID_67,,,SV,A,,,,,,,
+10098=SubstLocID_68,,,SV,A,,,,,,,
+10099=SubstLocID_69,,,SV,A,,,,,,,
+10100=SubstLocID_70,,,SV,A,,,,,,,
+10101=SubstLocID_71,,,SV,A,,,,,,,
+10102=SubstLocID_72,,,SV,A,,,,,,,
+10103=SubstLocID_73,,,SV,A,,,,,,,
+10104=SubstLocID_74,,,SV,A,,,,,,,
+10105=SubstLocID_75,,,SV,A,,,,,,,
+10106=SubstLocID_76,,,SV,A,,,,,,,
+10107=SubstLocID_77,,,SV,A,,,,,,,
+10108=SubstLocID_78,,,SV,A,,,,,,,
+10109=SubstLocID_79,,,SV,A,,,,,,,
+10110=SubstLocID_80,,,SV,A,,,,,,,
+10111=SubstLocID_81,,,SV,A,,,,,,,
+10112=SubstLocID_82,,,SV,A,,,,,,,
+10113=SubstLocID_83,,,SV,A,,,,,,,
+10114=SubstLocID_84,,,SV,A,,,,,,,
+10115=SubstLocID_85,,,SV,A,,,,,,,
+10116=SubstLocID_86,,,SV,A,,,,,,,
+10117=SubstLocID_87,,,SV,A,,,,,,,
+10118=SubstLocID_88,,,SV,A,,,,,,,
+10119=SubstLocID_89,,,SV,A,,,,,,,
+10120=SubstLocID_90,,,SV,A,,,,,,,
+10121=SubstLocID_91,,,SV,A,,,,,,,
+10122=SubstLocID_92,,,SV,A,,,,,,,
+10123=SubstLocID_93,,,SV,A,,,,,,,
+10124=SubstLocID_94,,,SV,A,,,,,,,
+10125=SubstLocID_95,,,SV,A,,,,,,,
+10126=SubstLocID_96,,,SV,A,,,,,,,
+10127=SubstLocID_97,,,SV,A,,,,,,,
+10128=SubstLocID_98,,,SV,A,,,,,,,
+10129=SubstLocID_99,,,SV,A,,,,,,,
+10130=SubstLocID_100,,,SV,A,,,,,,,
+10131=SubstLocID_101,,,SV,A,,,,,,,
+10132=SubstLocID_102,,,SV,A,,,,,,,
+10133=SubstLocID_103,,,SV,A,,,,,,,
+10134=SubstLocID_104,,,SV,A,,,,,,,
+10135=SubstLocID_105,,,SV,A,,,,,,,
+10136=SubstLocID_106,,,SV,A,,,,,,,
+10137=SubstLocID_107,,,SV,A,,,,,,,
+10138=SubstLocID_108,,,SV,A,,,,,,,
+10139=SubstLocID_109,,,SV,A,,,,,,,
+10140=SubstLocID_110,,,SV,A,,,,,,,
+10141=SubstLocID_111,,,SV,A,,,,,,,
+10142=SubstLocID_112,,,SV,A,,,,,,,
+10143=SubstLocID_113,,,SV,A,,,,,,,
+10144=SubstLocID_114,,,SV,A,,,,,,,
+10145=SubstLocID_115,,,SV,A,,,,,,,
+10146=SubstLocID_116,,,SV,A,,,,,,,
+10147=SubstLocID_117,,,SV,A,,,,,,,
+10148=SubstLocID_118,,,SV,A,,,,,,,
+10149=SubstLocID_119,,,SV,A,,,,,,,
+10150=SubstLocID_120,,,SV,A,,,,,,,
+10151=SubstLocID_121,,,SV,A,,,,,,,
+10152=SubstLocID_122,,,SV,A,,,,,,,
+10153=SubstLocID_123,,,SV,A,,,,,,,
+10154=SubstLocID_124,,,SV,A,,,,,,,
+10155=SubstLocID_125,,,SV,A,,,,,,,
+10156=SubstLocID_126,,,SV,A,,,,,,,
+10157=SubstLocID_127,,,SV,A,,,,,,,
+10158=SubstLocID_128,,,SV,A,,,,,,,
+10159=SubstLocID_129,,,SV,A,,,,,,,
+10160=SubstLocID_130,,,SV,A,,,,,,,
+10161=SubstLocID_131,,,SV,A,,,,,,,
+10162=SubstLocID_132,,,SV,A,,,,,,,
+10163=SubstLocID_133,,,SV,A,,,,,,,
+10164=SubstLocID_134,,,SV,A,,,,,,,
+10165=SubstLocID_135,,,SV,A,,,,,,,
+10166=SubstLocID_136,,,SV,A,,,,,,,
+10167=SubstLocID_137,,,SV,A,,,,,,,
+10168=SubstLocID_138,,,SV,A,,,,,,,
+10169=SubstLocID_139,,,SV,A,,,,,,,
+10170=SubstLocID_140,,,SV,A,,,,,,,
+10171=SubstLocID_141,,,SV,A,,,,,,,
+10172=SubstLocID_142,,,SV,A,,,,,,,
+10173=SubstLocID_143,,,SV,A,,,,,,,
+10174=SubstLocID_144,,,SV,A,,,,,,,
+10175=SubstLocID_145,,,SV,A,,,,,,,
+10176=SubstLocID_146,,,SV,A,,,,,,,
+10177=SubstLocID_147,,,SV,A,,,,,,,
+10178=SubstLocID_148,,,SV,A,,,,,,,
+10179=SubstLocID_149,,,SV,A,,,,,,,
+10180=SubstLocID_150,,,SV,A,,,,,,,
+10181=SubstLocID_151,,,SV,A,,,,,,,
+10182=SubstLocID_152,,,SV,A,,,,,,,
+10183=SubstLocID_153,,,SV,A,,,,,,,
+10184=SubstLocID_154,,,SV,A,,,,,,,
+10185=SubstLocID_155,,,SV,A,,,,,,,
+10186=SubstLocID_156,,,SV,A,,,,,,,
+10187=SubstLocID_157,,,SV,A,,,,,,,
+10188=SubstLocID_158,,,SV,A,,,,,,,
+10189=SubstLocID_159,,,SV,A,,,,,,,
+10190=SubstLocID_160,,,SV,A,,,,,,,
+10191=SubstLocID_161,,,SV,A,,,,,,,
+10192=SubstLocID_162,,,SV,A,,,,,,,
+10193=SubstLocID_163,,,SV,A,,,,,,,
+10194=SubstLocID_164,,,SV,A,,,,,,,
+10195=SubstLocID_165,,,SV,A,,,,,,,
+10196=SubstLocID_166,,,SV,A,,,,,,,
+10197=SubstLocID_167,,,SV,A,,,,,,,
+10198=SubstLocID_168,,,SV,A,,,,,,,
+10199=SubstLocID_169,,,SV,A,,,,,,,
+10200=SubstLocID_170,,,SV,A,,,,,,,
+10201=SubstLocID_171,,,SV,A,,,,,,,
+10202=SubstLocID_172,,,SV,A,,,,,,,
+10203=SubstLocID_173,,,SV,A,,,,,,,
+10204=SubstLocID_174,,,SV,A,,,,,,,
+10205=SubstLocID_175,,,SV,A,,,,,,,
+10206=SubstLocID_176,,,SV,A,,,,,,,
+10207=SubstLocID_177,,,SV,A,,,,,,,
+10208=SubstLocID_178,,,SV,A,,,,,,,
+10209=SubstLocID_179,,,SV,A,,,,,,,
+10210=SubstLocID_180,,,SV,A,,,,,,,
+10211=SubstLocID_181,,,SV,A,,,,,,,
+10212=SubstLocID_182,,,SV,A,,,,,,,
+10213=SubstLocID_183,,,SV,A,,,,,,,
+10214=SubstLocID_184,,,SV,A,,,,,,,
+10215=SubstLocID_185,,,SV,A,,,,,,,
+10216=SubstLocID_186,,,SV,A,,,,,,,
+10217=SubstLocID_187,,,SV,A,,,,,,,
+10218=SubstLocID_188,,,SV,A,,,,,,,
+10219=SubstLocID_189,,,SV,A,,,,,,,
+10220=SubstLocID_190,,,SV,A,,,,,,,
+10221=SubstLocID_191,,,SV,A,,,,,,,
+10222=SubstLocID_192,,,SV,A,,,,,,,
+10223=SubstLocID_193,,,SV,A,,,,,,,
+10224=SubstLocID_194,,,SV,A,,,,,,,
+10225=SubstLocID_195,,,SV,A,,,,,,,
+10226=SubstLocID_196,,,SV,A,,,,,,,
+10227=SubstLocID_197,,,SV,A,,,,,,,
+10228=SubstLocID_198,,,SV,A,,,,,,,
+10229=SubstLocID_199,,,SV,A,,,,,,,
+10230=SubstLocID_200,,,SV,A,,,,,,,
+10231=SubstLocID_201,,,SV,A,,,,,,,
+10232=SubstLocID_202,,,SV,A,,,,,,,
+10233=SubstLocID_203,,,SV,A,,,,,,,
+10234=SubstLocID_204,,,SV,A,,,,,,,
+10235=SubstLocID_205,,,SV,A,,,,,,,
+10236=SubstLocID_206,,,SV,A,,,,,,,
+10237=SubstLocID_207,,,SV,A,,,,,,,
+10238=SubstLocID_208,,,SV,A,,,,,,,
+10239=SubstLocID_209,,,SV,A,,,,,,,
+10240=SubstLocID_210,,,SV,A,,,,,,,
+10241=SubstLocID_211,,,SV,A,,,,,,,
+10242=SubstLocID_212,,,SV,A,,,,,,,
+10243=SubstLocID_213,,,SV,A,,,,,,,
+10244=SubstLocID_214,,,SV,A,,,,,,,
+10245=SubstLocID_215,,,SV,A,,,,,,,
+10246=SubstLocID_216,,,SV,A,,,,,,,
+10247=SubstLocID_217,,,SV,A,,,,,,,
+10248=SubstLocID_218,,,SV,A,,,,,,,
+10249=SubstLocID_219,,,SV,A,,,,,,,
+10250=SubstLocID_220,,,SV,A,,,,,,,
+10251=SubstLocID_221,,,SV,A,,,,,,,
+10252=SubstLocID_222,,,SV,A,,,,,,,
+10253=SubstLocID_223,,,SV,A,,,,,,,
+10254=SubstLocID_224,,,SV,A,,,,,,,
+10255=SubstLocID_225,,,SV,A,,,,,,,
+10256=SubstLocID_226,,,SV,A,,,,,,,
+10257=SubstLocID_227,,,SV,A,,,,,,,
+10258=SubstLocID_228,,,SV,A,,,,,,,
+10259=SubstLocID_229,,,SV,A,,,,,,,
+10260=SubstLocID_230,,,SV,A,,,,,,,
+10261=SubstLocID_231,,,SV,A,,,,,,,
+10262=SubstLocID_232,,,SV,A,,,,,,,
+10263=SubstLocID_233,,,SV,A,,,,,,,
+10264=SubstLocID_234,,,SV,A,,,,,,,
+10265=SubstLocID_235,,,SV,A,,,,,,,
+10266=SubstLocID_236,,,SV,A,,,,,,,
+10267=SubstLocID_237,,,SV,A,,,,,,,
+10268=SubstLocID_238,,,SV,A,,,,,,,
+10269=SubstLocID_239,,,SV,A,,,,,,,
+10270=SubstLocID_240,,,SV,A,,,,,,,
+10271=SubstLocID_241,,,SV,A,,,,,,,
+10272=SubstLocID_242,,,SV,A,,,,,,,
+10273=SubstLocID_243,,,SV,A,,,,,,,
+10274=SubstLocID_244,,,SV,A,,,,,,,
+10275=SubstLocID_245,,,SV,A,,,,,,,
+10276=SubstLocID_246,,,SV,A,,,,,,,
+10277=SubstLocID_247,,,SV,A,,,,,,,
+10278=SubstLocID_248,,,SV,A,,,,,,,
+10279=SubstLocID_249,,,SV,A,,,,,,,
+10280=SubstLocID_250,,,SV,A,,,,,,,
+10281=SubstLocID_251,,,SV,A,,,,,,,
+10282=SubstLocID_252,,,SV,A,,,,,,,
+10283=SubstLocID_253,,,SV,A,,,,,,,
+10284=SubstLocID_254,,,SV,A,,,,,,,
+10285=SubstLocID_255,,,SV,A,,,,,,,
+10286=SubstLocID_256,,,SV,A,,,,,,,
+
+10287=BatchLocState, current batch location state,,DV,U1,,,,,,U1 0,
+10288=BatchSubstIDMap, Ordered list of substrateIDs corresponding to the position in a batch,,DV,L,,,1,,,,
+10289=CarrierTxferGroupEvents, Use List DVs and trigger a single event for all substrates and SubLocs on carrier delivery and removal,,EC,Bo,,0,1,Bo 0,Bo 1,Bo 0,
+10290=SuppressGroupSubLocEvents, Do not send individual substrate location events when moving batches between batch locations,,EC,Bo,,0,1,Bo 0,Bo 1,Bo 0,
+
+10291=BatchLocID_1,,,SV,A,,,,,,,
+10292=BatchLocID_2,,,SV,A,,,,,,,
+10293=BatchLocID_3,,,SV,A,,,,,,,
+10294=BatchLocID_4,,,SV,A,,,,,,,
+10295=BatchLocID_5,,,SV,A,,,,,,,
+
+10296=BatchLocState_1,,,SV,U1,,,,,,,
+10297=BatchLocState_2,,,SV,U1,,,,,,,
+10298=BatchLocState_3,,,SV,U1,,,,,,,
+10299=BatchLocState_4,,,SV,U1,,,,,,,
+10300=BatchLocState_5,,,SV,U1,,,,,,,
+
+10301=BatchSubstIDMap_1,,,SV,L,,,1,,,,
+10302=BatchSubstIDMap_2,,,SV,L,,,1,,,,
+10303=BatchSubstIDMap_3,,,SV,L,,,1,,,,
+10304=BatchSubstIDMap_4,,,SV,L,,,1,,,,
+10305=BatchSubstIDMap_5,,,SV,L,,,1,,,,
+
+10306=LocationNoStateEvents, 0=no NoState2XXXX or XXXX2NoState events for substrate locations 1=send events,,EC,Bo,,0,1,Bo 0,Bo 1,Bo 0,
+10307=E90UseSlotmapOnly,Only use slotmap for adding/removing carriers from batches (ignore contentmap if set to true 1),,EC,Bo,,0,1,,,Bo 0,
+
+#E90 1104 and 0705 vars
+901000=E90ComplianceLevel,This variable determines what level of compliance the CIM90 will run at.  The default is always the latest version supported by Cimetrix. Format=yyyymm (200411 or 200507 etc.),,EC,U4,,,,,,U4 200511,
+901001=SubstrateReaderEnabled,When set to TRUE…the support and logic for substrate readers is turned on,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0,
+901002=SubstratePreviousIDStatus,Preious ID Status,,DV,A,,,,,,,
+901003=AcquiredID,Contains the ID read from the substrate. Empty string before the substrate is read.,,DV,A,,,,,,,
+901004=SubstBatchLocID,Current BatchLocID for the substrate associated with the last event,, DV,A,,,,,,,
+901005=AquiredIDList,A list of SubstBatchLocIDs related by the same Substrate Object State Model state transition that triggered a collection event,,DV,L,,,,,,,
+901007=SubstDestinationList, A list of SubstDestinations related by the same Substrate Object State Model state transition that triggered a collection event,,DV,L,,,,,,,
+901008=SubstHistoryList, A list of SubHistorys related by the same Substrate Object State Model state transition that triggered a collection event,,DV,L,,,,,,,
+901009=SubstSubstLocID,Current substrate location for the substrate associated with the last event.,, DV,A,,,,,,,
+901011=SubstLotID,The LotID of the Substrate Object associated with the last event,, DV,A,,,,,,,
+901012=SubstLotIDList, A list of substrate LotIDs related by the same Substrate Object State Model state transition that triggered a collection event,,DV,L,,,,,,,
+901013=SubstMtrlStatusList, A list of MtrlStatus related by the same Substrate Object State Model state transition that triggered a collection event,,DV,L,,,,,,,
+901015=SubstPosInBatchList, A list of SubstPosInBatchs related by the same Substrate Object State Model state transition that triggered a collection event,,DV,L,,,,,,,
+901017=SubstSourceList,A list of SubstSources related by the same Substrate Object State Model state transition that triggered a collection event,,DV,L,,,,,,,
+901018=SubstType,Substate SubstType for the substrate associated with the last event,, DV, U1,,,,,,U1 0,
+901019=SubstTypeList, A list of SubstTypes related by the same Substrate Object State Model state transition that triggered a collection event,,DV,L,,,,,,,
+901020=SubstUsageList, A list of SubstUsages related by the same Substrate Object State Model state transition that triggered a collection event,,DV,L,,,,,,,
+901022=SubstLocSubstID,Substate Identifier relevant to the location associated with the last event,, DV,A,,,,,,,
+901023=SubstIDStatus,Status of the substate ID,, DV,U1,,,,,,U1 0,
+901024=SubstIDStatusList, A list of SubstIDStatuses related by the same Substrate Object State Model state transition that triggered a collection event,,DV,L,,,,,,,
+901025=SubstBatchLocIDList,A list of BatchLocIDs related by the same Substrate Object State Model state transtion that triggered a collection event,, DV,L,,,,,,,
+
+904001=SubstLocDisableEvents_1,When set to TRUE…the transitions for substrate location 1 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904002=SubstLocDisableEvents_2,When set to TRUE…the transitions for substrate location 2 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904003=SubstLocDisableEvents_3,When set to TRUE…the transitions for substrate location 3 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904004=SubstLocDisableEvents_4,When set to TRUE…the transitions for substrate location 4 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904005=SubstLocDisableEvents_5,When set to TRUE…the transitions for substrate location 5 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904006=SubstLocDisableEvents_6,When set to TRUE…the transitions for substrate location 6 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904007=SubstLocDisableEvents_7,When set to TRUE…the transitions for substrate location 7 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904008=SubstLocDisableEvents_8,When set to TRUE…the transitions for substrate location 8 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904009=SubstLocDisableEvents_9,When set to TRUE…the transitions for substrate location 9 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904010=SubstLocDisableEvents_10,When set to TRUE…the transitions for substrate location 10 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904011=SubstLocDisableEvents_11,When set to TRUE…the transitions for substrate location 11 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904012=SubstLocDisableEvents_12,When set to TRUE…the transitions for substrate location 12 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904013=SubstLocDisableEvents_13,When set to TRUE…the transitions for substrate location 13 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904014=SubstLocDisableEvents_14,When set to TRUE…the transitions for substrate location 14 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904015=SubstLocDisableEvents_15,When set to TRUE…the transitions for substrate location 15 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904016=SubstLocDisableEvents_16,When set to TRUE…the transitions for substrate location 16 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904017=SubstLocDisableEvents_17,When set to TRUE…the transitions for substrate location 17 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904018=SubstLocDisableEvents_18,When set to TRUE…the transitions for substrate location 18 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904019=SubstLocDisableEvents_19,When set to TRUE…the transitions for substrate location 19 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904020=SubstLocDisableEvents_20,When set to TRUE…the transitions for substrate location 20 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904021=SubstLocDisableEvents_21,When set to TRUE…the transitions for substrate location 21 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904022=SubstLocDisableEvents_22,When set to TRUE…the transitions for substrate location 22 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904023=SubstLocDisableEvents_23,When set to TRUE…the transitions for substrate location 23 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904024=SubstLocDisableEvents_24,When set to TRUE…the transitions for substrate location 24 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904025=SubstLocDisableEvents_25,When set to TRUE…the transitions for substrate location 25 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904026=SubstLocDisableEvents_26,When set to TRUE…the transitions for substrate location 26 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904027=SubstLocDisableEvents_27,When set to TRUE…the transitions for substrate location 27 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904028=SubstLocDisableEvents_28,When set to TRUE…the transitions for substrate location 28 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904029=SubstLocDisableEvents_29,When set to TRUE…the transitions for substrate location 29 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904030=SubstLocDisableEvents_30,When set to TRUE…the transitions for substrate location 30 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904031=SubstLocDisableEvents_31,When set to TRUE…the transitions for substrate location 31 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904032=SubstLocDisableEvents_32,When set to TRUE…the transitions for substrate location 32 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904033=SubstLocDisableEvents_33,When set to TRUE…the transitions for substrate location 33 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904034=SubstLocDisableEvents_34,When set to TRUE…the transitions for substrate location 34 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904035=SubstLocDisableEvents_35,When set to TRUE…the transitions for substrate location 35 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904036=SubstLocDisableEvents_36,When set to TRUE…the transitions for substrate location 36 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904037=SubstLocDisableEvents_37,When set to TRUE…the transitions for substrate location 37 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904038=SubstLocDisableEvents_38,When set to TRUE…the transitions for substrate location 38 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904039=SubstLocDisableEvents_39,When set to TRUE…the transitions for substrate location 39 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904040=SubstLocDisableEvents_40,When set to TRUE…the transitions for substrate location 40 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904041=SubstLocDisableEvents_41,When set to TRUE…the transitions for substrate location 41 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904042=SubstLocDisableEvents_42,When set to TRUE…the transitions for substrate location 42 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904043=SubstLocDisableEvents_43,When set to TRUE…the transitions for substrate location 43 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904044=SubstLocDisableEvents_44,When set to TRUE…the transitions for substrate location 44 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904045=SubstLocDisableEvents_45,When set to TRUE…the transitions for substrate location 45 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904046=SubstLocDisableEvents_46,When set to TRUE…the transitions for substrate location 46 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904047=SubstLocDisableEvents_47,When set to TRUE…the transitions for substrate location 47 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904048=SubstLocDisableEvents_48,When set to TRUE…the transitions for substrate location 48 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904049=SubstLocDisableEvents_49,When set to TRUE…the transitions for substrate location 49 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904050=SubstLocDisableEvents_50,When set to TRUE…the transitions for substrate location 50 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904051=SubstLocDisableEvents_51,When set to TRUE…the transitions for substrate location 51 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904052=SubstLocDisableEvents_52,When set to TRUE…the transitions for substrate location 52 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904053=SubstLocDisableEvents_53,When set to TRUE…the transitions for substrate location 53 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904054=SubstLocDisableEvents_54,When set to TRUE…the transitions for substrate location 54 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904055=SubstLocDisableEvents_55,When set to TRUE…the transitions for substrate location 55 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904056=SubstLocDisableEvents_56,When set to TRUE…the transitions for substrate location 56 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904057=SubstLocDisableEvents_57,When set to TRUE…the transitions for substrate location 57 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904058=SubstLocDisableEvents_58,When set to TRUE…the transitions for substrate location 58 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904059=SubstLocDisableEvents_59,When set to TRUE…the transitions for substrate location 59 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904060=SubstLocDisableEvents_60,When set to TRUE…the transitions for substrate location 60 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904061=SubstLocDisableEvents_61,When set to TRUE…the transitions for substrate location 61 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904062=SubstLocDisableEvents_62,When set to TRUE…the transitions for substrate location 62 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904063=SubstLocDisableEvents_63,When set to TRUE…the transitions for substrate location 63 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904064=SubstLocDisableEvents_64,When set to TRUE…the transitions for substrate location 64 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904065=SubstLocDisableEvents_65,When set to TRUE…the transitions for substrate location 65 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904066=SubstLocDisableEvents_66,When set to TRUE…the transitions for substrate location 66 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904067=SubstLocDisableEvents_67,When set to TRUE…the transitions for substrate location 67 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904068=SubstLocDisableEvents_68,When set to TRUE…the transitions for substrate location 68 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904069=SubstLocDisableEvents_69,When set to TRUE…the transitions for substrate location 69 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904070=SubstLocDisableEvents_70,When set to TRUE…the transitions for substrate location 70 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904071=SubstLocDisableEvents_71,When set to TRUE…the transitions for substrate location 71 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904072=SubstLocDisableEvents_72,When set to TRUE…the transitions for substrate location 72 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904073=SubstLocDisableEvents_73,When set to TRUE…the transitions for substrate location 73 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904074=SubstLocDisableEvents_74,When set to TRUE…the transitions for substrate location 74 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904075=SubstLocDisableEvents_75,When set to TRUE…the transitions for substrate location 75 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904076=SubstLocDisableEvents_76,When set to TRUE…the transitions for substrate location 76 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904077=SubstLocDisableEvents_77,When set to TRUE…the transitions for substrate location 77 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904078=SubstLocDisableEvents_78,When set to TRUE…the transitions for substrate location 78 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904079=SubstLocDisableEvents_79,When set to TRUE…the transitions for substrate location 79 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904080=SubstLocDisableEvents_80,When set to TRUE…the transitions for substrate location 80 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904081=SubstLocDisableEvents_81,When set to TRUE…the transitions for substrate location 81 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904082=SubstLocDisableEvents_82,When set to TRUE…the transitions for substrate location 82 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904083=SubstLocDisableEvents_83,When set to TRUE…the transitions for substrate location 83 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904084=SubstLocDisableEvents_84,When set to TRUE…the transitions for substrate location 84 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904085=SubstLocDisableEvents_85,When set to TRUE…the transitions for substrate location 85 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904086=SubstLocDisableEvents_86,When set to TRUE…the transitions for substrate location 86 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904087=SubstLocDisableEvents_87,When set to TRUE…the transitions for substrate location 87 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904088=SubstLocDisableEvents_88,When set to TRUE…the transitions for substrate location 88 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904089=SubstLocDisableEvents_89,When set to TRUE…the transitions for substrate location 89 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904090=SubstLocDisableEvents_90,When set to TRUE…the transitions for substrate location 90 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904091=SubstLocDisableEvents_91,When set to TRUE…the transitions for substrate location 91 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904092=SubstLocDisableEvents_92,When set to TRUE…the transitions for substrate location 92 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904093=SubstLocDisableEvents_93,When set to TRUE…the transitions for substrate location 93 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904094=SubstLocDisableEvents_94,When set to TRUE…the transitions for substrate location 94 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904095=SubstLocDisableEvents_95,When set to TRUE…the transitions for substrate location 95 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904096=SubstLocDisableEvents_96,When set to TRUE…the transitions for substrate location 96 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904097=SubstLocDisableEvents_97,When set to TRUE…the transitions for substrate location 97 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904098=SubstLocDisableEvents_98,When set to TRUE…the transitions for substrate location 98 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904099=SubstLocDisableEvents_99,When set to TRUE…the transitions for substrate location 99 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904100=SubstLocDisableEvents_100,When set to TRUE…the transitions for substrate location 100 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904101=SubstLocDisableEvents_101,When set to TRUE…the transitions for substrate location 101 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904102=SubstLocDisableEvents_102,When set to TRUE…the transitions for substrate location 102 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904103=SubstLocDisableEvents_103,When set to TRUE…the transitions for substrate location 103 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904104=SubstLocDisableEvents_104,When set to TRUE…the transitions for substrate location 104 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904105=SubstLocDisableEvents_105,When set to TRUE…the transitions for substrate location 105 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904106=SubstLocDisableEvents_106,When set to TRUE…the transitions for substrate location 106 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904107=SubstLocDisableEvents_107,When set to TRUE…the transitions for substrate location 107 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904108=SubstLocDisableEvents_108,When set to TRUE…the transitions for substrate location 108 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904109=SubstLocDisableEvents_109,When set to TRUE…the transitions for substrate location 109 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904110=SubstLocDisableEvents_110,When set to TRUE…the transitions for substrate location 110 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904111=SubstLocDisableEvents_111,When set to TRUE…the transitions for substrate location 111 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904112=SubstLocDisableEvents_112,When set to TRUE…the transitions for substrate location 112 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904113=SubstLocDisableEvents_113,When set to TRUE…the transitions for substrate location 113 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904114=SubstLocDisableEvents_114,When set to TRUE…the transitions for substrate location 114 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904115=SubstLocDisableEvents_115,When set to TRUE…the transitions for substrate location 115 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904116=SubstLocDisableEvents_116,When set to TRUE…the transitions for substrate location 116 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904117=SubstLocDisableEvents_117,When set to TRUE…the transitions for substrate location 117 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904118=SubstLocDisableEvents_118,When set to TRUE…the transitions for substrate location 118 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904119=SubstLocDisableEvents_119,When set to TRUE…the transitions for substrate location 119 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904120=SubstLocDisableEvents_120,When set to TRUE…the transitions for substrate location 120 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904121=SubstLocDisableEvents_121,When set to TRUE…the transitions for substrate location 121 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904122=SubstLocDisableEvents_122,When set to TRUE…the transitions for substrate location 122 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904123=SubstLocDisableEvents_123,When set to TRUE…the transitions for substrate location 123 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904124=SubstLocDisableEvents_124,When set to TRUE…the transitions for substrate location 124 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904125=SubstLocDisableEvents_125,When set to TRUE…the transitions for substrate location 125 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904126=SubstLocDisableEvents_126,When set to TRUE…the transitions for substrate location 126 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904127=SubstLocDisableEvents_127,When set to TRUE…the transitions for substrate location 127 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904128=SubstLocDisableEvents_128,When set to TRUE…the transitions for substrate location 128 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904129=SubstLocDisableEvents_129,When set to TRUE…the transitions for substrate location 129 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904130=SubstLocDisableEvents_130,When set to TRUE…the transitions for substrate location 130 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904131=SubstLocDisableEvents_131,When set to TRUE…the transitions for substrate location 131 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904132=SubstLocDisableEvents_132,When set to TRUE…the transitions for substrate location 132 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904133=SubstLocDisableEvents_133,When set to TRUE…the transitions for substrate location 133 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904134=SubstLocDisableEvents_134,When set to TRUE…the transitions for substrate location 134 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904135=SubstLocDisableEvents_135,When set to TRUE…the transitions for substrate location 135 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904136=SubstLocDisableEvents_136,When set to TRUE…the transitions for substrate location 136 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904137=SubstLocDisableEvents_137,When set to TRUE…the transitions for substrate location 137 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904138=SubstLocDisableEvents_138,When set to TRUE…the transitions for substrate location 138 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904139=SubstLocDisableEvents_139,When set to TRUE…the transitions for substrate location 139 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904140=SubstLocDisableEvents_140,When set to TRUE…the transitions for substrate location 140 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904141=SubstLocDisableEvents_141,When set to TRUE…the transitions for substrate location 141 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904142=SubstLocDisableEvents_142,When set to TRUE…the transitions for substrate location 142 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904143=SubstLocDisableEvents_143,When set to TRUE…the transitions for substrate location 143 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904144=SubstLocDisableEvents_144,When set to TRUE…the transitions for substrate location 144 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904145=SubstLocDisableEvents_145,When set to TRUE…the transitions for substrate location 145 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904146=SubstLocDisableEvents_146,When set to TRUE…the transitions for substrate location 146 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904147=SubstLocDisableEvents_147,When set to TRUE…the transitions for substrate location 147 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904148=SubstLocDisableEvents_148,When set to TRUE…the transitions for substrate location 148 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904149=SubstLocDisableEvents_149,When set to TRUE…the transitions for substrate location 149 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904150=SubstLocDisableEvents_150,When set to TRUE…the transitions for substrate location 150 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904151=SubstLocDisableEvents_151,When set to TRUE…the transitions for substrate location 151 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904152=SubstLocDisableEvents_152,When set to TRUE…the transitions for substrate location 152 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904153=SubstLocDisableEvents_153,When set to TRUE…the transitions for substrate location 153 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904154=SubstLocDisableEvents_154,When set to TRUE…the transitions for substrate location 154 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904155=SubstLocDisableEvents_155,When set to TRUE…the transitions for substrate location 155 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904156=SubstLocDisableEvents_156,When set to TRUE…the transitions for substrate location 156 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904157=SubstLocDisableEvents_157,When set to TRUE…the transitions for substrate location 157 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904158=SubstLocDisableEvents_158,When set to TRUE…the transitions for substrate location 158 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904159=SubstLocDisableEvents_159,When set to TRUE…the transitions for substrate location 159 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904160=SubstLocDisableEvents_160,When set to TRUE…the transitions for substrate location 160 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904161=SubstLocDisableEvents_161,When set to TRUE…the transitions for substrate location 161 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904162=SubstLocDisableEvents_162,When set to TRUE…the transitions for substrate location 162 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904163=SubstLocDisableEvents_163,When set to TRUE…the transitions for substrate location 163 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904164=SubstLocDisableEvents_164,When set to TRUE…the transitions for substrate location 164 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904165=SubstLocDisableEvents_165,When set to TRUE…the transitions for substrate location 165 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904166=SubstLocDisableEvents_166,When set to TRUE…the transitions for substrate location 166 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904167=SubstLocDisableEvents_167,When set to TRUE…the transitions for substrate location 167 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904168=SubstLocDisableEvents_168,When set to TRUE…the transitions for substrate location 168 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904169=SubstLocDisableEvents_169,When set to TRUE…the transitions for substrate location 169 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904170=SubstLocDisableEvents_170,When set to TRUE…the transitions for substrate location 170 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904171=SubstLocDisableEvents_171,When set to TRUE…the transitions for substrate location 171 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904172=SubstLocDisableEvents_172,When set to TRUE…the transitions for substrate location 172 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904173=SubstLocDisableEvents_173,When set to TRUE…the transitions for substrate location 173 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904174=SubstLocDisableEvents_174,When set to TRUE…the transitions for substrate location 174 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904175=SubstLocDisableEvents_175,When set to TRUE…the transitions for substrate location 175 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904176=SubstLocDisableEvents_176,When set to TRUE…the transitions for substrate location 176 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904177=SubstLocDisableEvents_177,When set to TRUE…the transitions for substrate location 177 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904178=SubstLocDisableEvents_178,When set to TRUE…the transitions for substrate location 178 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904179=SubstLocDisableEvents_179,When set to TRUE…the transitions for substrate location 179 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904180=SubstLocDisableEvents_180,When set to TRUE…the transitions for substrate location 180 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904181=SubstLocDisableEvents_181,When set to TRUE…the transitions for substrate location 181 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904182=SubstLocDisableEvents_182,When set to TRUE…the transitions for substrate location 182 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904183=SubstLocDisableEvents_183,When set to TRUE…the transitions for substrate location 183 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904184=SubstLocDisableEvents_184,When set to TRUE…the transitions for substrate location 184 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904185=SubstLocDisableEvents_185,When set to TRUE…the transitions for substrate location 185 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904186=SubstLocDisableEvents_186,When set to TRUE…the transitions for substrate location 186 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904187=SubstLocDisableEvents_187,When set to TRUE…the transitions for substrate location 187 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904188=SubstLocDisableEvents_188,When set to TRUE…the transitions for substrate location 188 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904189=SubstLocDisableEvents_189,When set to TRUE…the transitions for substrate location 189 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904190=SubstLocDisableEvents_190,When set to TRUE…the transitions for substrate location 190 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904191=SubstLocDisableEvents_191,When set to TRUE…the transitions for substrate location 191 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904192=SubstLocDisableEvents_192,When set to TRUE…the transitions for substrate location 192 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904193=SubstLocDisableEvents_193,When set to TRUE…the transitions for substrate location 193 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904194=SubstLocDisableEvents_194,When set to TRUE…the transitions for substrate location 194 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904195=SubstLocDisableEvents_195,When set to TRUE…the transitions for substrate location 195 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904196=SubstLocDisableEvents_196,When set to TRUE…the transitions for substrate location 196 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904197=SubstLocDisableEvents_197,When set to TRUE…the transitions for substrate location 197 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904198=SubstLocDisableEvents_198,When set to TRUE…the transitions for substrate location 198 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904199=SubstLocDisableEvents_199,When set to TRUE…the transitions for substrate location 199 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904200=SubstLocDisableEvents_200,When set to TRUE…the transitions for substrate location 200 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904201=SubstLocDisableEvents_201,When set to TRUE…the transitions for substrate location 201 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904202=SubstLocDisableEvents_202,When set to TRUE…the transitions for substrate location 202 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904203=SubstLocDisableEvents_203,When set to TRUE…the transitions for substrate location 203 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904204=SubstLocDisableEvents_204,When set to TRUE…the transitions for substrate location 204 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904205=SubstLocDisableEvents_205,When set to TRUE…the transitions for substrate location 205 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904206=SubstLocDisableEvents_206,When set to TRUE…the transitions for substrate location 206 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904207=SubstLocDisableEvents_207,When set to TRUE…the transitions for substrate location 207 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904208=SubstLocDisableEvents_208,When set to TRUE…the transitions for substrate location 208 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904209=SubstLocDisableEvents_209,When set to TRUE…the transitions for substrate location 209 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904210=SubstLocDisableEvents_210,When set to TRUE…the transitions for substrate location 210 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904211=SubstLocDisableEvents_211,When set to TRUE…the transitions for substrate location 211 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904212=SubstLocDisableEvents_212,When set to TRUE…the transitions for substrate location 212 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904213=SubstLocDisableEvents_213,When set to TRUE…the transitions for substrate location 213 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904214=SubstLocDisableEvents_214,When set to TRUE…the transitions for substrate location 214 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904215=SubstLocDisableEvents_215,When set to TRUE…the transitions for substrate location 215 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904216=SubstLocDisableEvents_216,When set to TRUE…the transitions for substrate location 216 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904217=SubstLocDisableEvents_217,When set to TRUE…the transitions for substrate location 217 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904218=SubstLocDisableEvents_218,When set to TRUE…the transitions for substrate location 218 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904219=SubstLocDisableEvents_219,When set to TRUE…the transitions for substrate location 219 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904220=SubstLocDisableEvents_220,When set to TRUE…the transitions for substrate location 220 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904221=SubstLocDisableEvents_221,When set to TRUE…the transitions for substrate location 221 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904222=SubstLocDisableEvents_222,When set to TRUE…the transitions for substrate location 222 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904223=SubstLocDisableEvents_223,When set to TRUE…the transitions for substrate location 223 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904224=SubstLocDisableEvents_224,When set to TRUE…the transitions for substrate location 224 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904225=SubstLocDisableEvents_225,When set to TRUE…the transitions for substrate location 225 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904226=SubstLocDisableEvents_226,When set to TRUE…the transitions for substrate location 226 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904227=SubstLocDisableEvents_227,When set to TRUE…the transitions for substrate location 227 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904228=SubstLocDisableEvents_228,When set to TRUE…the transitions for substrate location 228 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904229=SubstLocDisableEvents_229,When set to TRUE…the transitions for substrate location 229 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904230=SubstLocDisableEvents_230,When set to TRUE…the transitions for substrate location 230 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904231=SubstLocDisableEvents_231,When set to TRUE…the transitions for substrate location 231 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904232=SubstLocDisableEvents_232,When set to TRUE…the transitions for substrate location 232 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904233=SubstLocDisableEvents_233,When set to TRUE…the transitions for substrate location 233 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904234=SubstLocDisableEvents_234,When set to TRUE…the transitions for substrate location 234 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904235=SubstLocDisableEvents_235,When set to TRUE…the transitions for substrate location 235 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904236=SubstLocDisableEvents_236,When set to TRUE…the transitions for substrate location 236 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904237=SubstLocDisableEvents_237,When set to TRUE…the transitions for substrate location 237 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904238=SubstLocDisableEvents_238,When set to TRUE…the transitions for substrate location 238 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904239=SubstLocDisableEvents_239,When set to TRUE…the transitions for substrate location 239 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904240=SubstLocDisableEvents_240,When set to TRUE…the transitions for substrate location 240 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904241=SubstLocDisableEvents_241,When set to TRUE…the transitions for substrate location 241 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904242=SubstLocDisableEvents_242,When set to TRUE…the transitions for substrate location 242 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904243=SubstLocDisableEvents_243,When set to TRUE…the transitions for substrate location 243 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904244=SubstLocDisableEvents_244,When set to TRUE…the transitions for substrate location 244 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904245=SubstLocDisableEvents_245,When set to TRUE…the transitions for substrate location 245 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904246=SubstLocDisableEvents_246,When set to TRUE…the transitions for substrate location 246 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904247=SubstLocDisableEvents_247,When set to TRUE…the transitions for substrate location 247 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904248=SubstLocDisableEvents_248,When set to TRUE…the transitions for substrate location 248 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904249=SubstLocDisableEvents_249,When set to TRUE…the transitions for substrate location 249 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904250=SubstLocDisableEvents_250,When set to TRUE…the transitions for substrate location 250 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904251=SubstLocDisableEvents_251,When set to TRUE…the transitions for substrate location 251 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904252=SubstLocDisableEvents_252,When set to TRUE…the transitions for substrate location 252 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904253=SubstLocDisableEvents_253,When set to TRUE…the transitions for substrate location 253 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904254=SubstLocDisableEvents_254,When set to TRUE…the transitions for substrate location 254 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904255=SubstLocDisableEvents_255,When set to TRUE…the transitions for substrate location 255 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+904256=SubstLocDisableEvents_256,When set to TRUE…the transitions for substrate location 256 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+
+905001=BatchLocDisableEvents_1,When set to TRUE…the transitions for batch location 1 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+905002=BatchLocDisableEvents_2,When set to TRUE…the transitions for batch location 2 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+905003=BatchLocDisableEvents_3,When set to TRUE…the transitions for batch location 3 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+905004=BatchLocDisableEvents_4,When set to TRUE…the transitions for batch location 4 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+905005=BatchLocDisableEvents_5,When set to TRUE…the transitions for batch location 5 do not generate events to the host,, EC,Bo,,0,1,Bo 0,Bo 1,Bo 0, 
+
+[COMMON EVENTS]
+#E90 1104 and 0705 events
+901500=SubstrateIDReaderAvailable,A substrate ID reader is now available,
+901501=SubstrateIDReaderUnavailable,A substrate ID reader is now unavailable,
+901502=E90_ID_NotConfirmed2Confirmed,17 – Substrate was successfully read and SubstID provide in the ContentMap matched the AcquiredID read by the equipment,
+901503=E90_ID_NotConfirmed2WaitingForHost,18 – Substrate ID reading has failed after several retries,
+901504=E90_ID_NotConfirmed2WaitingForHost2,19 – Substrate ID was successfully read but the acquired ID is different from the one the equipment used to instantiate the substrate object,
+901505=E90_ID_WaitingForHost2Confirmed,20 – Equipment has received a ProceedWithSubstrate service,
+901506=E90_ID_WaitingForHost2ConfirmationFailed,21 – Equipment has received a CancelSubstrate service,
+#############################################
+# END: E90 Cimetrix Definitions
+#############################################
+
+
+#############################################
+## START: E94 Cimetrix Definitions
+#############################################
+#project file: E94CJM.epj
+
+
+#note that all fields must be filled except wellknownname
+#empty fields (i.e. ,,) are allowed in some places
+
+[COMMON EVENTS]
+#id=name, description, wellknownname
+9450=E94_NoState2Queued,Control Job has been created and transitioned to QUEUED state.,
+9451=E94_Queued2NoState,Control Job has been canceled and deleted,
+9452=E94_Queued2Selected,Control Job transitioned to SELECTED state.,
+9453=E94_Selected2Queued,Control Job has been deselected and transitioned to QUEUED state.,
+9454=E94_Selected2Executing,Control Job transitioned to EXECUTING state.,
+9455=E94_Selected2WaitingForStart,Control Job is waiting for START event.,
+9456=E94_WaitingForStart2Executing,Control Job transitioned to EXECUTING state.,
+9457=E94_Executing2Paused,Control Job transitioned to PAUSED state.,
+9458=E94_Paused2Executing,Control Job has been resumed and transitioned to EXECUTING state.,
+9459=E94_Executing2Completed,The Control Job has been completed.,
+9460=E94_Active2Completed_Stopped,The Control Job has been stopped.,
+9461=E94_Active2Completed_Aborted,The Control Job has been aborted.,
+9462=E94_Completed2NoState,The Control Job has been deleted.,
+
+
+[ALARMS]
+#id=name, description, text, setEventID, clearEventID, wellknownname
+#9200=AccessModeViolation,E87 alarm, Access Mode Violation, 9015, 9016,
+
+
+#varTypes DV,SV,EC
+#valTypes I1, I2, I4, I8, U1, U2, U4, U8, F4, F8, A, Bo, Bi, L, J, W
+
+[COMMON VARIABLES]
+#id=name, description, units, varType, valType, eventID, private, persistant, min, max, default, wellknownname
+941000=E94ComplianceLevel,This variable determines what level of compliance the CIM94 will run at.  The default is always the latest version supported by Cimetrix. Format=yyyymm (200411 or 200507 etc.),,EC,U4,,,,,,U4 200411,
+
+9400=CtrlJobID,Control Job ID,,DV,A,,,,,,,
+9401=DataCollectionPlan,Data collection plan attribute,,DV,A,,,,,,,
+9402=QueuedCJobs,List of Object Identifiers of queued Control Jobs,,SV,L,,,,,,,
+9403=QueueAvailableSpace,Available space in the queue,,SV,U2,,,,,,,
+9404=SetUpName,Host sets this to define the operational condition of the equipment,,EC,A,,0,1,,,A unknown,
+9405=CtrlJobState,Control Job state,,DV,U1,,,,,,,
+9406=CJWaitFor1DayAfterComplete,1=CJ will be removed after it has persisted for at least one day in COMPLETED state; 0=CJ will be removed immediately,,EC,Bo,,,1,,,Bo 0,
+9407=CJCheckSlotMapStatusMaterial,1=CJ will wait for Slot Map Status of Carrier(s) to be verified; 0=will not check,,EC,Bo,,,1,,,Bo 1,
+9408=CJCreateERRTEXT, ERRTEXT for application rejection of control job creation,,DV,A,,,,,,A,
+9409=CJCreateERRCODE, ERRCODE for application rejection of control job creation,,DV,U4,,,,,,U4 0,
+9410=CheckMtrlOutSpecFmt,1=Format of MtrlOutSpec attribute will be checked on CJ Create request; 0=will not,,EC,Bo,,,1,,,Bo 1,
+9411=CheckMtrlOutByStatusFmt,1=Format of MtrlOutByStatus attribute will be checked on CJ Create request; 0=will not,,EC,Bo,,,1,,,Bo 1,
+
+9412=CJCreateReturn0LenObjSpec,1=Return a zero length OBJSPEC in the S14F10 message; 0=behave as normal,,EC,Bo,,,1,,,Bo 0,
+9413=ClearAttrListOnError, 1=If the CJCreate callback returns an error then clear the attributes list; 0=Do not clear the attribute list,,EC,Bo,,,1,,,Bo 0,
+9414=CurrentPRJob,CurrentPRJob attribute,,DV,L,,,,,,,
+9415=CarrierInputSpec,CurrentInputSpec attribute,,DV,L,,,,,,,
+9416=MtrlOutSpec,MtrlOutSpec attribute,,DV,L,,,,,,,
+9417=MtrlOutbyStatus,MtrlOutbyStatus attribute,,DV,L,,,,,,,
+9418=PauseEvent,PauseEvent attribute,,DV,L,,,,,,,
+9419=ProcessingCtrlSpec,ProcessingCtrlSpec attribute,,DV,L,,,,,,,
+9420=ProcessOrderMgmt,ProcessOrderMgmt attribute,,DV,U1,,,,,,,
+9421=StartMethod,StartMethod attribute,,DV,Bo,,,,,,,
+9422=PRJobStatusList,PRJobStatusList attribute,,DV,L,,,,,,,
+
+#############################################
+# END: E94 Cimetrix Definitions
+#############################################
+
+#############################################
+## START: E116 Definitions (CIMETRIX) - Unused
+#############################################
+#project file: E116EPT.epj
+
+
+#note that all fields must be filled except wellknownname
+#empty fields (i.e. ,,) are allowed in some places
+
+[COMMON EVENTS]
+#id=name, description, wellknownname
+#11601=EPTStateChange,EPT SM state change for the equipment,
+#11602=EPTStateChange_1,EPT SM module state change,
+#11603=EPTStateChange_2,EPT SM module state change,
+#11604=EPTStateChange_3,EPT SM module state change,
+#11605=EPTStateChange_4,EPT SM module state change,
+#11606=EPTStateChange_5,EPT SM module state change,
+
+#varTypes DV,SV,EC
+#valTypes I1, I2, I4, I8, U1, U2, U4, U8, F4, F8, A, Bo, Bi, L, J, W
+
+[COMMON VARIABLES]
+#id=name, description, units, varType, valType, eventID, private, persistant, min, max, default, wellknownname
+
+#data variables
+#11601=EPTState,EPT State,,DV,U1,,0,0,U1 0,U1 3,U1 0,
+#11602=PreviousEPTState,Previous EPT State,,DV,U1,,0,0,U1 0,U1 3,U1 3,
+#11603=EPTStateTime,,,DV,U4,,0,0,,,U4 0,
+#11604=BlockedReason,,,DV,U1,,0,0,,,U1 0,
+#11605=BlockedReasonText,,,DV,A,,0,0,,,,
+#11606=TaskName,,,DV,A,,0,0,,,,
+#11607=TaskType,,,DV,U1,,0,0,U1 0,U1 6,U1 0,
+#11608=PreviousTaskName,,,DV,A,,0,0,,,,
+#11609=PreviousTaskType,,,DV,U1,,0,0,U1 0,U1 6,U1 0,
+#11610=EPTElementName,,,DV,A,,0,0,,,,
+#11611=EPTElementType,,,DV,U1,,0,0,U1 0,U1 2,U1 1,
+
+#Equipment variables
+#1161000=E116ComplianceLevel,SEMI Standard Revision Compliance Level for CIM116.  The default is always the latest version supported by Cimetrix. Format=yyyymm (200411 or 200507 etc.),,EC,U4,,1,0,,,U4 200507,
+
+#11612=EPTElementName_0,Equipment Name,,DV,A,,0,1,,,,
+#11613=EPTState_0,EPT State,,DV,U1,,0,0,U1 0,U1 3,U1 0,
+#11614=PreviousEPTState_0,Previous EPT State,,DV,U1,,0,0,U1 0,U1 3,U1 3,
+#11615=EPTStateTime_0,,,DV,U4,,0,0,,,U4 0,
+#11616=NumModules,number of EPT modules,,SV,U1,,1,0,,,U1 0,
+#11617=NumBusy,number of EPT modules in the BUSY state,,SV,U1,,1,0,,,U1 0,
+#11618=NumBlocked,number of EPT modules in the BLOCKED state,,SV,U1,,1,0,,,U1 0,
+#11619=NumIdle,number of EPT modules in the IDLE state,,SV,U1,,1,0,,,U1 0,
+#11620=BlockedReason_0,,,DV,U1,,0,0,,,U1 0,
+#11621=BlockedReasonText_0,,,DV,A,,0,0,,,,
+#11622=NumProductionModules,number of Production EPT modules,,SV,U1,,1,0,,,U1 0,
+#11623=NumProductionBusy,number of Production EPT modules in the BUSY state,,SV,U1,,1,0,,,U1 0,
+#11624=NumProductionBlocked,number of Production EPT modules in the BLOCKED state,,SV,U1,,1,0,,,U1 0,
+#11625=NumProductionIdle,number of Production EPT modules in the IDLE state,,SV,U1,,1,0,,,U1 0,
+#11626=NumEFEMLoadportModules,number of EFEM/Loadport EPT modules,,SV,U1,,1,0,,,U1 0,
+#11627=NumEFEMLoadportBusy,number of EFEM/Loadport EPT modules in the BUSY state,,SV,U1,,1,0,,,U1 0,
+#11628=NumEFEMLoadportBlocked,number of EFEM/Loadport EPT modules in the BLOCKED state,,SV,U1,,1,0,,,U1 0,
+#11629=NumEFEMLoadportIdle,number of EFEM/Loadport EPT modules in the IDLE state,,SV,U1,,1,0,,,U1 0,
+#11630=ModuleList,list of all EPT module IDs,,SV,L,,0,0,,,,
+#11631=ProductionModuleList,list of all Production EPT module IDs,,SV,L,,0,0,,,,
+#11632=EFEMModuleList,list of all EFEM EPT module IDs,,SV,L,,0,0,,,,
+#11633=BlockedProductionModuleList,list of all BLOCKED Production EPT module IDs,,SV,L,,0,0,,,,
+#11634=BusyProductionModuleList,list of all BUSY Production EPT module IDs,,SV,L,,0,0,,,,
+#11635=IdleProductionModuleList,list of all IDLE Production EPT module IDs,,SV,L,,0,0,,,,
+#11636=BlockedEFEMModuleList,list of all BLOCKED EFEM EPT module IDs,,SV,L,,0,0,,,,
+#11637=BusyEFEMModuleList,list of all BUSY EFEM EPT module IDs,,SV,L,,0,0,,,,
+#11638=IdleEFEMModuleList,list of all IDLE EFEM EPT module IDs,,SV,L,,0,0,,,,
+#11639=SubstCount,the number of substrates processed since SubstCountReset,,SV,U4,,1,1,,,U4 0,
+#11640=SubstCountReset,Clock at the time the SubstCount accumulator was reset,,SV,A,,1,1,,,,
+#11641=DisableEventOnTransition,List of transitions (1-9) for which EPTStateChange will not be triggered,,SV,L,,0,1,,,,
+#11642=TaskName_0,,,DV,A,,0,0,,,,
+#11643=TaskType_0,,,DV,U1,,0,0,U1 0,U1 6,U1 0,
+#11644=PreviousTaskName_0,,,DV,A,,0,0,,,,
+#11645=PreviousTaskType_0,,,DV,U1,,0,0,U1 0,U1 6,U1 0,
+
+
+#ModuleVariables  
+#11646=EPTElementName_1,Module Name,,DV,A,,0,1,,,,
+#11647=EPTState_1,EPT State,,DV,U1,,0,0,U1 0,U1 3,U1 0,
+#11648=PreviousEPTState_1,Previous EPT State,,DV,U1,,0,0,U1 0,U1 3,U1 3,
+#11649=EPTStateTime_1,,,DV,U4,,0,0,,,U4 0,
+#11650=TaskName_1,,,DV,A,,0,0,,,,
+#11651=TaskType_1,,,DV,U1,,0,0,U1 0,U1 6,U1 0,
+#11652=PreviousTaskName_1,,,DV,A,,0,0,,,,
+#11653=PreviousTaskType_1,,,DV,U1,,0,0,U1 0,U1 6,U1 0,
+#11654=BlockedReason_1,,,DV,U1,,0,0,,,U1 0,
+#11655=BlockedReasonText_1,,,DV,A,,0,0,,,,
+#11656=SubstCount_1,the number of substrates processed since SubstCountReset,,SV,U4,,1,1,,,U4 0,
+#11657=SubstCountReset_1,Clock at the time the SubstCount accumulator was reset,,SV,A,,1,1,,,,
+#11658=DisableEventOnTransition_1,List of transitions (1-9) for which EPTStateChange will not be triggered,,SV,L,,0,1,,,,
+
+#11666=EPTElementName_2,Module Name,,DV,A,,0,1,,,,
+#11667=EPTState_2,EPT State,,DV,U1,,0,0,U1 0,U1 3,U1 0,
+#11668=PreviousEPTState_2,Previous EPT State,,DV,U1,,0,0,U1 0,U1 3,U1 3,
+#11669=EPTStateTime_2,,,DV,U4,,0,0,,,U4 0,
+#11670=TaskName_2,,,DV,A,,0,0,,,,
+#11671=TaskType_2,,,DV,U1,,0,0,U1 0,U1 6,U1 0,
+#11672=PreviousTaskName_2,,,DV,A,,0,0,,,,
+#11673=PreviousTaskType_2,,,DV,U1,,0,0,U1 0,U1 6,U1 0,
+#11674=BlockedReason_2,,,DV,U1,,0,0,,,U1 0,
+#11675=BlockedReasonText_2,,,DV,A,,0,0,,,,
+#11676=SubstCount_2,the number of substrates processed since SubstCountReset,,SV,U4,,1,1,,,U4 0,
+#11677=SubstCountReset_2,Clock at the time the SubstCount accumulator was reset,,SV,A,,1,1,,,,
+#11678=DisableEventOnTransition_2,List of transitions (1-9) for which EPTStateChange will not be triggered,,SV,L,,0,1,,,,
+
+#11686=EPTElementName_3,Module Name,,DV,A,,0,1,,,,
+#11687=EPTState_3,EPT State,,DV,U1,,0,0,U1 0,U1 3,U1 0,
+#11688=PreviousEPTState_3,Previous EPT State,,DV,U1,,0,0,U1 0,U1 3,U1 3,
+#11689=EPTStateTime_3,,,DV,U4,,0,0,,,U4 0,
+#11690=TaskName_3,,,DV,A,,0,0,,,,
+#11691=TaskType_3,,,DV,U1,,0,0,U1 0,U1 6,U1 0,
+#11692=PreviousTaskName_3,,,DV,A,,0,0,,,,
+#11693=PreviousTaskType_3,,,DV,U1,,0,0,U1 0,U1 6,U1 0,
+#11694=BlockedReason_3,,,DV,U1,,0,0,,,U1 0,
+#11695=BlockedReasonText_3,,,DV,A,,0,0,,,,
+#11696=SubstCount_3,the number of substrates processed since SubstCountReset,,SV,U4,,1,1,,,U4 0,
+#11697=SubstCountReset_3,Clock at the time the SubstCount accumulator was reset,,SV,A,,1,1,,,,
+#11698=DisableEventOnTransition_3,List of transitions (1-9) for which EPTStateChange will not be triggered,,SV,L,,0,1,,,,
+
+#11706=EPTElementName_4,Module Name,,DV,A,,0,1,,,,
+#11707=EPTState_4,EPT State,,DV,U1,,0,0,U1 0,U1 3,U1 0,
+#11708=PreviousEPTState_4,Previous EPT State,,DV,U1,,0,0,U1 0,U1 3,U1 3,
+#11709=EPTStateTime_4,,,DV,U4,,0,0,,,U4 0,
+#11710=TaskName_4,,,DV,A,,0,0,,,,
+#11711=TaskType_4,,,DV,U1,,0,0,U1 0,U1 6,U1 0,
+#11712=PreviousTaskName_4,,,DV,A,,0,0,,,,
+#11713=PreviousTaskType_4,,,DV,U1,,0,0,U1 0,U1 6,U1 0,
+#11714=BlockedReason_4,,,DV,U1,,0,0,,,U1 0,
+#11715=BlockedReasonText_4,,,DV,A,,0,0,,,,
+#11716=SubstCount_4,the number of substrates processed since SubstCountReset,,SV,U4,,1,1,,,U4 0,
+#11717=SubstCountReset_4,Clock at the time the SubstCount accumulator was reset,,SV,A,,1,1,,,,
+#11718=DisableEventOnTransition_4,List of transitions (1-9) for which EPTStateChange will not be triggered,,SV,L,,0,1,,,,
+
+#11726=EPTElementName_5,Module Name,,DV,A,,0,1,,,,
+#11727=EPTState_5,EPT State,,DV,U1,,0,0,U1 0,U1 3,U1 0,
+#11728=PreviousEPTState_5,Previous EPT State,,DV,U1,,0,0,U1 0,U1 3,U1 3,
+#11729=EPTStateTime_5,,,DV,U4,,0,0,,,U4 0,
+#11730=TaskName_5,,,DV,A,,0,0,,,,
+#11731=TaskType_5,,,DV,U1,,0,0,U1 0,U1 6,U1 0,
+#11732=PreviousTaskName_5,,,DV,A,,0,0,,,,
+#11733=PreviousTaskType_5,,,DV,U1,,0,0,U1 0,U1 6,U1 0,
+#11734=BlockedReason_5,,,DV,U1,,0,0,,,U1 0,
+#11735=BlockedReasonText_5,,,DV,A,,0,0,,,,
+#11736=SubstCount_5,the number of substrates processed since SubstCountReset,,SV,U4,,1,1,,,U4 0,
+#11737=SubstCountReset_5,Clock at the time the SubstCount accumulator was reset,,SV,A,,1,1,,,,
+#11738=DisableEventOnTransition_5,List of transitions (1-9) for which EPTStateChange will not be triggered,,SV,L,,0,1,,,,
+#############################################
+## END: E116 Definitions (CIMETRIX) - Unused
+#############################################
+
+#############################################
+## START: E116 Definitions (August)
+#############################################
+
+[COMMON EVENTS]
+#id=name, description, wellknownname
+# E116 Equipment EPT events
+116000=116EPTStateChange_0,,
+116001=116EPTStateChange_1,,
+116002=116EPTStateChange_2,,
+116003=116EPTStateChange_3,,
+116004=116EPTStateChange_4,,
+
+
+[COMMON VARIABLES]
+#id=name, description, units, varType, valType, eventID, private, persistant, min, max, default, wellknownname
+# E116 Equipment VIDs
+#2008=MDLN,Machine hardware ID up to 6 characters. The value is constant.,,SV,A,,0,0,A,A,A MODEL,MDLN
+116100=116EPTEquipmentName,equipment name,,SV,A,,0,0,A,A,A Equipment,
+116101=116EPTEquipmentState,,,SV,Bi,,0,0,Bi 0,Bi 3,Bi 3,
+116102=116EPTEquipmentPrevState,,,SV,Bi,,0,0,Bi 0,Bi 3,Bi 3,
+116103=116EPTEquipmentTime,,,SV,U4,,0,0,,,U4 0,
+116104=116EPTEquipmentBlockedReason,,,SV,Bi,,0,0,Bi 0,Bi 9,Bi 0,
+116105=116EPTEquipmentBlockedText,,,SV,A,,0,0,A,A,A,
+116106=116EPTEquipmentNumModules,,,SV,U1,,0,0,,,U1 0,
+116107=116EPTEquipmentNumBusy,,,SV,U1,,0,0,,,U1 0,
+116108=116EPTEquipmentNumBlocked,,,SV,U1,,0,0,,,U1 0,
+116109=116EPTEquipmentNumIdle,,,SV,U1,,0,0,,,U1 0,
+
+116120=116EPTName_1,equipment name,,SV,A,,0,0,A,A,A InspectionStage,
+116121=116EPTState_1,,,SV,Bi,,0,0,Bi 0,Bi 3,Bi 3,
+116122=116EPTPrevState_1,,,SV,Bi,,0,0,Bi 0,Bi 3,Bi 3,
+116123=116EPTTime_1,,,SV,U4,,0,0,,,U4 0,
+116124=116EPTBlockedReason_1,,,SV,Bi,,0,0,Bi 0,Bi 9,Bi 0,
+116125=116EPTBlockedText_1,,,SV,A,,0,0,A,A,A,
+116126=116EPTTaskName_1,,,SV,A,,0,0,A,A,A,
+116127=116EPTTaskType_1,,,SV,Bi,,0,0,Bi 0,Bi 5,Bi 0,
+116128=116EPTPrevTaskName_1,,,SV,A,,0,0,A,A,A,
+116129=116EPTPrevTaskType_1,,,SV,Bi,,0,0,Bi 0,Bi 5,Bi 0,
+
+116140=116EPTName_2,equipment name,,SV,A,,0,0,A,A,A Handler,
+116141=116EPTState_2,,,SV,Bi,,0,0,Bi 0,Bi 3,Bi 3,
+116142=116EPTPrevState_2,,,SV,Bi,,0,0,Bi 0,Bi 3,Bi 3,
+116143=116EPTTime_2,,,SV,U4,,0,0,,,U4 0,
+116144=116EPTBlockedReason_2,,,SV,Bi,,0,0,Bi 0,Bi 9,Bi 0,
+116145=116EPTBlockedText_2,,,SV,A,,0,0,A,A,A,
+116146=116EPTTaskName_2,,,SV,A,,0,0,A,A,A,
+116147=116EPTTaskType_2,,,SV,Bi,,0,0,Bi 0,Bi 5,Bi 0,
+116148=116EPTPrevTaskName_2,,,SV,A,,0,0,A,A,A,
+116149=116EPTPrevTaskType_2,,,SV,Bi,,0,0,Bi 0,Bi 5,Bi 0,
+
+116160=116EPTName_3,equipment name,,SV,A,,0,0,A,A,A LoadPort1,
+116161=116EPTState_3,,,SV,Bi,,0,0,Bi 0,Bi 3,Bi 3,
+116162=116EPTPrevState_3,,,SV,Bi,,0,0,Bi 0,Bi 3,Bi 3,
+116163=116EPTTime_3,,,SV,U4,,0,0,,,U4 0,
+116164=116EPTBlockedReason_3,,,SV,Bi,,0,0,Bi 0,Bi 9,Bi 0,
+116165=116EPTBlockedText_3,,,SV,A,,0,0,A,A,A,
+116166=116EPTTaskName_3,,,SV,A,,0,0,A,A,A,
+116167=116EPTTaskType_3,,,SV,Bi,,0,0,Bi 0,Bi 5,Bi 0,
+116168=116EPTPrevTaskName_3,,,SV,A,,0,0,A,A,A,
+116169=116EPTPrevTaskType_3,,,SV,Bi,,0,0,Bi 0,Bi 5,Bi 0,
+
+116180=116EPTName_4,equipment name,,SV,A,,0,0,A,A,A LoadPort2,
+116181=116EPTState_4,,,SV,Bi,,0,0,Bi 0,Bi 3,Bi 3,
+116182=116EPTPrevState_4,,,SV,Bi,,0,0,Bi 0,Bi 3,Bi 3,
+116183=116EPTTime_4,,,SV,U4,,0,0,,,U4 0,
+116184=116EPTBlockedReason_4,,,SV,Bi,,0,0,Bi 0,Bi 9,Bi 0,
+116185=116EPTBlockedText_4,,,SV,A,,0,0,A,A,A,
+116186=116EPTTaskName_4,,,SV,A,,0,0,A,A,A,
+116187=116EPTTaskType_4,,,SV,Bi,,0,0,Bi 0,Bi 5,Bi 0,
+116188=116EPTPrevTaskName_4,,,SV,A,,0,0,A,A,A,
+116189=116EPTPrevTaskType_4,,,SV,Bi,,0,0,Bi 0,Bi 5,Bi 0,
+
+#############################################
+## END: E116 Definitions (August)
+#############################################
+
+
+#############################################
+## START: E58 ARAMS
+#############################################
+#project file: E58ARAMS.epj
+
+
+#note that all fields must be filled except wellknownname
+#empty fields (i.e. ,,) are allowed in some places
+#This file defines the events and variables for the CIM58 ARAMS package.
+
+[COMMON EVENTS]
+#id=name, description, wellknownname
+5800=ARAMSStateChange,Change to a new ARAMS state/substate,
+5801=ToManufacturingState,Transit to Manufacturing State,
+5802=StandbyToProductive,Transit from STANDBY to PRODUCTIVE State,
+5803=ProductiveToStandby,Transit from PRODUCTIVE to STANDBY State,
+5804=ProductiveToUnscheduledDowntime,Transit from PRODUCTIVE to UNSCHEDULED DOWNTIME State,
+5805=UnscheduledDowntimeToProductive,Transit from UNSCHEDULED DOWNTIME to PRODUCTIVE State,
+5806=StandbyToUnscheduledDowntime,Transit from STANDBY to UNSCHEDULED DOWNTIME State,
+5807=UnscheduledDowntimeToStandby,Transit from UNSCHEDULED DOWNTIME to STANDBY State,
+5808=StandbyToScheduledDowntime,Transit from STANDBY to SCHEDULED DOWNTIME State,
+5809=ToUserSelectedSubstate,Transit to a user selected substate,
+5810=ToPowerdown,Powerdown,
+5811=StandbyToStandby,Transition due to change in STANDBY conditions,
+5812=ProductiveToProductive,Transition due to change in PRODUCTIVE conditions,
+5813=EngineeringToUnscheduledDowntime,Transition due to a fault condition during ENGINEERING State,
+5814=UnscheduledDowntimeToEngineering,Recovered to ENGINEERING from all fault conditions,
+5815=AnyToAny,Any ARAMS state to any other ARAMS state; transition 10,
+
+[ALARMS]
+#id=name, description, text, setEventID, clearEventID, wellknownname
+#5888=AccessModeViolation,E87 alarm, Access Mode Violation, 9015, 9016,
+
+
+#varTypes DV,SV,EC
+#valTypes I1, I2, I4, I8, U1, U2, U4, U8, F4, F8, A, Bo, Bi, L, J, W
+
+[COMMON VARIABLES]
+#id=name, description, units, varType, valType, eventID, private, persistant, min, max, default, wellknownname
+#5800 = ARAMSID,,,DV,A,,,,,,,
+#5801 = ARAMSType,,,DV,A,,,,,,,
+5802 = ARAMSState,Code that identifies the currently selected ARAMS state,,DV,A,,,,,,,
+5803 = ARAMSText,Descriptive text to code in ARAMSState,,DV,A,,,,,,,
+5804 = CycleCtr,Non-resettable counter of equipment run cycles,,DV,U4,,,,,,,
+5805 = DowntimeAlarm,Last alarm or exception triggering an equipment-initiated transition to a downtime state/substate,,DV,A,,,,,,,
+5806 = DowntimeAlarmText,Text associated with DowntimeAlarm,,DV,A,,,,,,,
+5807 = DowntimeData,Equipment-defined text associated with transitions to downtime state/substate,,DV,A,,,,,,,
+5808 = EqpModel,The equipment model,,DV,A,,,,,,,
+5809 = EqpSerialNum,Equipment serial number,,DV,A,,,,,,,
+5810 = LastPowerdown,Estimate of last powerdown time,,DV,A,,,,,,,
+5811 = PowerdownTime,Estimate of powerdown time,,DV,A,,,,,,,
+5812 = PrdState,The last ARAMS code specified by the user for PRODUCTIV,,DV,A,,,,,,,.
+5813 = PrevARAMSState,ARAMS substate code that identifies the state prior to last state transition,,DV,A,,,,,,,
+5814 = SymptomID,The identifier of a symptom selected by the user when requesting a state change,,DV,A,,,,,,,
+5815 = SymptomText,The descriptive text of the symptom selected by the user when requesting a state change,,DV,A,,,,,,,
+5816 = EqpName,uesr-assigned logical name of the equipment,,SV,A,,,,,,,
+#############################################
+## END: E58 Definitions 
+#############################################
+
+
+
+#############################################
+## START: E39 Definitions 
+#############################################
+#project file: E39OSS.epj
+
+
+#note that all fields must be filled except wellknownname
+#empty fields (i.e. ,,) are allowed in some places
+
+[COMMON EVENTS]
+#id=name, description, wellknownname
+#following events will be used if PRJobEventStyle EC is set to true(1) - Cimetrix style - event for each state
+
+
+
+#varTypes DV,SV,EC
+#valTypes I1, I2, I4, I8, U1, U2, U4, U8, F4, F8, A, Bo, Bi, L, J, W
+
+[COMMON VARIABLES]
+#id=name, description, units, varType, valType, eventID, private, persistant, min, max, default, wellknownname
+9000=Use0303S14F20,1=list of 4 items with errcode/errtext pairs; 0=pre E5-0303 with list of 3 items (old behavior),,EC,Bo,,,1,,,Bo 0,
+#############################################
+## END: E39 Definitions 
+#############################################
+
+
+#############################################
+## START: NSX-SPECIFIC DEFINITIONS
+#############################################
+
+[COMMON EVENTS]
+#id=name, description, wellknownname
+# GEM Process State Model (PSM)
+# transition events
+3101=GEMEvent_psmInitComplete,,
+3102=GEMEvent_psmSTART,,
+3103=GEMEvent_psmSTOP,,
+3104=GEMEvent_psmRESUME,,
+3105=GEMEvent_psmPAUSE,,
+3106=GEMEvent_psmRunComplete,,
+3107=GEMEvent_psmALARMpause,,
+3108=GEMEvent_psmALARMready,,
+3109=GEMEvent_psmALARMrunning,,
+3110=GEMEvent_psmALARMinit,,
+3111=GEMEvent_psmAlarmToInit,,
+3112=GEMEvent_psmAlarmToPause,,
+3113=GEMEvent_psmAlarmToReady,,
+3114=GEMEvent_psmAlarmToRunning,,
+
+# Material Movement Events
+3201=GEMEvent_Cassette1NotPresent,,
+3202=GEMEvent_Cassette1Present,,
+3205=GEMEvent_Cassette2NotPresent,,
+3206=GEMEvent_Cassette2Present,,
+
+# NSX Events
+3301=GEMEvent_Cassette1MapComplete,,
+3302=GEMEvent_Cassette2MapComplete,,
+3303=GEMEvent_WaferStart,,
+3304=GEMEvent_WaferComplete,,
+3305=GEMEvent_LotStart,,
+3306=GEMEvent_LotComplete,,
+3307=GEMEvent_LotStatusChange,,
+3308=GEMEvent_ReviewStart,,
+3309=GEMEvent_ReviewComplete,,
+3310=GEMEvent_CrossSlottedWafer,,
+3311=GEMEvent_WaferMapExported,,
+3312=GEMEvent_ChosenWaferNotPresent,,
+3313=GEMEvent_InvalidMediaListLength,,
+3314=GEMEvent_WaferLost,,
+3315=GEMEvent_RawBumpMapExported,,
+3317=GEMEvent_WaferAtDestination,,
+3318=GEMEvent_SummaryReportComplete,,
+3319=GEMEvent_SlotMapFormatError,,
+3320=GEMEvent_WaferIDListFormatError,,
+3321=GEMEvent_SlotMapValidationError,,
+3322=GEMEvent_WaferIDValidationError,,
+3323=GEMEvent_SoftStart,,
+3324=GEMEvent_RFTagIDRead,,
+3325=GEMEvent_RFTagDataRead,,
+3330=GEMEvent_WaferIDReadByOCR,,
+3331=GEMEvent_MappingCompleted,,
+3332=GEMEvent_WaferAlarmReport,,
+3333=GEMEvent_FoupAlarmReport,,
+3335=GEMEvent_MappingProfileChanged_C1,,
+3336=GEMEvent_MappingProfileChanged_C2,,
+3337=GEMEvent_WaferInspectionComplete,,
+3338=GEMEvent_PreviousSystemFailureDetected,,
+3339=GEMEvent_RecipeSelected,,
+3340=GEMEvent_ProductSetupSelected,,
+
+# GEM Alarm On/Off events
+3001=GEMAlarmOn_OperatorAttention,,
+3002=GEMAlarmOff_OperatorAttention,,
+3003=GEMAlarmOn_EStop,,
+3004=GEMAlarmOff_EStop,,
+3005=GEMAlarmOn_DoorOpen,,
+3006=GEMAlarmOff_DoorOpen,,
+3007=GEMAlarmOn_VacuumLoss,,
+3008=GEMAlarmOff_VacuumLoss,,
+3009=GEMAlarmOn_Cassette1Removed,,
+3010=GEMAlarmOff_Cassette1Removed,,
+3011=GEMAlarmOn_Cassette2Removed,,
+3012=GEMAlarmOff_Cassette2Removed,,
+3013=GEMAlarmOn_CassetteCrossSlotted,,
+3014=GEMAlarmOff_CassetteCrossSlotted,,
+3015=GEMAlarmOn_CassetteSag,,
+3016=GEMAlarmOff_CassetteSag,,
+3017=GEMAlarmOn_FailOCR,,
+3018=GEMAlarmOff_FailOCR,,
+3019=GEMAlarmOn_LotPreviousInspect,,
+3020=GEMAlarmOff_LotPreviousInspect,,
+3021=GEMAlarmOn_WaferIDInvalid,,
+3022=GEMAlarmOff_WaferIDInvalid,,
+3023=GEMAlarmOn_DefectFileUploadError,,
+3024=GEMAlarmOff_DefectFileUploadError,,
+3025=GEMAlarmOn_SampledDefectFileError,,
+3026=GEMAlarmOff_SampledDefectFileError,,
+3027=GEMAlarmOn_TakeImageError,,
+3028=GEMAlarmOff_TakeImageError,,
+3029=GEMAlarmOn_FinishTakeImagesError,,
+3030=GEMAlarmOff_FinishTakeImagesError,,
+3031=GEMAlarmOn_ADCResultsError,,
+3032=GEMAlarmOff_ADCResultsError,,
+3033=GEMAlarmOn_XPortAirPressureTooLow,,
+3034=GEMAlarmOff_XPortAirPressureTooLow,,
+3035=GEMAlarmOn_XPortAirPressureTooHigh,,
+3036=GEMAlarmOff_XPortAirPressureTooHigh,,
+
+#############################################
+## START: NSX E87 SPECIFIC EVENTS
+#############################################
+3501=CarrierClampFailureSet,,
+3502=CarrierClampFailureClear,,
+3503=CarrierUnClampFailureSet,,
+3504=CarrierUnClampFailureClear,,
+
+
+[ALARMS]
+#id=name, description, text, setEventID, clearEventID, alarm code (ALCD), wellknownname
+1004=GEMAlarm_OperatorAttention,,Operator attention required.,3001,3002,0,
+1005=GEMAlarm_EStop,,E-Stop,3003,3004,0,
+1006=GEMAlarm_DoorOpen,,Door Open,3005,3006,0,
+1007=GEMAlarm_VacuumLoss,,Vacuum loss.,3007,3008,0,
+1008=GEMAlarm_Cassette1Removed,,Cassette 1 removed during processing.,3009,3010,0,
+1009=GEMAlarm_Cassette2Removed,,Cassette 2 removed during processing.,3011,3012,0,
+1010=GEMAlarm_CassetteCrossSlotted,,Cross-slotted wafer(s) present.,3013,3014,0,
+1011=GEMAlarm_CassetteSag,,Wafers with excessive sag present.,3015,3016,0,
+1012=GEMAlarm_FailOCR,,OCR failure,3017,3018,0,
+1013=GEMAlarm_LotPreviousInspect,,This lot was previously inspected.,3019,3020,0,
+1014=GEMAlarm_WaferIDInvalid,,Invalid Wafer-ID,3021,3022,0,
+1015=GEMAlarm_DefectFileUploadError,,Error uploading defect file to DMS.,3023,3024,0,
+1016=GEMAlarm_SampledDefectFileError,,Error getting sampled defect file from DMS.,3025,3026,0,
+1017=GEMAlarm_TakeImageError,,Error taking defect/reference image.,3027,3028,0,
+1018=GEMAlarm_FinishTakeImagesError,,Error on finish take images method.,3029,3030,0,
+1019=GEMAlarm_ADCResultsError,,Error occured parsing ADC results data.,3031,3032,0,
+1020=GEMAlarm_XPortAirPressureTooLow,,Error occured Xport air pressure too low.,3033,3034,0,
+1021=GEMAlarm_XPortAirPressureTooHigh,,Error occured Xport air pressure too high.,3035,3036,0,
+
+#############################################
+## START: NSX E87 SPECIFIC ALARMS
+#############################################
+1101=CarrierClampFailure,E87 alarm, Clamping of Carrier failed, 3501, 3502,0,
+1102=CarrierUnClampFailure,E87 alarm, Unclamping of Carrier failed, 3503, 3504,0,
+
+
+[COMMON VARIABLES]
+#id=name, description, units, varType, valType, eventID, private, persistant, min, max, default, wellknownname
+5005=CurrentWaferID,Wafer ID,,SV,A,,0,0,A,A,A,
+5006=WaferDieCount,WaferDieCount,,DV,U4,,0,0,U4 0,U4 4294967295,U4,
+5007=WaferDieGood,WaferDieGood,,DV,U4,,0,0,U4 0,U4 4294967295,U4,
+5008=WaferDieBad,WaferDieBad,,DV,U4,,0,0,U4 0,U4 4294967295,U4,
+5009=LotID,,,DV,A,,0,0,A,A,,
+5012=LotDieCount,LotDieCount,,DV,U4,,0,0,U4 0,U4 4294967295,U4,
+5013=LotDieGood,LotDieGood,,DV,U4,,0,0,U4 0,U4 4294967295,U4,
+5014=LotDieBad,LotDieBad,,DV,U4,,0,0,U4 0,U4 4294967295,U4,
+5015=WaferCounter,Processed Wafer Counter,,SV,U4,,0,0,U4 0,U4 4294967295,U4,
+5016=LimitsMonitorTest,dummy VID for CCS E30 test,,SV,U4,,0,0,U4 1000,U4 1100,U4 1010,
+5020=Port1Presence,Port 1 Occupied (1) or Unoccupied (0),,SV,U1,,0,0,U1 0,U1 1,U1,
+5021=Port2Presence,Port 2 Occupied (1) or Unoccupied (0),,SV,U1,,0,0,U1 0,U1 1,U1,
+5022=Cassette1Map,Cassette 1 Slot Map,,SV,A,,0,0,A,A,A,
+5023=Cassette2Map,Cassette 2 Slot Map,,SV,A,,0,0,A,A,A,
+5024=WaferMapExportPath,Wafer Map Export Path,,SV,A,,0,0,A,A,A,
+5025=MediaList1,Host selection slot map for Cassette 1,,SV,A,,0,0,A,A,A,
+5026=MediaList2,Host selection slot map for Cassette 2,,SV,A,,0,0,A,A,A,
+5027=CassetteInError,Cassette number that has chosen wafer not present,,SV,U1,,0,0,U1 0,U1 2,U1,
+5028=RawBumpMapFile,Raw Bump Map Path and Filename,,SV,A,,0,0,A,A,A,
+5030=OriginalSlot,Cassette slot where wafer came from,,SV,U1,,0,0,U1 0,U1 255,U1,
+5031=DestinationSlot,Cassette slot where wafer was placed,,SV,U1,,0,0,U1 0,U1 255,U1,
+5032=VirtualSlotMap,Validation slot map,,EC,A,,0,0,A,A,A,
+5033=VirtualWaferIDList,List of validation wafer IDs,,EC,L,,,,,,,
+5034=CarrierIDFromReader,Carrier ID from CarrierID Reader,,DV,A,,0,0,A,A,A,
+5035=NotepadData,Notepad Data from CarrierID Reader,,DV,A,,0,0,A,A,A,
+5036=DataSeg,DataSeg indicating the offset to read data from,,DV,U1,,0,0,U1 0,U1 255,U1,
+5038=NoOfDefectsPerWafer,Total number of defects for each wafer,,SV,U4,,0,0,U4 0,U4 4294967295,U4 0,
+5039=PassFailState,PassFailState,,SV,A,,0,0,A,A,A,
+5040=LotSummaryData,List of Lot Summary Data.,,SV,L,,0,0,L,L,L,LotSummaryData
+5041=OCRReadWaferID,OCR Read Wafer ID,,DV,A,,0,0,A,A,A,
+5042=NoOfDefectiveDiesPerLot,No Of Defective dies in a lot,,DV,U4,,0,0,U4 0,U4 4294967295,U4 0,
+5043=NoOfInspDiePerLot,No Of dies inspected in  a lot,,DV,U4,,0,0,U4 0,U4 4294967295,U4 0,
+5044=NoOfFailedWafersPerLot,No Of Wafers Failed in a lot,,DV,U4,,0,0,U4 0,U4 4294967295,U4 0,
+5045=NoOfInspWafersPerLot,No Of Wafers inspected in a lot,,DV,U4,,0,0,U4 0,U4 4294967295,U4 0,
+5046=DefectSizeBinData,Defect Bin size info for each wafer,,DV,L,,0,0,L,L,L,DefectSizeBinData
+5047=WaferDieGoodPercentage,Percentage of good dies,,DV,F8,,0,0,F8 0,F8 100.0,F8 0,
+5048=WaferDieBadPercentage,Percentage of bad dies,,DV,F8,,0,0,F8 0,F8 100.0,F8 0,
+5049=RandomDefectDensityList,List of random defect density value for each pass,,DV,L,,0,0,L,L,L,RandomDefectDensityList
+5050=DefectRatioList,List of Defect ratio value for each pass,,DV,L,,0,0,L,L,L,DefectRatioList
+5051=DefectAreaList,List of Defect Area values for each pass,,DV,L,,0,0,L,L,L,DefectAreaList
+5052=DefectCountList,List of Defect Count values for each pass,,DV,L,,0,0,L,L,L,DefectCountList
+5053=DMSADAResultList,List of DMS ADA result values for each pass,,DV,L,,0,0,L,L,L,DMSADAResultList
+5054=NumPassFailState,Pass Fail state of the Wafer 0 - PASS 1 - FAIL,,DV,U1,,0,0,U1 0,U1 2,U1,
+5062=BincodeHistogram,Histogram of bincode defect counts,,DV,L,,0,0,L,L,L,BincodeHistogram
+5063=DefectDetailByDieList,List of Defect Detail by each die,,DV,L,,0,0,L,L,L,DefectDetailByDieList
+5064=ProductCode,,,DV,A,,0,0,A,A,,
+5065=RecipeName,,,DV,A,,0,0,A,A,,
+5066=ProductSetupName,,,DV,A,,0,0,A,A,,
+5067=WaferAlarmReportVar,Wafer Result,,DV,L,,0,0,L,L,,
+5068=FoupAlarmReportVar,FOUP Result,,DV,L,,0,0,L,L,,
+5069=CurrentInspectionCarrierID,Current Inspection Carrier ID,,DV,A,,,,,,,
+5070=CalcBumpAndDefectStats,Enable result calculation after inspection,,EC,Bo,,0,0,Bo 0,Bo 1,Bo 0,
+5071=AverageBumpHeightUM,Mean height of all inspected bumps on wafer,,DV,F8,,0,0,F8 0,,F8 0,
+5072=StandardDeviationBumpHeightUM,Standard deviation of all inspected bumps on wafer,,DV,F8,,0,0,F8 0,,F8 0,
+5073=Wafer2DDefectOnlyDieCount,Number of inspected die on wafer with only 2D defects,,DV,U4,,0,0,U4 0,U4 4294967295,U4 0,
+5074=Wafer3DDefectOnlyDieCount,Number of inspected die on wafer with only 3D defects,,DV,U4,,0,0,U4 0,U4 4294967295,U4 0,
+5075=Wafer2DAnd3DDefectDieCount,Number of inspected die on wafer with both 2D and 3D defects,,DV,U4,,0,0,U4 0,U4 4294967295,U4 0,
+5076=UnclassifiedDieRemain,Whether any die remain unclassified after review of wafer,,DV,Bo,,0,0,Bo 0,Bo 1,Bo 0,
+5077=LotBincodeHistogram, Histogram of bincode defect counts for the Lot,,SV,L,,0,0,L,L,L,LotBincodeHistogram
+5078=FailureLogZipFilePath,Path to the Failure Log zip file,,SV,A,,0,0,A,A,,
+5079=FrontsideDefectCount,Number of Frontside defects found,,DV,U4,,0,0,U4 0,U4 4294967295,U4 0,
+5080=EdgeDefectCount,Number of Edge defects found,,DV,U4,,0,0,U4 0,U4 4294967295,U4 0,
+5081=BacksideDefectCount,Number of Backside defects found,,DV,U4,,0,0,U4 0,U4 4294967295,U4 0,
+5082=CurrentInspectionPortID, Port ID of the currently running job,,SV,U1,,0,0,U1 0,U1 4,U1 0,CurrentInspectionPortID
+5083=EdgePassFailState,Edge Inspection Pass Fail State,,DV,A,,0,0,A,A,A,
+5084=BackSidePassFailState,Backside Inspection Pass Fail State,,DV,A,,0,0,A,A,A,
+5085=LotPassFailState,Lot Pass Fail State,,SV,A,,0,0,A,A,A,
+5086=CurrentProcessProgram, Current Process Program,,SV,L,,0,0,L,L,,
+5087=CurrentRecipe, Current Recipe,,SV,L,,0,0,L,L,,
+5088=CurrentProductSetup, Current Product Setup,,SV,L,,0,0,L,L,,
+
+
+7001=OperatorSTART,Operator START,,SV,Bo,,0,0,Bo 0,Bo 1,Bo,
+7002=OperatorName,Operator Name,,SV,A,,0,0,A,A,A,
+7003=PPIDMappingProfileC1,PPID MappingProfile_C1,,SV,A,,0,0,A,A,A,
+7004=PPIDMappingProfileC2,PPID MappingProfile_C2,,SV,A,,0,0,A,A,A,
+7005=MappingProfileC1,MappingProfile_C1,,SV,A,,0,0,A,A,A,
+7006=MappingProfileC2,MappingProfile_C2,,SV,A,,0,0,A,A,A,
+7007=ATErrorCode,August Tech Error Code,,DV,U4,,0,0,U4,U4,U4,
+7008=ATErrorText,August Tech Error Text,,DV,A,,0,0,A,A,A,
+7009=LastATErrorCode,August Tech Last Error Code,,SV,U4,,0,0,U4,U4,U4,
+7010=LastATErrorText,August Tech Last Error Text,,SV,A,,0,0,A,A,A,
+
+
+#############################################
+## END: NSX-SPECIFIC DEFINITIONS
+#############################################
+
+#############################################
+## START: AUGUST-SPECIFIC 300MM DEFINITIONS
+#############################################
+
+5055=SELETEloadStartSignal,0=none 1=button,,EC,U1,,0,0,U1 0,U1 1,U1 0,
+5056=SELETEloadEndSignal,0=none 1=button 2=timer,,EC,U1,,0,0,U1 0,U1 2,U1 0,
+5057=SELETEunloadStartSignal,0=none 1=button,,EC,U1,,0,0,U1 0,U1 1,U1 0,
+5058=SELETEunloadEndSignal,0=none 1=button 2=timer,,EC,U1,,0,0,U1 0,U1 2,U1 0,
+5059=SELETEtimerSec,,,EC,U1,,0,0,U1 0,U1 255,U1 0,
+# values for MANUALINTYPE, MANUALOUTTYPE
+# value(U1)	start	end
+#	0		button	button
+#	1:		button	timer
+#	2:		none	timer
+#	3:		none	button
+#	4:		button	none
+#	5:		none	none
+5060=MANUALINTYPE,,,EC,U1,,0,0,U1 0,U1 255,U1 0,
+5061=MANUALOUTTYPE,,,EC,U1,,0,0,U1 0,U1 255,U1 0,
+
+#############################################
+## END: AUGUST-SPECIFIC 300MM DEFINITIONS
+#############################################
+
